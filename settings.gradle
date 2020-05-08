@@ -1,0 +1,2 @@
+rootProject.name='snatch'
+include ':app'
