@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">snatch</string>
+
+    <string-array name="food_court">
+        <item>Makan Place</item>
+        <item>Food Club</item>
+        <item>Munch</item>
+        <item>Poolside</item>
+    </string-array>
 </resources>

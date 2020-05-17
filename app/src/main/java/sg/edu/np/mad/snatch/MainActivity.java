@@ -2,6 +2,7 @@ package sg.edu.np.mad.snatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     Button signUpBtn;
     EditText emailEditText;
     EditText pwEditText;
+    TextView errorMsgTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
+        errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
     }
 
     @Override
@@ -46,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
+                if (email.equals("s1234567") && pw.equals("12345678")) {
+                    Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
+                    startActivity(in);
+                }
+                else {
+                    errorMsgTextView.setText("Incorrect email/password! Please try again");
+                }
             }
         });
 
