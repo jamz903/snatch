@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "567873877958",
-    "firebase_url": "https://andriodtest-91736.firebaseio.com",
-    "project_id": "andriodtest-91736",
-    "storage_bucket": "andriodtest-91736.appspot.com"
+    "project_number": "955776269865",
+    "firebase_url": "https://mad-snatch.firebaseio.com",
+    "project_id": "mad-snatch",
+    "storage_bucket": "mad-snatch.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:567873877958:android:c9c0ec7dae422bdf09e4c7",
+        "mobilesdk_app_id": "1:955776269865:android:63a7f363fc8ab01d356638",
         "android_client_info": {
           "package_name": "sg.edu.np.mad.snatch"
         }
       },
       "oauth_client": [
         {
-          "client_id": "567873877958-mg5s055b1hpcdt64j4vnd51fvm53qf67.apps.googleusercontent.com",
+          "client_id": "955776269865-mspp02j7ftfnnog1iph0jl9n21d8th56.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAWXxTfr2Qr6i7rJNeqaHXi-lxpdzku2bU"
+          "current_key": "AIzaSyBLl77FKem9twzqMIStz_EF2lP2_ahiKzI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "567873877958-mg5s055b1hpcdt64j4vnd51fvm53qf67.apps.googleusercontent.com",
+              "client_id": "955776269865-mspp02j7ftfnnog1iph0jl9n21d8th56.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

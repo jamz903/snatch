@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     EditText emailEditText;
     EditText pwEditText;
     TextView errorMsgTextView;
+
+    DatabaseReference reff;
+    Students student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
         errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
+
+        student = new Students();
+        reff = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -62,7 +72,15 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String id = emailEditText.getText().toString();
+                String pw = pwEditText.getText().toString();
 
+                student.setStudentID(id);
+                student.setStudentPW(pw);
+
+                
+                reff.child("Students").child(id).child("Password").setValue(pw);
+                Toast.makeText(getApplicationContext(),"New Account registered",Toast.LENGTH_SHORT).show();
             }
         });
     }
