@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "567873877958",
+    "firebase_url": "https://andriodtest-91736.firebaseio.com",
+    "project_id": "andriodtest-91736",
+    "storage_bucket": "andriodtest-91736.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567873877958:android:c9c0ec7dae422bdf09e4c7",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.snatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567873877958-mg5s055b1hpcdt64j4vnd51fvm53qf67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWXxTfr2Qr6i7rJNeqaHXi-lxpdzku2bU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567873877958-mg5s055b1hpcdt64j4vnd51fvm53qf67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
