@@ -20,4 +20,9 @@ public class Students {
     public void setStudentPW(String studentPW) {
         StudentPW = studentPW;
     }
+
+    @Override
+    public String toString(){
+        return StudentID + " " + StudentPW;
+    }
 }
