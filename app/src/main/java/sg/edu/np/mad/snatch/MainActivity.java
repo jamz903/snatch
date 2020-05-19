@@ -97,13 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                /*if (email.equals("s1234567") && pw.equals("12345678")) {
+                if (email.equals("s1234567") && pw.equals("12345678")) {
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
                 }
                 else {
                     errorMsgTextView.setText("Incorrect email/password! Please try again");
-                }*/
+                }
             }
         });
 
