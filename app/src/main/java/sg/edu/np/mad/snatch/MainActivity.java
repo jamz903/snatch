@@ -1,24 +1,22 @@
 package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.provider.ContactsContract;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
+
+import com.android.volley.RequestQueue;
+
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,6 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Students student;
 
     List<Students> studentsList;
+    RequestQueue requestQueue;
 
 
     @Override
@@ -55,10 +57,11 @@ public class MainActivity extends AppCompatActivity {
         pwEditText = (EditText) findViewById(R.id.pwEditText);
         errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
 
-        student = new Students("","");
+        student = new Students("", "");
         studentsList = new ArrayList<>();
         reff = FirebaseDatabase.getInstance().getReference();
 
+        requestQueue = Volley.newRequestQueue(this);
 
 
     }
@@ -68,75 +71,32 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         Log.d(TAG, "Started");
 
-        getStudents();
+        //read from the ;
 
-        for( Students student : studentsList){
-            System.out.println(student.getStudentID());
-            System.out.println(student.getStudentPW());
-        }
-        System.out.println("OWF");
-    }
 
-    public void getStudents(){
-        studentsList.clear();
-
-        DatabaseReference getDatabase;
-        getDatabase = FirebaseDatabase.getInstance().getReference();
-
-        ChildEventListener childEventListener = new ChildEventListener() {
+        reff.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                Log.d(TAG,"Success");
+                Log.d(TAG,"Value is" + map);
 
-                Students student = dataSnapshot.getValue(Students.class);
-
-                studentsList.add(student);
-                if (studentsList.size() > 0){
-                    System.out.println("YAY" + studentsList.size());
-                    System.out.println(studentsList.get(0));
-                }
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d(TAG, "onChildChanged:" + dataSnapshot.getKey());
-
-                Students students = dataSnapshot.getValue(Students.class);
-
-
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onChildRemoved:" + dataSnapshot.getKey());
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d(TAG, "onChildMoved:" + dataSnapshot.getKey());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w(TAG, "postComments:onCancelled", databaseError.toException());
-                Toast.makeText(MainActivity.this, "Failed to load comments.",
-                        Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"FAILL" , databaseError.toException());
             }
-        };
-        getDatabase.addChildEventListener(childEventListener);
+        });
+
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG,"Resumed");
+        Log.d(TAG, "Resumed");
         final List<Students> studentsList = new ArrayList();
-
-
-
-
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,16 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 String pw = pwEditText.getText().toString();
 
 
-
-
-
-
-
                 if (email.equals("s1234567") && pw.equals("12345678")) {
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
-                }
-                else {
+                } else {
                     errorMsgTextView.setText("Incorrect email/password! Please try again");
                 }
             }
@@ -170,12 +124,13 @@ public class MainActivity extends AppCompatActivity {
                 student.setStudentPW(pw);
 
 
-                reff.child("Students").child(id).setValue(student);
-                Toast.makeText(getApplicationContext(),"New Account registered",Toast.LENGTH_SHORT).show();
+                reff.child("Student").setValue(student);
+                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-
 }
+
+
+
