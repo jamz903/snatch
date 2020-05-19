@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -78,8 +80,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                studentsList.clear();
                 Log.d(TAG,"Success");
                 Log.d(TAG,"Value is" + map);
+                Log.d(TAG,"is a " + map.getClass().getName());
+
+                //add to list
+                Iterator StuList = map.entrySet().iterator();
+
+                while(StuList.hasNext()){
+                    Map.Entry mapElement = (Map.Entry)StuList.next();
+                    Log.d(TAG,"map key is" + mapElement.getValue());
+
+                    HashMap hash = (HashMap) mapElement.getValue();
+                    Iterator IDLIST = hash.entrySet().iterator();
+                    while (IDLIST.hasNext()) {
+
+                        Map.Entry hashElement = (Map.Entry)IDLIST.next();
+
+                        Log.d(TAG,"map key s" + hashElement.getValue());
+
+                        HashMap uSerInfo = (HashMap) hashElement.getValue();
+                        Iterator UserInfo = uSerInfo.entrySet().iterator();
+
+                        while (UserInfo.hasNext()){
+                            Map.Entry UserDeets = (Map.Entry)UserInfo.next();
+                            String details = (((String)UserDeets.getValue()));
+                            
+                            Log.d(TAG,UserDeets.getKey()+ ":" + details);
+                        }
+
+                    }
+
+
+                }
 
             }
 
@@ -124,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 student.setStudentPW(pw);
 
 
-                reff.child("Student").setValue(student);
+                reff.child("Students").child(id).setValue(student);
                 Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
