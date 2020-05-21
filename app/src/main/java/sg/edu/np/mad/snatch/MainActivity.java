@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue requestQueue;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //add to list
                 Iterator StuList = map.entrySet().iterator();
+                String a = null;
+                String b = null;
+
 
                 while(StuList.hasNext()){
                     Map.Entry mapElement = (Map.Entry)StuList.next();
@@ -106,9 +110,28 @@ public class MainActivity extends AppCompatActivity {
                         while (UserInfo.hasNext()){
                             Map.Entry UserDeets = (Map.Entry)UserInfo.next();
                             String details = (((String)UserDeets.getValue()));
-                            
-                            Log.d(TAG,UserDeets.getKey()+ ":" + details);
+
+
+
+
+
+                            if (UserDeets.getKey().equals("studentID")){
+                                a = (String) details;
+                            }
+                            else if (UserDeets.getKey().equals("studentPW")){
+                                b = (String) details;
+                            }
+                            else{
+                                Log.d(TAG,"Assignment failure");
+                            }
+
+
                         }
+
+
+                        Students student = new Students(a,b);
+                        studentsList.add(student);
+                        
 
                     }
 
@@ -117,11 +140,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG,"FAILL" , databaseError.toException());
             }
         });
+
 
     }
 
