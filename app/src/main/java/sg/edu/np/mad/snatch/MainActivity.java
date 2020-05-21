@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference reff;
     Students student;
 
-    List<Students> studentsList;
-    RequestQueue requestQueue;
 
+    RequestQueue requestQueue;
+    final List<Students> studentsList = new ArrayList();
 
 
     @Override
@@ -60,11 +60,12 @@ public class MainActivity extends AppCompatActivity {
         pwEditText = (EditText) findViewById(R.id.pwEditText);
         errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
 
-        student = new Students("", "");
-        studentsList = new ArrayList<>();
+        //student = new Students("", "");
+
         reff = FirebaseDatabase.getInstance().getReference();
 
         requestQueue = Volley.newRequestQueue(this);
+        addExistingMembers();
 
 
     }
@@ -75,8 +76,63 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Started");
 
         //read from the ;
+    }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "Resumed");
+
+
+        addExistingMembers();
+        //Log.d(TAG, " " + studentsList.get(0).getStudentID());
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = emailEditText.getText().toString();
+                String pw = pwEditText.getText().toString();
+
+
+
+                for(int i = 0; i<studentsList.size(); i++)
+                {
+
+                    if (studentsList.get(i).getStudentID().equals(email) && studentsList.get(i).getStudentPW().equals(pw)){
+                        Log.d(TAG, "Login correct");
+                        Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
+                        startActivity(in);
+
+                    }
+                    else{
+                        Log.d(TAG, "Login Wrong");
+                        continue;
+                    }
+                    errorMsgTextView.setText("Incorrect email/password! Please try again");
+
+                }
+
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = emailEditText.getText().toString();
+                String pw = pwEditText.getText().toString();
+
+                student.setStudentID(id);
+                student.setStudentPW(pw);
+
+
+                reff.child("Students").child(id).setValue(student);
+                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    protected void addExistingMembers(){
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -131,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
 
                         Students student = new Students(a,b);
                         studentsList.add(student);
-                        
+                        Log.d(TAG, " " + studentsList.get(0).getStudentID());
+
 
                     }
 
@@ -145,47 +202,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG,"FAILL" , databaseError.toException());
-            }
-        });
-
-
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "Resumed");
-        final List<Students> studentsList = new ArrayList();
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailEditText.getText().toString();
-                String pw = pwEditText.getText().toString();
-
-
-                if (email.equals("s1234567") && pw.equals("12345678")) {
-                    Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                    startActivity(in);
-                } else {
-                    errorMsgTextView.setText("Incorrect email/password! Please try again");
-                }
-            }
-        });
-
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = emailEditText.getText().toString();
-                String pw = pwEditText.getText().toString();
-
-                student.setStudentID(id);
-                student.setStudentPW(pw);
-
-
-                reff.child("Students").child(id).setValue(student);
-                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
     }
