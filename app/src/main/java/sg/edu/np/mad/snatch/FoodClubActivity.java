@@ -40,7 +40,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
 
     private static void storeNames(ArrayList<String> storeName){
         storeName.add("Japanese Food");
-        storeName.add("Bak Ku Teh");
+        storeName.add("Bak Kut Teh");
         storeName.add("Ban Mian");
         storeName.add("Western");
         storeName.add("Indonesian");

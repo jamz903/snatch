@@ -50,13 +50,42 @@ public class stallMenuActivity extends AppCompatActivity {
 
     //incomplete, need continue for remaining stalls
     public void determineFoodStall() {
-        if (getIntent().getStringExtra("Stall").equals("Chicken Rice")) {
+        String choice = getIntent().getStringExtra("Stall");
+        if (choice.equals("Chicken Rice")) {
             initChickenRice();
             initChickenRiceIDs();
         }
-        else if (getIntent().getStringExtra("Stall").equals("Mala")) {
+        else if (choice.equals("Mala")) {
             initMala();
             initMalaIDs();
+        }
+        else if(choice.equals("Western")) {
+            initWestern();
+            initWesternIDs();
+        }
+        else if (choice.equals("Japanese Food")) {
+            initJap();
+            initJapIDs();
+        }
+        else if (choice.equals("Bak Kut Teh")) {
+            initBKT();
+            initBKTIDs();
+        }
+        else if (choice.equals("Ban Mian")) {
+            initBanMian();
+            initBanMianIDs();
+        }
+        else if (choice.equals("Indonesian")) {
+            initIndo();
+            initIndoIDs();
+        }
+        else if (choice.equals("Drinks Stall")) {
+            initDrinks();
+            initDrinksIDs();
+        }
+        else if (choice.equals("Yogurt")) {
+            initYogurt();
+            initYogurtIDs();
         }
     }
 
@@ -84,5 +113,91 @@ public class stallMenuActivity extends AppCompatActivity {
         imageIDs.add(R.drawable.taiwan_sausage);
         imageIDs.add(R.drawable.rice);
         imageIDs.add(R.drawable.noodle);
+    }
+
+    public void initWesternIDs() {
+        imageIDs.add(R.drawable.chicken_chop);
+        imageIDs.add(R.drawable.fish_and_chips);
+        imageIDs.add(R.drawable.cheese_fries);
+    }
+
+    public void initWestern() {
+        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6));
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3));
+    }
+
+    public void initJapIDs() {
+        imageIDs.add(R.drawable.chicken_katsu_curry);
+        imageIDs.add(R.drawable.salmon_don);
+        imageIDs.add(R.drawable.chawanmushi);
+    }
+
+    public void initJap() {
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4));
+        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1));
+    }
+
+    public void initBKTIDs() {
+        imageIDs.add(R.drawable.bakkutteh);
+        imageIDs.add(R.drawable.youtiao);
+        imageIDs.add(R.drawable.vinegar_braised_pork);
+    }
+
+    public void initBKT() {
+        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4));
+        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5));
+        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4));
+    }
+
+    public void initBanMianIDs() {
+        imageIDs.add(R.drawable.sliced_fish_noodle_soup);
+        imageIDs.add(R.drawable.banmian);
+        imageIDs.add(R.drawable.fish_soup);
+    }
+
+    public void initBanMian() {
+        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5));
+        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4));
+        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5));
+    }
+
+    public void initIndoIDs() {
+        imageIDs.add(R.drawable.ayam_penyet);
+        imageIDs.add(R.drawable.mee_soto);
+        imageIDs.add(R.drawable.papadom);
+    }
+
+    public void initIndo() {
+        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5));
+        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3));
+        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1));
+    }
+
+    public void initDrinksIDs() {
+        imageIDs.add(R.drawable.iced_milo);
+        imageIDs.add(R.drawable.hot_milo);
+        imageIDs.add(R.drawable.hot_coffee);
+        imageIDs.add(R.drawable.iced_lemon_tea);
+    }
+
+    public void initDrinks() {
+        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5));
+        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7));
+        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7));
+        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5));
+    }
+
+    public void initYogurtIDs() {
+        imageIDs.add(R.drawable.yogurt);
+        imageIDs.add(R.drawable.yogurt);
+        imageIDs.add(R.drawable.yogurt);
+    }
+
+    public void initYogurt() {
+        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9));
+        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9));
+        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9));
     }
 }
