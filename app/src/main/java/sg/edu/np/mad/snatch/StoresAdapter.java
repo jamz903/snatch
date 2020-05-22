@@ -18,11 +18,13 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
     Context context;
     ArrayList<String> storeName;
     ArrayList<String> storeDesc;
+    StoresAdapterCallback listener;
 
-    public StoresAdapter(ArrayList<String> aStoreName, ArrayList<String> aStoreDesc, Context context){
+    public StoresAdapter(ArrayList<String> aStoreName, ArrayList<String> aStoreDesc, Context context, StoresAdapterCallback aListener){
         storeName = aStoreName;
         storeDesc = aStoreDesc;
         this.context = context;
+        listener = aListener;
     }
     @NonNull
     @Override
@@ -44,8 +46,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String string = storeName.get(position); //show store name
-                Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
+                //String string = storeName.get(position); //show store name
+                //Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
+                listener.promptFoodStore(position);
             }
         });
     }
