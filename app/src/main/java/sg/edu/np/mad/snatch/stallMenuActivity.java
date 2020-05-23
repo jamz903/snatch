@@ -87,6 +87,14 @@ public class stallMenuActivity extends AppCompatActivity {
             initYogurt();
             initYogurtIDs();
         }
+        else if (choice.equals("Mini Wok")) {
+            initMiniWok();
+            initMiniWokIDs();
+        }
+        else if (choice.equals("Thai")) {
+            initThai();
+            initThaiIDs();
+        }
     }
 
     public void initChickenRice() {
@@ -199,5 +207,29 @@ public class stallMenuActivity extends AppCompatActivity {
         foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9));
         foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9));
         foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9));
+    }
+
+    public void initMiniWokIDs() {
+        imageIDs.add(R.drawable.gongbao_chicken);
+        imageIDs.add(R.drawable.horfun);
+        imageIDs.add(R.drawable.salted_egg_rice);
+    }
+
+    public void initMiniWok() {
+        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4));
+        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4));
+        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5));
+    }
+
+    public void initThaiIDs() {
+        imageIDs.add(R.drawable.basil_pork_rice);
+        imageIDs.add(R.drawable.padthai);
+        imageIDs.add(R.drawable.mangosalad);
+    }
+
+    public void initThai() {
+        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5));
+        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5));
+        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3));
     }
 }
