@@ -14,10 +14,12 @@ import java.util.zip.Inflater;
 public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     ArrayList<FoodItem> menuItems;
     ArrayList<Integer> itemImageIDs;
+    menuItemAdapterCallback listener;
 
-    public menuItemAdapter(ArrayList<FoodItem> aMenuItems, ArrayList<Integer> aItemImageIDs) {
+    public menuItemAdapter(ArrayList<FoodItem> aMenuItems, ArrayList<Integer> aItemImageIDs, menuItemAdapterCallback aListener) {
         this.itemImageIDs = aItemImageIDs;
         this.menuItems = aMenuItems;
+        this.listener = aListener;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull menuItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull menuItemViewHolder holder, final int position) {
 
         if (position < menuItems.size()) {
             FoodItem dish = menuItems.get(position);
@@ -45,6 +47,13 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             int imageID = itemImageIDs.get(position);
             holder.foodImageView.setImageResource(imageID);
         }
+
+        holder.parentLayoutMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.promptAddItem(position);
+            }
+        });
     }
 
     @Override

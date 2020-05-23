@@ -29,7 +29,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
     @NonNull
     @Override
     public StoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stores_listitem,null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stores_listitem, parent, false);
 
         return new StoresViewHolder(v);
     }
@@ -43,7 +43,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
         holder.storeDesc.setText(information2);
 
         //clickable list view of stalls
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.parentLayoutStores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //String string = storeName.get(position); //show store name

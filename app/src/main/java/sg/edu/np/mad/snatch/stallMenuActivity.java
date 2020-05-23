@@ -6,21 +6,32 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class stallMenuActivity extends AppCompatActivity {
+public class stallMenuActivity extends AppCompatActivity implements menuItemAdapterCallback {
 
     ArrayList<FoodItem> foodMenu;
     ArrayList<Integer> imageIDs;
+    ArrayList<OrderItem> shoppingCart;
+    FloatingActionButton menuFAB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stall_menu);
+        shoppingCart = new ArrayList<>();
+        menuFAB = (FloatingActionButton) findViewById(R.id.menuFAB);
 
     }
 
@@ -36,7 +47,7 @@ public class stallMenuActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerViewMenu);
 
         //change line below for adapter if is other food stall
-        menuItemAdapter adapter = new menuItemAdapter(foodMenu, imageIDs);
+        menuItemAdapter adapter = new menuItemAdapter(foodMenu, imageIDs, this);
         rv.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(this);
@@ -46,6 +57,44 @@ public class stallMenuActivity extends AppCompatActivity {
         //adds a divider inbetween items
         rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
 
+        menuFAB.bringToFront();
+        menuFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(stallMenuActivity.this, OrderActivity.class);
+                in.putExtra("OrderList", shoppingCart);
+                startActivity(in);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        //prevents alertDialog from closing immediately when backbutton is pressed
+        //super.onBackPressed();
+        if (shoppingCart.size() > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Warning! Clearing cart?")
+                    .setCancelable(false)
+                    .setMessage("Going back to see other stalls will clear current items in cart. Would you like to proceed?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            shoppingCart.clear();
+                            stallMenuActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }
+        else {
+            stallMenuActivity.super.onBackPressed();
+        }
     }
 
     //incomplete, need continue for remaining stalls
@@ -265,5 +314,42 @@ public class stallMenuActivity extends AppCompatActivity {
         foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1));
         foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8));
         foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1));
+    }
+
+    @Override
+    public void promptAddItem(final int aPosition) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Go to Food Stall?")
+                .setCancelable(true)
+                .setMessage("Would you like to add " + foodMenu.get(aPosition).foodName + " to cart?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!checkSame(shoppingCart, foodMenu.get(aPosition).foodName)) {
+                            shoppingCart.add(new OrderItem(foodMenu.get(aPosition).foodName, 1, foodMenu.get(aPosition).price, foodMenu.get(aPosition).price));
+                        }
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public boolean checkSame(ArrayList<OrderItem> aShoppingCart, String aFoodName) {
+        boolean isSame = false;
+        for (OrderItem food : aShoppingCart) {
+            if (aFoodName.equals(food.foodName)) {
+                food.quantity += 1;
+                food.subtotal += food.foodPrice;
+                isSame = true;
+                break;
+            }
+        }
+        return isSame;
     }
 }
