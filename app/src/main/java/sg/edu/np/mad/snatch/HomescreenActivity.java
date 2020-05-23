@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,12 +23,13 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         dropdownList = findViewById(R.id.dropdownList);
         adapter = ArrayAdapter.createFromResource(this, R.array.food_court, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

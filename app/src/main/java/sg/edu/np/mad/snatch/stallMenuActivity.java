@@ -95,6 +95,14 @@ public class stallMenuActivity extends AppCompatActivity {
             initThai();
             initThaiIDs();
         }
+        else if (choice.equals("Economical Rice")) {
+            initEconRice();
+            initEconRiceIDs();
+        }
+        else if (choice.equals("FC Bakery")) {
+            initBakery();
+            initBakeryIDs();
+        }
     }
 
     public void initChickenRice() {
@@ -231,5 +239,31 @@ public class stallMenuActivity extends AppCompatActivity {
         foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5));
         foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5));
         foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3));
+    }
+
+    public void initEconRiceIDs() {
+        imageIDs.add(R.drawable.rice);
+        imageIDs.add(R.drawable.beehoon);
+        imageIDs.add(R.drawable.sweet_sour_pork);
+        imageIDs.add(R.drawable.fried_egg);
+    }
+
+    public void initEconRice() {
+        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5));
+        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7));
+        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8));
+        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5));
+    }
+
+    public void initBakeryIDs() {
+        imageIDs.add(R.drawable.hotdog_bun);
+        imageIDs.add(R.drawable.cream_puff);
+        imageIDs.add(R.drawable.floss_bun);
+    }
+
+    public void initBakery() {
+        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1));
+        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8));
+        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1));
     }
 }
