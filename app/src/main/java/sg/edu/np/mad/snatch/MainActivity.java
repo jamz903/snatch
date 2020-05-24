@@ -109,14 +109,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
-                if (email.equals("s1234567") && pw.equals("12345678")) {
+/*                if (email.equals("s1234567") && pw.equals("12345678")) {
                     Log.d(TAG, "Login successful!");
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
-                }
+                }*/
 
 
-                /*for(int i = 0; i<studentsList.size(); i++)
+                for(int i = 0; i<studentsList.size(); i++)
                 {
 
                     if (studentsList.get(i).getStudentID().equals(email) && studentsList.get(i).getStudentPW().equals(pw)){
@@ -127,11 +127,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         Log.d(TAG, "Login Wrong");
+                        errorMsgTextView.setText("Incorrect email/password! Please try again");
                         continue;
                     }
-                    errorMsgTextView.setText("Incorrect email/password! Please try again");
 
-                }*/
+
+                }
 
             }
         });
@@ -141,12 +142,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String id = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
+                
+                Students students = new Students(id,pw);
+                //students.setStudentID(id);
+                //students.setStudentPW(pw);
 
-                student.setStudentID(id);
-                student.setStudentPW(pw);
 
-
-                reff.child("Students").child(id).setValue(student);
+                reff.child("Students").child(id).setValue(students);
                 Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
