@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     ArrayList<Integer> imageIDs;
     ArrayList<OrderItem> shoppingCart;
     FloatingActionButton menuFAB;
+    Button upvote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,17 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         shoppingCart = new ArrayList<>();
         menuFAB = (FloatingActionButton) findViewById(R.id.menuFAB);
 
+        //upvote button
+        /*Button upvote = (Button)findViewById(R.id.upvote);
+        upvote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String dish = getIntent().getStringExtra("foodName");
+                //String text = dish + "succesfully upvoted.";
+                //Toast.makeText(stallMenuActivity.this, text, Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
     }
 
     @Override
@@ -352,4 +365,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         }
         return isSame;
     }
+
+
 }

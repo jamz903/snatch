@@ -51,4 +51,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/foodImageView"
         app:layout_constraintStart_toStartOf="@+id/foodDescTextView"
         app:layout_constraintTop_toBottomOf="@+id/foodDescTextView" />
+
+    <Button
+        android:id="@+id/upvote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="upvote"
+        app:layout_constraintBottom_toBottomOf="@+id/priceTextView"
+        app:layout_constraintEnd_toStartOf="@+id/foodImageView"
+        app:layout_constraintTop_toTopOf="@+id/priceTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

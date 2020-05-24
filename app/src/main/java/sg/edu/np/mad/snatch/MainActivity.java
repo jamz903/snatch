@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -67,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         addExistingMembers();
 
+        // Manually configure Firebase Options. The following fields are REQUIRED:
+        //   - Project ID
+        //   - App ID
+        //   - API Key
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setProjectId("snatch2-2f8b9")
+                .setApplicationId("1:340213712944:android:9ea6bb8418a249af8d45f5")
+                .setApiKey("AIzaSyA3_GwOTRglQCYshcToK9TMNFDvx7_WQGc")
+                .build();
+
+        // Initialize with secondary app
+        FirebaseApp.initializeApp(this /* Context */, options, "secondary");
+        //Retrieve secondary firebase app
+        //FirebaseApp secondary = FirebaseApp.getInstance("secondary");
 
     }
 
