@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
     //Create variables and lists for adapter

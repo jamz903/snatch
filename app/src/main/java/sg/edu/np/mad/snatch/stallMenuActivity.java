@@ -33,7 +33,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     //Create variables and lists for item
     ArrayList<FoodItem> foodMenu;
-    ArrayList<Integer> imageIDs;
     ArrayList<OrderItem> shoppingCart;
     FloatingActionButton menuFAB;
     DatabaseReference reference;
@@ -54,13 +53,13 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         //Create a new list for ech food menu
         foodMenu = new ArrayList<>();
 
-        determineFoodStall();
         //Create recycler view
         RecyclerView rv = findViewById(R.id.recyclerViewMenu);
 
         //change line below for adapter if is other food stall
 
         menuItemAdapter adapter = new menuItemAdapter(foodMenu, this);
+        determineFoodStall(adapter);
         rv.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(this);
@@ -112,7 +111,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     //incomplete, need continue for remaining stalls
     //Check for each singular stall in food court
-    public void determineFoodStall() {
+    public void determineFoodStall(menuItemAdapter adapter) {
         String choice = getIntent().getStringExtra("Stall");
         if (choice.equals("Chicken Rice")) {
             initChickenRice();
@@ -126,6 +125,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         else if (choice.equals("Japanese Food")) {
             reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
             initJap();
+            adapter.notifyDataSetChanged();
         }
         else if (choice.equals("Bak Kut Teh")) {
             initBKT();
@@ -279,7 +279,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     public int getUpvote(final String dishName){
         final int[] upVotes = {0};
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 upVotes[0] = (int)dataSnapshot.child(dishName).getValue(int.class);
