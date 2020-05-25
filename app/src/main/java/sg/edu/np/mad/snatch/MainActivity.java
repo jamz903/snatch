@@ -69,21 +69,6 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         addExistingMembers();
 
-        // Manually configure Firebase Options. The following fields are REQUIRED:
-        //   - Project ID
-        //   - App ID
-        //   - API Key
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setProjectId("snatch2-2f8b9")
-                .setApplicationId("1:340213712944:android:9ea6bb8418a249af8d45f5")
-                .setApiKey("AIzaSyA3_GwOTRglQCYshcToK9TMNFDvx7_WQGc")
-                .build();
-
-        // Initialize with secondary app
-        FirebaseApp.initializeApp(this /* Context */, options, "secondary");
-        //Retrieve secondary firebase app
-        //FirebaseApp secondary = FirebaseApp.getInstance("secondary");
-
     }
 
     @Override
@@ -109,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
-/*                if (email.equals("s1234567") && pw.equals("12345678")) {
+                /*if (email.equals("s1234567") && pw.equals("12345678")) {
                     Log.d(TAG, "Login successful!");
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
