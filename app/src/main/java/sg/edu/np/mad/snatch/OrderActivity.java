@@ -19,6 +19,8 @@ public class OrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        //create array list for shopping cart objects
         shoppingCart = (ArrayList<OrderItem>) getIntent().getSerializableExtra("OrderList");
         if (shoppingCart.size() == 0) {
             setContentView(R.layout.empty_order);

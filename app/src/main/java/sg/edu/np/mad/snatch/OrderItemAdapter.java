@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
+    //created necessary variables
     Context context;
     ArrayList<OrderItem> shoppingCart;
 
@@ -21,6 +22,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         this.shoppingCart = aShoppingCart;
     }
 
+
+    //View holder for recycler view
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +33,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         return new OrderViewHolder(v);
     }
 
+    //Assign variables for shopping cart items.
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         if (position < shoppingCart.size()) {

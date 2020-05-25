@@ -13,7 +13,10 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+
 public class FoodClubActivity extends AppCompatActivity implements StoresAdapterCallback {
+
+    //Lists for Store activities
     ArrayList<String> storeName = new ArrayList<>();
     ArrayList<String> storeDesc = new ArrayList<>();
     @Override
@@ -26,6 +29,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
 
         RecyclerView rv = findViewById(R.id.recyclerView1);
 
+        //Recycler view adapter
         StoresAdapter adapter = new StoresAdapter(storeName,storeDesc,this, this);
         rv.setAdapter(adapter);
 
@@ -33,12 +37,13 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
         rv.setLayoutManager(layout);
         rv.setItemAnimator(new DefaultItemAnimator());
 
-        //adds a divider inbetween items
+        //adds a divider in-between items
         rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
 
     }
 
     private static void storeNames(ArrayList<String> storeName){
+        //store names
         storeName.add("Japanese Food");
         storeName.add("Bak Kut Teh");
         storeName.add("Ban Mian");
@@ -55,6 +60,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
     }
 
     private static void storeDescs(ArrayList<String> storeDesc){
+        //store descriptions
         storeDesc.add("This is the Japanese Stall");
         storeDesc.add("This is the Bak Ku Teh Stall");
         storeDesc.add("This is the Ban Mian Stall");
@@ -73,10 +79,15 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
 
     @Override
     public void promptFoodStore(final int aPosition) {
+
+        //prompt when user clicks on name of food store
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Go to Food Stall?")
                 .setCancelable(true)
                 .setMessage("Would you like to see " + storeName.get(aPosition) + " menu?")
+
+                // Yes/No options and actions
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -91,6 +102,8 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
                         dialog.cancel();
                     }
                 });
+
+        //Show alert
         AlertDialog alert = builder.create();
         alert.show();
     }

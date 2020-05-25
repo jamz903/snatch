@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
+    //Create variables and lists for adapter
     Context context;
     ArrayList<String> storeName;
     ArrayList<String> storeDesc;
     StoresAdapterCallback listener;
 
     public StoresAdapter(ArrayList<String> aStoreName, ArrayList<String> aStoreDesc, Context context, StoresAdapterCallback aListener){
+        //Assign variables to items
         storeName = aStoreName;
         storeDesc = aStoreDesc;
         this.context = context;

@@ -14,10 +14,13 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
+
+    //creating required lists
     ArrayList<FoodItem> menuItems;
     ArrayList<Integer> itemImageIDs;
     menuItemAdapterCallback listener;
 
+    //Assigning items
     public menuItemAdapter(ArrayList<FoodItem> aMenuItems, ArrayList<Integer> aItemImageIDs, menuItemAdapterCallback aListener) {
         this.itemImageIDs = aItemImageIDs;
         this.menuItems = aMenuItems;
@@ -26,7 +29,11 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
     @NonNull
     @Override
+
+
     public menuItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        //get View holder for recycler
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.menus_listitem, parent, false);
 
         return new menuItemViewHolder(v);
@@ -35,6 +42,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull menuItemViewHolder holder, final int position) {
 
+
+        //set format for mennu items
         if (position < menuItems.size()) {
             FoodItem dish = menuItems.get(position);
             String information1 = dish.foodName;

@@ -24,6 +24,7 @@ import java.util.List;
 
 public class stallMenuActivity extends AppCompatActivity implements menuItemAdapterCallback {
 
+    //Create variables and lists for item
     ArrayList<FoodItem> foodMenu;
     ArrayList<Integer> imageIDs;
     ArrayList<OrderItem> shoppingCart;
@@ -32,6 +33,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_stall_menu);
         shoppingCart = new ArrayList<>();
         menuFAB = (FloatingActionButton) findViewById(R.id.menuFAB);
@@ -41,11 +43,13 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     protected void onResume() {
         super.onResume();
 
+        //Create a new list for ech food menu
         foodMenu = new ArrayList<>();
         imageIDs = new ArrayList<>();
 
         determineFoodStall();
 
+        //Create recycler view
         RecyclerView rv = findViewById(R.id.recyclerViewMenu);
 
         //change line below for adapter if is other food stall
@@ -100,6 +104,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     //incomplete, need continue for remaining stalls
+    //Check for each singular stall in food court
     public void determineFoodStall() {
         String choice = getIntent().getStringExtra("Stall");
         if (choice.equals("Chicken Rice")) {

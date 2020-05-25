@@ -22,21 +22,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class menuItemViewHolder extends RecyclerView.ViewHolder {
+
+    //Assigning required wigits
+
     TextView foodNameTextView;
     TextView foodDescTextView;
     TextView priceTextView;
     ImageView foodImageView;
     ConstraintLayout parentLayoutMenu;
     Button upvote;
+
+    //temp reference for food item
     DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");//Set to foodClub for now
     public menuItemViewHolder(@NonNull View itemView) {
         super(itemView);
+
+        //Assign view items to variables
         foodNameTextView = itemView.findViewById(R.id.foodNameTextView);
         foodDescTextView = itemView.findViewById(R.id.foodDescTextView);
         priceTextView = itemView.findViewById(R.id.priceTextView);
         foodImageView = itemView.findViewById(R.id.foodImageView);
         parentLayoutMenu = itemView.findViewById(R.id.parentLayoutMenu);
         upvote = itemView.findViewById(R.id.upvote);
+
+        //when upvote button is clicked add to database and stop user from updating.
         upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

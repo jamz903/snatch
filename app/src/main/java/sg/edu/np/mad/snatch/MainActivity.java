@@ -17,8 +17,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,6 +34,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //TAG and variables
     private static final String TAG = "snatch";
     Button loginBtn;
     Button signUpBtn;
@@ -56,17 +57,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Created");
 
+
+        //Assign Buttons to variables
         loginBtn = (Button) findViewById(R.id.loginBtn);
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
         errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
 
-        //student = new Students("", "");
 
+        //Reference for firebase to get studentList
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
 
-        requestQueue = Volley.newRequestQueue(this);
+        //Function to add all Students to studentsLIst from firebase
         addExistingMembers();
 
     }
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         Log.d(TAG, "Started");
 
-        //read from the ;
+
     }
 
 
@@ -85,10 +88,11 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d(TAG, "Resumed");
 
-
+        //assign values to studentsList incase of change
         addExistingMembers();
-        //Log.d(TAG, " " + studentsList.get(0).getStudentID());
 
+
+        //When is login button is pressed check students List with input info
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Wem sign up button is pressed send input info to new firebase child
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,13 +144,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //add members of database to studentsList
     protected void addExistingMembers(){
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 studentsList.clear();
-                Log.d(TAG,"Success");
+
+
+                Log.d(TAG,"connection Success");
                 Log.d(TAG,"Value is" + map);
                 Log.d(TAG,"is a " + map.getClass().getName());
 
@@ -154,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 String a = null;
                 String b = null;
 
-
+                //iterate through database for all child items
                 while(StuList.hasNext()){
                     Map.Entry mapElement = (Map.Entry)StuList.next();
                     Log.d(TAG,"map key is" + mapElement.getValue());
@@ -169,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG,"map key s" + hashElement);
                         String details = (((String)hashElement.getValue()));
 
+                        //check if item is an ID or PW before adding to list
                         if (hashElement.getKey().equals("studentID")){
                             a = (String) details;
                         }
@@ -181,8 +190,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+                        //make student obkect to add to list
                         Students student = new Students(a,b);
+                        //add student to student list
                         studentsList.add(student);
                         Log.d(TAG, " " + studentsList.get(0).getStudentID());
 
