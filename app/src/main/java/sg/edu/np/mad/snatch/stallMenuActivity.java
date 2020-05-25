@@ -18,6 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class stallMenuActivity extends AppCompatActivity implements menuItemAdapterCallback {
@@ -155,9 +157,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initChickenRice() {
-        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3));
-        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5));
-        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5));
+        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, 30));
+        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, 29));
+        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5, 28));
     }
 
     public void initChickenRiceIDs() {
@@ -167,10 +169,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initMala() {
-        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1));
-        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1));
-        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5));
-        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5));
+        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1,2));
+        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1,3));
+        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5,5));
+        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5,4));
     }
 
     public void initMalaIDs() {
@@ -187,9 +189,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initWestern() {
-        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5));
-        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6));
-        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3));
+        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5,30));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6,30));
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3,30));
     }
 
     public void initJapIDs() {
@@ -199,9 +201,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initJap() {
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5));
-        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4));
-        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1));
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5,33));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4,34));
+        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1,5));
+        foodMenu = checkUpvotes();
     }
 
     public void initBKTIDs() {
@@ -211,9 +214,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initBKT() {
-        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4));
-        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5));
-        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4));
+        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4,35));
+        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5,15));
+        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4,20));
     }
 
     public void initBanMianIDs() {
@@ -223,9 +226,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initBanMian() {
-        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5));
-        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4));
-        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5));
+        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5,29));
+        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4,30));
+        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5,28));
     }
 
     public void initIndoIDs() {
@@ -235,9 +238,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initIndo() {
-        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5));
-        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3));
-        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1));
+        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5,30));
+        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3,25));
+        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1,24));
     }
 
     public void initDrinksIDs() {
@@ -248,10 +251,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initDrinks() {
-        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5));
-        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7));
-        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7));
-        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5));
+        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5,25));
+        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7,30));
+        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7,20));
+        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5,50));
     }
 
     public void initYogurtIDs() {
@@ -261,9 +264,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initYogurt() {
-        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9));
-        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9));
-        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9));
+        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9,25));
+        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9,30));
+        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9,40));
     }
 
     public void initMiniWokIDs() {
@@ -273,9 +276,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initMiniWok() {
-        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4));
-        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4));
-        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5));
+        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4,40));
+        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4,35));
+        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5,30));
     }
 
     public void initThaiIDs() {
@@ -285,9 +288,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initThai() {
-        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5));
-        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5));
-        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3));
+        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5,3));
+        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5,1));
+        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3,2));
     }
 
     public void initEconRiceIDs() {
@@ -298,10 +301,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initEconRice() {
-        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5));
-        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7));
-        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8));
-        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5));
+        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5,4));
+        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7,3));
+        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8,5));
+        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5,3));
     }
 
     public void initBakeryIDs() {
@@ -311,9 +314,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void initBakery() {
-        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1));
-        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8));
-        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1));
+        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1,14));
+        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8,13));
+        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,15));
     }
 
     @Override
@@ -351,6 +354,25 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
             }
         }
         return isSame;
+    }
+
+    public ArrayList<FoodItem> checkUpvotes(){
+        ArrayList<Integer> upVoteList = new ArrayList<>();
+        ArrayList<FoodItem> finalFoodMenu = new ArrayList<>();
+        for(FoodItem food : foodMenu){
+            upVoteList.add(food.getUpVotes());
+        }
+        Comparator c = Collections.reverseOrder();
+        Collections.sort(upVoteList,c);
+        for(FoodItem food : foodMenu){
+            for(int upvote : upVoteList){
+                if(food.getUpVotes() == upvote){
+                    finalFoodMenu.add(food);
+                    break;
+                }
+            }
+        }
+        return finalFoodMenu;
     }
 
 

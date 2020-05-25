@@ -1,9 +1,12 @@
 package sg.edu.np.mad.snatch;
 
-public class FoodItem {
+import java.util.Comparator;
+
+public class FoodItem implements Comparator<FoodItem> {
     public String foodName;
     public String foodDesc;
     public double price;
+    public int upVotes;
 
     public String getFoodName() {
         return foodName;
@@ -29,9 +32,29 @@ public class FoodItem {
         this.price = price;
     }
 
-    public FoodItem(String aFoodName, String aFoodDesc, double aPrice) {
+    public int getUpVotes() {
+        return upVotes;
+    }
+
+    public void setUpVotes(int upVotes) {
+        this.upVotes = upVotes;
+    }
+
+    public FoodItem(String aFoodName, String aFoodDesc, double aPrice, int aUpVotes) {
         foodName = aFoodName;
         foodDesc = aFoodDesc;
         price = aPrice;
+        upVotes = aUpVotes;
     }
+
+    @Override
+    public int compare(FoodItem o1, FoodItem o2) {
+        if(o1.getUpVotes() > o2.getUpVotes()){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
 }

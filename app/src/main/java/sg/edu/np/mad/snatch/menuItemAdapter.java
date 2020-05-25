@@ -56,6 +56,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
                 listener.promptAddItem(position);
             }
         });
+
+
     }
 
     @Override
