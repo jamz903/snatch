@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //student = new Students("", "");
 
-        reff = FirebaseDatabase.getInstance().getReference();
+        reff = FirebaseDatabase.getInstance().getReference().child("Students");
 
         requestQueue = Volley.newRequestQueue(this);
         addExistingMembers();
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 //students.setStudentPW(pw);
 
 
-                reff.child("Students").child(id).setValue(students);
+                reff.child(id).setValue(students);
                 Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
@@ -174,37 +174,27 @@ public class MainActivity extends AppCompatActivity {
                     Map.Entry mapElement = (Map.Entry)StuList.next();
                     Log.d(TAG,"map key is" + mapElement.getValue());
 
+
                     HashMap hash = (HashMap) mapElement.getValue();
                     Iterator IDLIST = hash.entrySet().iterator();
                     while (IDLIST.hasNext()) {
 
                         Map.Entry hashElement = (Map.Entry)IDLIST.next();
 
-                        Log.d(TAG,"map key s" + hashElement.getValue());
+                        Log.d(TAG,"map key s" + hashElement);
+                        String details = (((String)hashElement.getValue()));
 
-                        HashMap uSerInfo = (HashMap) hashElement.getValue();
-                        Iterator UserInfo = uSerInfo.entrySet().iterator();
-
-                        while (UserInfo.hasNext()){
-                            Map.Entry UserDeets = (Map.Entry)UserInfo.next();
-                            String details = (((String)UserDeets.getValue()));
-
-
-
-
-
-                            if (UserDeets.getKey().equals("studentID")){
-                                a = (String) details;
-                            }
-                            else if (UserDeets.getKey().equals("studentPW")){
-                                b = (String) details;
-                            }
-                            else{
-                                Log.d(TAG,"Assignment failure");
-                            }
-
-
+                        if (hashElement.getKey().equals("studentID")){
+                            a = (String) details;
                         }
+                        else if (hashElement.getKey().equals("studentPW")){
+                            b = (String) details;
+                        }
+                        else{
+                            Log.d(TAG,"Assignment failure");
+                        }
+
+
 
 
                         Students student = new Students(a,b);
