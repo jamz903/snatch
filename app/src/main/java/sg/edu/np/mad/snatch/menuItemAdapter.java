@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -76,7 +77,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             }
         });
 
-        upvote.setOnClickListener(new View.OnClickListener() {
+
+        holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String dish = String.valueOf(holder.foodNameTextView.getText());
@@ -84,7 +86,10 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
                 String text = dish + " succesfully upvoted.";
                 Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
                 menuItems.get(position).upVotes++;
+                Collections.sort(menuItems);
+                
                 notifyDataSetChanged();
+
             }
         });
 
