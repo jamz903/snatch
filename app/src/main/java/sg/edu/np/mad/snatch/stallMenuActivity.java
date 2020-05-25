@@ -26,7 +26,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     ArrayList<Integer> imageIDs;
     ArrayList<OrderItem> shoppingCart;
     FloatingActionButton menuFAB;
-    Button upvote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +33,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         setContentView(R.layout.activity_stall_menu);
         shoppingCart = new ArrayList<>();
         menuFAB = (FloatingActionButton) findViewById(R.id.menuFAB);
-
-        //upvote button
-        /*Button upvote = (Button)findViewById(R.id.upvote);
-        upvote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //String dish = getIntent().getStringExtra("foodName");
-                //String text = dish + "succesfully upvoted.";
-                //Toast.makeText(stallMenuActivity.this, text, Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
     }
 
     @Override

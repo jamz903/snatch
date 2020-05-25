@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,5 +25,13 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
         foodImageView = itemView.findViewById(R.id.foodImageView);
         parentLayoutMenu = itemView.findViewById(R.id.parentLayoutMenu);
         upvote = itemView.findViewById(R.id.upvote);
+        upvote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dish = String.valueOf(foodNameTextView.getText());
+                String text = dish + " succesfully upvoted.";
+                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
