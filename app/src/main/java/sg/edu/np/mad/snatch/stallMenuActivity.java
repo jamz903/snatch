@@ -53,19 +53,14 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
         //Create a new list for ech food menu
         foodMenu = new ArrayList<>();
-        imageIDs = new ArrayList<>();
 
         determineFoodStall();
-
-        for(FoodItem f: foodMenu){
-            imageIDs.add(f.imageID);
-        }
         //Create recycler view
         RecyclerView rv = findViewById(R.id.recyclerViewMenu);
 
         //change line below for adapter if is other food stall
 
-        menuItemAdapter adapter = new menuItemAdapter(foodMenu, imageIDs, this);
+        menuItemAdapter adapter = new menuItemAdapter(foodMenu, this);
         rv.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(this);

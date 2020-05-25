@@ -25,14 +25,12 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
     //creating required lists
     ArrayList<FoodItem> menuItems;
-    ArrayList<Integer> itemImageIDs;
     menuItemAdapterCallback listener;
     Button upvote;
     DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
 
     //Assigning items
-    public menuItemAdapter(ArrayList<FoodItem> aMenuItems, ArrayList<Integer> aItemImageIDs, menuItemAdapterCallback aListener) {
-        this.itemImageIDs = aItemImageIDs;
+    public menuItemAdapter(ArrayList<FoodItem> aMenuItems, menuItemAdapterCallback aListener) {
         this.menuItems = aMenuItems;
         this.listener = aListener;
     }
@@ -53,7 +51,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     public void onBindViewHolder(@NonNull final menuItemViewHolder holder, final int position) {
 
 
-        //set format for mennu items
+        //set format for menu items
         if (position < menuItems.size()) {
             FoodItem dish = menuItems.get(position);
             String information1 = dish.foodName;
@@ -66,8 +64,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             holder.priceTextView.setText(String.format("$%.2f", information3));
 
             //pretty sure we need to change smth (TBD)
-            int imageID = itemImageIDs.get(position);
-            holder.foodImageView.setImageResource(imageID);
+            int information4 = dish.imageID;
+            holder.foodImageView.setImageResource(information4);
         }
 
         holder.parentLayoutMenu.setOnClickListener(new View.OnClickListener() {
