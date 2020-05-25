@@ -30,7 +30,7 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
     TextView priceTextView;
     ImageView foodImageView;
     ConstraintLayout parentLayoutMenu;
-    //Button upvote;
+    Button upvote;
 
     //temp reference for food item
     //DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");//Set to foodClub for now
@@ -43,7 +43,7 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
         priceTextView = itemView.findViewById(R.id.priceTextView);
         foodImageView = itemView.findViewById(R.id.foodImageView);
         parentLayoutMenu = itemView.findViewById(R.id.parentLayoutMenu);
-        //upvote = itemView.findViewById(R.id.upvote);
+        upvote = itemView.findViewById(R.id.upvote);
 
         //when upvote button is clicked add to database and stop user from updating.
         /*upvote.setOnClickListener(new View.OnClickListener() {
