@@ -46,19 +46,20 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void checkDish(final String dish){
-        reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("Japanese");//Set to foodClub for now
+        reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");//Set to foodClub for now
+        final int[] urmom = {0};
         reff2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dish.equals("Japanese Curry Chicken Katsu")){
+                if(dish.equals("Japanese Curry Chicken Katsu") && urmom[0] == 0){
                     DataSnapshot dishName = dataSnapshot.child("JapChickenKatsu");
-                    int upVotes = (Integer)dishName.getValue();
-                    int upVotesUpdated = upVotes + 1;
+                    long upVotes = (long)dishName.getValue();
+                    long upVotesUpdated = upVotes + 1;
                     Object upVotesObject = (Object) upVotesUpdated;
                     reff2.child("JapChickenKatsu").setValue(upVotesObject);
                     String string = "Updated value to " + upVotes;
                     Log.d("value",string);
-
+                    urmom[0]++;
                 }
             }
 

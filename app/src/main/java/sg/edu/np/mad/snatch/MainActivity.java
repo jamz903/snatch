@@ -94,14 +94,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
-                /*if (email.equals("s1234567") && pw.equals("12345678")) {
+                if (email.equals("s1234567") && pw.equals("12345678")) {
                     Log.d(TAG, "Login successful!");
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
-                }*/
+                }
 
 
-                for(int i = 0; i<studentsList.size(); i++)
+                /*for(int i = 0; i<studentsList.size(); i++)
                 {
 
                     if (studentsList.get(i).getStudentID().equals(email) && studentsList.get(i).getStudentPW().equals(pw)){
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-                }
+                }*/
 
             }
         });
