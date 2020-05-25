@@ -30,10 +30,10 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
     TextView priceTextView;
     ImageView foodImageView;
     ConstraintLayout parentLayoutMenu;
-    Button upvote;
+    //Button upvote;
 
     //temp reference for food item
-    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");//Set to foodClub for now
+    //DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");//Set to foodClub for now
     public menuItemViewHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -43,10 +43,10 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
         priceTextView = itemView.findViewById(R.id.priceTextView);
         foodImageView = itemView.findViewById(R.id.foodImageView);
         parentLayoutMenu = itemView.findViewById(R.id.parentLayoutMenu);
-        upvote = itemView.findViewById(R.id.upvote);
+        //upvote = itemView.findViewById(R.id.upvote);
 
         //when upvote button is clicked add to database and stop user from updating.
-        upvote.setOnClickListener(new View.OnClickListener() {
+        /*upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String dish = String.valueOf(foodNameTextView.getText());
@@ -56,10 +56,10 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
                 //upvote.setEnabled(false);
 
             }
-        });
+        });*/
     }
 
-    public void checkDish(final String dish){
+    /*public void checkDish(final String dish){
         final int[] counter = {0};
         reff2.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,19 +92,5 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
                 Log.d("eh","this was cancelled");
             }
         });
-    }
-
-    public void checkUpVotes(){
-        reff2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+    }*/
 }
