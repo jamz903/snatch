@@ -55,6 +55,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             Double information3 = dish.price;
             holder.priceTextView.setText(String.format("$%.2f", information3));
 
+            //pretty sure we need to change smth (TBD)
             int imageID = itemImageIDs.get(position);
             holder.foodImageView.setImageResource(imageID);
         }

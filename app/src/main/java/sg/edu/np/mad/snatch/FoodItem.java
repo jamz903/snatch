@@ -2,11 +2,20 @@ package sg.edu.np.mad.snatch;
 
 import java.util.Comparator;
 
-public class FoodItem implements Comparator<FoodItem> {
+public class FoodItem implements Comparable {
     public String foodName;
     public String foodDesc;
     public double price;
     public int upVotes;
+    public int imageID;
+
+    public int getImageID() {
+        return imageID;
+    }
+
+    public void setImageID(int imageID) {
+        this.imageID = imageID;
+    }
 
     public String getFoodName() {
         return foodName;
@@ -40,21 +49,18 @@ public class FoodItem implements Comparator<FoodItem> {
         this.upVotes = upVotes;
     }
 
-    public FoodItem(String aFoodName, String aFoodDesc, double aPrice, int aUpVotes) {
+    public FoodItem(String aFoodName, String aFoodDesc, double aPrice, int aImageID, int aUpVotes) {
         foodName = aFoodName;
         foodDesc = aFoodDesc;
         price = aPrice;
+        imageID = aImageID;
         upVotes = aUpVotes;
     }
 
     @Override
-    public int compare(FoodItem o1, FoodItem o2) {
-        if(o1.getUpVotes() > o2.getUpVotes()){
-            return 1;
-        }
-        else{
-            return 0;
-        }
+    public int compareTo(Object o) {
+        int compareUpVotes = ((FoodItem)o).getUpVotes();
+        //returns in descending order
+        return compareUpVotes-this.upVotes;
     }
-
 }

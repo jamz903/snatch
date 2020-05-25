@@ -1,5 +1,6 @@
 package sg.edu.np.mad.snatch;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -10,11 +11,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -29,6 +36,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     ArrayList<Integer> imageIDs;
     ArrayList<OrderItem> shoppingCart;
     FloatingActionButton menuFAB;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +57,14 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
         determineFoodStall();
 
+        for(FoodItem f: foodMenu){
+            imageIDs.add(f.imageID);
+        }
         //Create recycler view
         RecyclerView rv = findViewById(R.id.recyclerViewMenu);
 
         //change line below for adapter if is other food stall
+
         menuItemAdapter adapter = new menuItemAdapter(foodMenu, imageIDs, this);
         rv.setAdapter(adapter);
 
@@ -109,219 +121,128 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         String choice = getIntent().getStringExtra("Stall");
         if (choice.equals("Chicken Rice")) {
             initChickenRice();
-            initChickenRiceIDs();
         }
         else if (choice.equals("Mala")) {
             initMala();
-            initMalaIDs();
         }
         else if(choice.equals("Western")) {
             initWestern();
-            initWesternIDs();
         }
         else if (choice.equals("Japanese Food")) {
+            reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
             initJap();
-            initJapIDs();
         }
         else if (choice.equals("Bak Kut Teh")) {
             initBKT();
-            initBKTIDs();
         }
         else if (choice.equals("Ban Mian")) {
             initBanMian();
-            initBanMianIDs();
         }
         else if (choice.equals("Indonesian")) {
             initIndo();
-            initIndoIDs();
         }
         else if (choice.equals("Drinks Stall")) {
             initDrinks();
-            initDrinksIDs();
         }
         else if (choice.equals("Yogurt")) {
             initYogurt();
-            initYogurtIDs();
         }
         else if (choice.equals("Mini Wok")) {
             initMiniWok();
-            initMiniWokIDs();
         }
         else if (choice.equals("Thai")) {
             initThai();
-            initThaiIDs();
         }
         else if (choice.equals("Economical Rice")) {
             initEconRice();
-            initEconRiceIDs();
         }
         else if (choice.equals("FC Bakery")) {
             initBakery();
-            initBakeryIDs();
         }
     }
 
     public void initChickenRice() {
-        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, 30));
-        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, 29));
-        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5, 28));
+        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, R.drawable.chicken_rice1,30));
+        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, R.drawable.chicken_rice2,29));
+        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5, R.drawable.chicken_rice3, 28));
     }
 
-    public void initChickenRiceIDs() {
-        imageIDs.add(R.drawable.chicken_rice1);
-        imageIDs.add(R.drawable.chicken_rice2);
-        imageIDs.add(R.drawable.chicken_rice3);
-    }
 
     public void initMala() {
-        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1,2));
-        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1,3));
-        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5,5));
-        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5,4));
-    }
-
-    public void initMalaIDs() {
-        imageIDs.add(R.drawable.sausage);
-        imageIDs.add(R.drawable.taiwan_sausage);
-        imageIDs.add(R.drawable.rice);
-        imageIDs.add(R.drawable.noodle);
-    }
-
-    public void initWesternIDs() {
-        imageIDs.add(R.drawable.chicken_chop);
-        imageIDs.add(R.drawable.fish_and_chips);
-        imageIDs.add(R.drawable.cheese_fries);
+        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1, R.drawable.sausage,2));
+        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1, R.drawable.taiwan_sausage,3));
+        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5, R.drawable.rice,5));
+        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5, R.drawable.noodle,4));
     }
 
     public void initWestern() {
-        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5,30));
-        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6,30));
-        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3,30));
+        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5, R.drawable.chicken_chop,30));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6, R.drawable.fish_and_chips,30));
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3, R.drawable.cheese_fries,30));
     }
 
-    public void initJapIDs() {
-        imageIDs.add(R.drawable.chicken_katsu_curry);
-        imageIDs.add(R.drawable.salmon_don);
-        imageIDs.add(R.drawable.chawanmushi);
-    }
 
     public void initJap() {
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5,33));
-        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4,34));
-        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1,5));
-        foodMenu = checkUpvotes();
-    }
-
-    public void initBKTIDs() {
-        imageIDs.add(R.drawable.bakkutteh);
-        imageIDs.add(R.drawable.youtiao);
-        imageIDs.add(R.drawable.vinegar_braised_pork);
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,getUpvote("JapChickenKatsu")));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, getUpvote("SalmonDon")));
+        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, getUpvote("Chawanmushi")));
+        Collections.sort(foodMenu);
     }
 
     public void initBKT() {
-        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4,35));
-        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5,15));
-        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4,20));
-    }
-
-    public void initBanMianIDs() {
-        imageIDs.add(R.drawable.sliced_fish_noodle_soup);
-        imageIDs.add(R.drawable.banmian);
-        imageIDs.add(R.drawable.fish_soup);
+        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4, R.drawable.bakkutteh,35));
+        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5, R.drawable.youtiao, 15));
+        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4, R.drawable.vinegar_braised_pork,20));
     }
 
     public void initBanMian() {
-        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5,29));
-        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4,30));
-        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5,28));
-    }
-
-    public void initIndoIDs() {
-        imageIDs.add(R.drawable.ayam_penyet);
-        imageIDs.add(R.drawable.mee_soto);
-        imageIDs.add(R.drawable.papadom);
+        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5, R.drawable.sliced_fish_noodle_soup,29));
+        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4, R.drawable.banmian,30));
+        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5, R.drawable.fish_soup,28));
     }
 
     public void initIndo() {
-        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5,30));
-        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3,25));
-        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1,24));
-    }
-
-    public void initDrinksIDs() {
-        imageIDs.add(R.drawable.iced_milo);
-        imageIDs.add(R.drawable.hot_milo);
-        imageIDs.add(R.drawable.hot_coffee);
-        imageIDs.add(R.drawable.iced_lemon_tea);
+        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5, R.drawable.ayam_penyet,30));
+        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3, R.drawable.mee_soto,25));
+        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1, R.drawable.papadom,24));
     }
 
     public void initDrinks() {
-        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5,25));
-        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7,30));
-        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7,20));
-        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5,50));
-    }
-
-    public void initYogurtIDs() {
-        imageIDs.add(R.drawable.yogurt);
-        imageIDs.add(R.drawable.yogurt);
-        imageIDs.add(R.drawable.yogurt);
+        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5, R.drawable.iced_milo,25));
+        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7, R.drawable.hot_milo,30));
+        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7, R.drawable.hot_coffee,20));
+        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5, R.drawable.iced_lemon_tea,50));
     }
 
     public void initYogurt() {
-        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9,25));
-        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9,30));
-        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9,40));
-    }
-
-    public void initMiniWokIDs() {
-        imageIDs.add(R.drawable.gongbao_chicken);
-        imageIDs.add(R.drawable.horfun);
-        imageIDs.add(R.drawable.salted_egg_rice);
+        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9, R.drawable.yogurt,25));
+        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9, R.drawable.yogurt,30));
+        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9, R.drawable.yogurt,40));
     }
 
     public void initMiniWok() {
-        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4,40));
-        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4,35));
-        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5,30));
-    }
-
-    public void initThaiIDs() {
-        imageIDs.add(R.drawable.basil_pork_rice);
-        imageIDs.add(R.drawable.padthai);
-        imageIDs.add(R.drawable.mangosalad);
+        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4, R.drawable.gongbao_chicken,40));
+        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4, R.drawable.horfun,35));
+        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5, R.drawable.salted_egg_rice,30));
     }
 
     public void initThai() {
-        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5,3));
-        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5,1));
-        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3,2));
-    }
-
-    public void initEconRiceIDs() {
-        imageIDs.add(R.drawable.rice);
-        imageIDs.add(R.drawable.beehoon);
-        imageIDs.add(R.drawable.sweet_sour_pork);
-        imageIDs.add(R.drawable.fried_egg);
+        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5, R.drawable.basil_pork_rice,3));
+        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5, R.drawable.padthai,1));
+        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3, R.drawable.mangosalad,2));
     }
 
     public void initEconRice() {
-        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5,4));
-        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7,3));
-        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8,5));
-        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5,3));
-    }
-
-    public void initBakeryIDs() {
-        imageIDs.add(R.drawable.hotdog_bun);
-        imageIDs.add(R.drawable.cream_puff);
-        imageIDs.add(R.drawable.floss_bun);
+        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5, R.drawable.rice,4));
+        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7, R.drawable.beehoon,3));
+        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8, R.drawable.sweet_sour_pork,5));
+        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5, R.drawable.fried_egg,3));
     }
 
     public void initBakery() {
-        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1,14));
-        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8,13));
-        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,15));
+        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1, R.drawable.hotdog_bun,14));
+        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8, R.drawable.cream_puff,13));
+        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,R.drawable.floss_bun,15));
     }
 
     @Override
@@ -361,24 +282,20 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         return isSame;
     }
 
-    public ArrayList<FoodItem> checkUpvotes(){
-        ArrayList<Integer> upVoteList = new ArrayList<>();
-        ArrayList<FoodItem> finalFoodMenu = new ArrayList<>();
-        for(FoodItem food : foodMenu){
-            upVoteList.add(food.getUpVotes());
-        }
-        Comparator c = Collections.reverseOrder();
-        Collections.sort(upVoteList,c);
-        for(FoodItem food : foodMenu){
-            for(int upvote : upVoteList){
-                if(food.getUpVotes() == upvote){
-                    finalFoodMenu.add(food);
-                    break;
-                }
+    public int getUpvote(final String dishName){
+        final int[] upVotes = {0};
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                upVotes[0] = (int)dataSnapshot.child(dishName).getValue(int.class);
             }
-        }
-        return finalFoodMenu;
-    }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return upVotes[0];
+    }
 
 }

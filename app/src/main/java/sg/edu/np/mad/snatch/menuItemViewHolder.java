@@ -53,7 +53,7 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
                 checkDish(dish);
                 String text = dish + " succesfully upvoted.";
                 Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
-                upvote.setEnabled(false);
+                //upvote.setEnabled(false);
 
             }
         });
