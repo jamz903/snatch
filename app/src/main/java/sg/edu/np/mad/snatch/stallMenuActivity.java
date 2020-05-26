@@ -80,6 +80,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         });
     }
 
+
+
     @Override
     public void onBackPressed() {
         //prevents alertDialog from closing immediately when backbutton is pressed
@@ -182,6 +184,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, getUpvote("SalmonDon")));
         foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, getUpvote("Chawanmushi")));
         Collections.sort(foodMenu);
+        Log.d("snatch",String.valueOf(foodMenu.get(0).upVotes));
+        Log.d("snatch",String.valueOf(foodMenu.get(1).upVotes));
+        Log.d("snatch",String.valueOf(foodMenu.get(2).upVotes));
+
     }
 
     public void initBKT() {
@@ -282,7 +288,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                upVotes[0] = (int)dataSnapshot.child(dishName).getValue(int.class);
+                Long upvotes = (Long) dataSnapshot.child(dishName).getValue();
+                upVotes[0] = upvotes.intValue();
             }
 
             @Override
