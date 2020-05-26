@@ -126,7 +126,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         }
         else if (choice.equals("Japanese Food")) {
             reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
-            initJap();
+            initJap(reference, adapter);
             adapter.notifyDataSetChanged();
         }
         else if (choice.equals("Bak Kut Teh")) {
@@ -179,15 +179,24 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
 
-    public void initJap() {
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,getUpvote("JapChickenKatsu")));
-        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, getUpvote("SalmonDon")));
-        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, getUpvote("Chawanmushi")));
-        Collections.sort(foodMenu);
-        Log.d("snatch",String.valueOf(foodMenu.get(0).upVotes));
-        Log.d("snatch",String.valueOf(foodMenu.get(1).upVotes));
-        Log.d("snatch",String.valueOf(foodMenu.get(2).upVotes));
-
+    public void initJap(DatabaseReference reference, menuItemAdapter aAdapter) {
+        final int[] upvote = {0};
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,0));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, 0));
+        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0));
+        for (FoodItem food : foodMenu) {
+            if (food.getFoodName().equals("Japanese Curry Chicken Katsu")) {
+                getUpvote("JapChickenKatsu", food, aAdapter);
+            }
+            else if (food.getFoodName().equals("Salmon Don")) {
+                getUpvote("SalmonDon", food, aAdapter);
+            }
+            else if (food.getFoodName().equals("Chawanmushi")) {
+                getUpvote("Chawanmushi", food, aAdapter);
+            }
+            Log.d("snatchwork", food.getFoodName() + " has " + food.getUpVotes());
+        }
+        //Collections.sort(foodMenu);
     }
 
     public void initBKT() {
@@ -283,13 +292,17 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         return isSame;
     }
 
-    public int getUpvote(final String dishName){
-        final int[] upVotes = {0};
+    public void getUpvote(final String dishName, final FoodItem food, final menuItemAdapter aAdapter){
+        //final int[] upVotes = {0};
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Long upvotes = (Long) dataSnapshot.child(dishName).getValue();
-                upVotes[0] = upvotes.intValue();
+                Log.d("snatchwork", "upvote here is " + String.valueOf(upvotes));
+                //upvote[0] = Integer.parseInt(String.valueOf(upvotes));
+                food.setUpVotes(Integer.parseInt(String.valueOf(upvotes)));
+                Collections.sort(foodMenu);
+                aAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -297,7 +310,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
             }
         });
-        return upVotes[0];
     }
 
 }
