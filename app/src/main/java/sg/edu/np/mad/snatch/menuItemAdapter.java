@@ -1,5 +1,7 @@
 package sg.edu.np.mad.snatch;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,14 +81,30 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
         holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String dish = String.valueOf(holder.foodNameTextView.getText());
-                checkDish(dish);
-                String text = dish + " succesfully upvoted.";
-                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
-                menuItems.get(position).upVotes++;
-                Collections.sort(menuItems);
-                notifyDataSetChanged();
+            public void onClick(final View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                String string = "Are you sure you want to upvote " + holder.foodNameTextView.getText() + "?";
+                builder.setTitle(string);
+                        builder.setMessage("You will not be able to retract this vote.")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String dish = String.valueOf(holder.foodNameTextView.getText());
+                                checkDish(dish);
+                                String text = dish + " succesfully upvoted.";
+                                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
+                                menuItems.get(position).upVotes++;
+                                Collections.sort(menuItems);
+                                notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
 
             }
         });

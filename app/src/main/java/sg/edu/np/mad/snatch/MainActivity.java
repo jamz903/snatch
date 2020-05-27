@@ -2,12 +2,17 @@ package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 String email = emailEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
                 /*if (email.equals("s1234567") && pw.equals("12345678")) {
@@ -142,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     //add members of database to studentsList
@@ -212,6 +219,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void closeKeyboard(){
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
 
 }
 
