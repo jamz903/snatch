@@ -1,7 +1,5 @@
 package sg.edu.np.mad.snatch;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
     Button upvote;
-    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
 
     //Assigning items
     public menuItemAdapter(ArrayList<FoodItem> aMenuItems, menuItemAdapterCallback aListener) {
@@ -43,6 +41,9 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
     public menuItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+
+
+        notifyDataSetChanged();
         //get View holder for recycler
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.menus_listitem, parent, false);
 
@@ -51,6 +52,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull final menuItemViewHolder holder, final int position) {
+
 
 
         //set format for menu items
@@ -68,7 +70,6 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             //pretty sure we need to change smth (TBD)
             int information4 = dish.imageID;
             holder.foodImageView.setImageResource(information4);
-
         }
 
         holder.parentLayoutMenu.setOnClickListener(new View.OnClickListener() {
@@ -81,30 +82,15 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
         holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(final View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                String string = "Are you sure you want to upvote " + holder.foodNameTextView.getText() + "?";
-                builder.setTitle(string);
-                        builder.setMessage("You will not be able to retract this vote.")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String dish = String.valueOf(holder.foodNameTextView.getText());
-                                checkDish(dish);
-                                String text = dish + " succesfully upvoted.";
-                                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
-                                menuItems.get(position).upVotes++;
-                                Collections.sort(menuItems);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
+            public void onClick(View v) {
+                String dish = String.valueOf(holder.foodNameTextView.getText());
+                checkDish(dish);
+                String text = dish + " succesfully upvoted.";
+                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
+                menuItems.get(position).upVotes++;
+                Collections.sort(menuItems);
+
+                notifyDataSetChanged();
 
             }
         });
@@ -119,26 +105,36 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     }
 
     public void checkDish(final String dish){
-        String firebaseDish = dish.replaceAll("\\s+","");
-        updateUpvote(firebaseDish);
-    }
-
-    public void updateUpvote(final String firebaseDish){
-        reff2.addListenerForSingleValueEvent(new ValueEventListener() {
+        final int[] counter = {0};
+        reff2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DataSnapshot dishName = dataSnapshot.child(firebaseDish);
-                long upVotes = (long)dishName.getValue();
-                long upVotesUpdated = upVotes + 1;
-                Object upVotesObject = (Object) upVotesUpdated;
-                reff2.child(firebaseDish).setValue(upVotesObject);
-                String string = "Updated value to " + upVotes;
-                Log.d("value",string);
+                if(dish.equals("Japanese Curry Chicken Katsu") && counter[0] == 0){
+                    DataSnapshot dishName = dataSnapshot.child("JapChickenKatsu");
+                    long upVotes = (long)dishName.getValue();
+                    long upVotesUpdated = upVotes + 1;
+                    Object upVotesObject = (Object) upVotesUpdated;
+                    reff2.child("JapChickenKatsu").setValue(upVotesObject);
+                    String string = "Updated value to " + upVotes;
+                    Log.d("value",string);
+                    counter[0]++;
+                }
+
+                if(dish.equals("Salmon Don") && counter[0] == 0){
+                    DataSnapshot dishName = dataSnapshot.child("SalmonDon");
+                    long upVotes = (long)dishName.getValue();
+                    long upVotesUpdated = upVotes + 1;
+                    Object upVotesObject = (Object) upVotesUpdated;
+                    reff2.child("SalmonDon").setValue(upVotesObject);
+                    String string = "Updated value to " + upVotes;
+                    Log.d("value",string);
+                    counter[0]++;
+                }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d("eh","this was cancelled");
             }
         });
     }
