@@ -109,25 +109,32 @@ public class MainActivity extends AppCompatActivity {
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
                 }*/
+                if (email == "" || pw == ""){
+                    errorMsgTextView.setText("Empty email/password! Please try again");
+                }
+                else{
+                    boolean matchFound = false;
+                    for(int i = 0; i<studentsList.size(); i++)
+                    {
+
+                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(email.toString()) && studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString())){
+                            Log.d(TAG, "Login correct");
+                            matchFound = true;
+                            Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
+                            startActivity(in);
+
+                        }
 
 
-                for(int i = 0; i<studentsList.size(); i++)
-                {
-
-                    if (studentsList.get(i).getStudentID().equals(email) && studentsList.get(i).getStudentPW().equals(pw)){
-                        Log.d(TAG, "Login correct");
-                        Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                        startActivity(in);
 
                     }
-                    else{
+                    if (!matchFound) {
                         Log.d(TAG, "Login Wrong");
                         errorMsgTextView.setText("Incorrect email/password! Please try again");
-                        continue;
+
                     }
-
-
                 }
+
 
             }
         });
