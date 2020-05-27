@@ -21,6 +21,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
     ArrayList<String> storeName;
     ArrayList<String> storeDesc;
     StoresAdapterCallback listener;
+    public static String firebaseStoreName;
 
     public StoresAdapter(ArrayList<String> aStoreName, ArrayList<String> aStoreDesc, Context context, StoresAdapterCallback aListener){
         //Assign variables to items
@@ -49,7 +50,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
         holder.parentLayoutStores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String string = storeName.get(position); //show store name
+                String string = storeName.get(position); //show store name
+                firebaseStoreName = string.replaceAll("\\s+","");
+                Log.d("snatch",firebaseStoreName);
                 //Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
                 listener.promptFoodStore(position);
             }

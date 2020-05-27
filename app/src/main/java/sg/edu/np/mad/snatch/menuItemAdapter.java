@@ -27,7 +27,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
     Button upvote;
-    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child("JapaneseFood");
+    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child(StoresAdapter.firebaseStoreName);
 
     //Assigning items
     public menuItemAdapter(ArrayList<FoodItem> aMenuItems, menuItemAdapterCallback aListener) {
@@ -66,6 +66,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             //pretty sure we need to change smth (TBD)
             int information4 = dish.imageID;
             holder.foodImageView.setImageResource(information4);
+
         }
 
         holder.parentLayoutMenu.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,6 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
                 Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
                 menuItems.get(position).upVotes++;
                 Collections.sort(menuItems);
-                
                 notifyDataSetChanged();
 
             }
