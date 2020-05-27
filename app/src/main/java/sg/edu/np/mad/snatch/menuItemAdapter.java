@@ -101,36 +101,39 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     }
 
     public void checkDish(final String dish){
-        final int[] counter = {0};
-        reff2.addValueEventListener(new ValueEventListener() {
+        String firebaseDish = null;
+        if(dish.equals("Japanese Curry Chicken Katsu")){
+            firebaseDish = "JapChickenKatsu";
+        }
+
+        else if(dish.equals("Salmon Don")){
+            firebaseDish = "SalmonDon";
+        }
+
+        else if(dish.equals("Chawanmushi")){
+            firebaseDish = "Chawanmushi";
+        }
+        
+        updateUpvote(firebaseDish);
+
+    }
+
+    public void updateUpvote(final String firebaseDish){
+        reff2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dish.equals("Japanese Curry Chicken Katsu") && counter[0] == 0){
-                    DataSnapshot dishName = dataSnapshot.child("JapChickenKatsu");
-                    long upVotes = (long)dishName.getValue();
-                    long upVotesUpdated = upVotes + 1;
-                    Object upVotesObject = (Object) upVotesUpdated;
-                    reff2.child("JapChickenKatsu").setValue(upVotesObject);
-                    String string = "Updated value to " + upVotes;
-                    Log.d("value",string);
-                    counter[0]++;
-                }
-
-                if(dish.equals("Salmon Don") && counter[0] == 0){
-                    DataSnapshot dishName = dataSnapshot.child("SalmonDon");
-                    long upVotes = (long)dishName.getValue();
-                    long upVotesUpdated = upVotes + 1;
-                    Object upVotesObject = (Object) upVotesUpdated;
-                    reff2.child("SalmonDon").setValue(upVotesObject);
-                    String string = "Updated value to " + upVotes;
-                    Log.d("value",string);
-                    counter[0]++;
-                }
+                DataSnapshot dishName = dataSnapshot.child(firebaseDish);
+                long upVotes = (long)dishName.getValue();
+                long upVotesUpdated = upVotes + 1;
+                Object upVotesObject = (Object) upVotesUpdated;
+                reff2.child(firebaseDish).setValue(upVotesObject);
+                String string = "Updated value to " + upVotes;
+                Log.d("value",string);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("eh","this was cancelled");
+
             }
         });
     }
