@@ -15,6 +15,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
     Spinner dropdownList;
     ArrayAdapter<CharSequence> adapter;
+    public static String firebaseStall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         if (position != 0){
             String foodCourt = parent.getItemAtPosition(position).toString();
             if (foodCourt.equals("Food Club")){
+                firebaseStall = foodCourt.replaceAll("\\s+","");
                 in = new Intent(HomescreenActivity.this, FoodClubActivity.class);
                 startActivity(in);
             }

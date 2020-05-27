@@ -27,7 +27,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
     Button upvote;
-    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child("FoodClub").child(StoresAdapter.firebaseStoreName);
+    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
     //Assigning items
     public menuItemAdapter(ArrayList<FoodItem> aMenuItems, menuItemAdapterCallback aListener) {
@@ -101,21 +101,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     }
 
     public void checkDish(final String dish){
-        String firebaseDish = null;
-        if(dish.equals("Japanese Curry Chicken Katsu")){
-            firebaseDish = "JapChickenKatsu";
-        }
-
-        else if(dish.equals("Salmon Don")){
-            firebaseDish = "SalmonDon";
-        }
-
-        else if(dish.equals("Chawanmushi")){
-            firebaseDish = "Chawanmushi";
-        }
-        
+        String firebaseDish = dish.replaceAll("\\s+","");
         updateUpvote(firebaseDish);
-
     }
 
     public void updateUpvote(final String firebaseDish){
