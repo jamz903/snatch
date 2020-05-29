@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class FoodClubActivity extends AppCompatActivity implements StoresAdapterCallback {
@@ -92,11 +91,9 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         Intent in = new Intent(FoodClubActivity.this, stallMenuActivity.class);
                         in.putExtra("Stall", storeName.get(aPosition));
                         startActivity(in);
-
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
