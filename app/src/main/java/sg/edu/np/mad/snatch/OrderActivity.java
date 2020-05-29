@@ -7,17 +7,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class OrderActivity extends AppCompatActivity {
 
     ArrayList<OrderItem> shoppingCart;
+    TextView grandTotalTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
         //create array list for shopping cart objects
@@ -27,7 +30,10 @@ public class OrderActivity extends AppCompatActivity {
         }
         else {
             setContentView(R.layout.activity_order);
+            grandTotalTextView = (TextView) findViewById(R.id.grandTotalTextView);
             initRecyclerView();
+            double amount = calculateGrandTotal(shoppingCart);
+            grandTotalTextView.setText("$" + String.format("%.2f", amount));
         }
     }
 
@@ -56,5 +62,13 @@ public class OrderActivity extends AppCompatActivity {
 
         //adds a divider inbetween items
         rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
+    }
+
+    public double calculateGrandTotal(ArrayList<OrderItem> aShoppingCart) {
+        double total = 0;
+        for (OrderItem item : aShoppingCart) {
+            total += item.getSubtotal();
+        }
+        return total;
     }
 }

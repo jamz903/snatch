@@ -10,7 +10,7 @@
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
+        android:text="Student ID:"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/emailEditText"
         app:layout_constraintStart_toStartOf="@+id/emailEditText" />

@@ -102,14 +102,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 closeKeyboard();
-                String email = emailEditText.getText().toString();
+                String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
                 /*if (email.equals("s1234567") && pw.equals("12345678")) {
                     Log.d(TAG, "Login successful!");
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
                 }*/
-                if (email == "" || pw == ""){
+                if (studentID == "" || pw == ""){
                     errorMsgTextView.setText("Empty email/password! Please try again");
                 }
                 else{
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i<studentsList.size(); i++)
                     {
 
-                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(email.toString()) && studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString())){
+                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString()) && studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString())){
                             Log.d(TAG, "Login correct");
                             matchFound = true;
                             Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = emailEditText.getText().toString();
+                String id = emailEditText.getText().toString().toUpperCase();
                 String pw = pwEditText.getText().toString();
                 
                 Students students = new Students(id,pw);
