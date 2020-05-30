@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
     Button upvote;
+    TextView numUpvotesTextView;
     DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
     //Assigning items
@@ -68,6 +70,9 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             //pretty sure we need to change smth (TBD)
             int information4 = dish.imageID;
             holder.foodImageView.setImageResource(information4);
+
+            int information5 = dish.getUpVotes();
+            holder.numUpvotesTextView.setText(String.valueOf(information5));
 
         }
 

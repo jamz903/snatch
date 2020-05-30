@@ -20,9 +20,10 @@
 
     <TextView
         android:id="@+id/foodNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -36,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/foodImageView"
         app:layout_constraintHorizontal_bias="0.0"
@@ -44,11 +46,14 @@
 
     <TextView
         android:id="@+id/priceTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/foodImageView"
+        app:layout_constraintEnd_toStartOf="@+id/numUpvotesTextView"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/foodDescTextView"
         app:layout_constraintTop_toBottomOf="@+id/foodDescTextView" />
 
@@ -61,4 +66,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/priceTextView"
         app:layout_constraintEnd_toStartOf="@+id/foodImageView"
         app:layout_constraintTop_toTopOf="@+id/priceTextView" />
+
+    <TextView
+        android:id="@+id/numUpvotesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/upvote"
+        app:layout_constraintEnd_toStartOf="@+id/upvote"
+        app:layout_constraintTop_toTopOf="@+id/upvote" />
 </androidx.constraintlayout.widget.ConstraintLayout>

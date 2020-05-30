@@ -53,11 +53,21 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
         if (position != 0){
             String foodCourt = parent.getItemAtPosition(position).toString();
+            firebaseStall = foodCourt.replaceAll("\\s+","");
+            in = new Intent(HomescreenActivity.this, FoodClubActivity.class);
             if (foodCourt.equals("Food Club")){
-                firebaseStall = foodCourt.replaceAll("\\s+","");
-                in = new Intent(HomescreenActivity.this, FoodClubActivity.class);
-                startActivity(in);
+                in.putExtra("FoodCourt", "FoodClub");
             }
+            else if (foodCourt.equals("Makan Place")) {
+                in.putExtra("FoodCourt", "MKP");
+            }
+            else if (foodCourt.equals("Munch")) {
+                in.putExtra("FoodCourt", "Munch");
+            }
+            else if (foodCourt.equals("Poolside")) {
+                in.putExtra("FoodCourt", "Poolside");
+            }
+            startActivity(in);
         }
         else{
             Toast.makeText(HomescreenActivity.this, "Please select a Food Court", Toast.LENGTH_SHORT).show();

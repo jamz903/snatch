@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
     ImageView foodImageView;
     ConstraintLayout parentLayoutMenu;
     Button upvote;
+    TextView numUpvotesTextView;
 
     public menuItemViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -42,5 +45,6 @@ public class menuItemViewHolder extends RecyclerView.ViewHolder {
         foodImageView = itemView.findViewById(R.id.foodImageView);
         parentLayoutMenu = itemView.findViewById(R.id.parentLayoutMenu);
         upvote = itemView.findViewById(R.id.upvote);
+        numUpvotesTextView = itemView.findViewById(R.id.numUpvotesTextView);
     }
 }

@@ -19,13 +19,18 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
     //Lists for Store activities
     ArrayList<String> storeName = new ArrayList<>();
     ArrayList<String> storeDesc = new ArrayList<>();
+    String foodCourt;
+    Intent receivingEnd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_club);
 
-        storeNames(storeName);
-        storeDescs(storeDesc);
+        receivingEnd = getIntent();
+        foodCourt = receivingEnd.getStringExtra("FoodCourt");
+        storeNames(storeName, foodCourt);
+        storeDescs(storeDesc, foodCourt);
 
         RecyclerView rv = findViewById(R.id.recyclerView1);
 
@@ -42,38 +47,70 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
 
     }
 
-    private static void storeNames(ArrayList<String> storeName){
+    private static void storeNames(ArrayList<String> storeName, String aFoodCourt){
         //store names
-        storeName.add("Japanese Food");
-        storeName.add("Bak Kut Teh");
-        storeName.add("Ban Mian");
-        storeName.add("Western");
-        storeName.add("Indonesian");
-        storeName.add("Drinks Stall");
-        storeName.add("Yogurt");
-        storeName.add("Mini Wok");
-        storeName.add("Mala");
-        storeName.add("Thai");
-        storeName.add("Chicken Rice");
-        storeName.add("Economical Rice");
-        storeName.add("FC Bakery");
+        if (aFoodCourt.equals("FoodClub")) {
+            storeName.add("Japanese Food");
+            storeName.add("Bak Kut Teh");
+            storeName.add("Ban Mian");
+            storeName.add("Western");
+            storeName.add("Indonesian");
+            storeName.add("Drinks Stall");
+            storeName.add("Yogurt");
+            storeName.add("Mini Wok");
+            storeName.add("Mala");
+            storeName.add("Thai");
+            storeName.add("Chicken Rice");
+            storeName.add("Economical Rice");
+            storeName.add("FC Bakery");
+        }
+        else if (aFoodCourt.equals("MKP")) {
+            storeName.add("Mala");
+            storeName.add("Chicken Rice");
+            storeName.add("Drinks Stall");
+            storeName.add("Japanese Food");
+        }
+        else if (aFoodCourt.equals("Munch")) {
+            storeName.add("Japanese");
+            storeName.add("Mala (Halal)");
+            storeName.add("Western");
+        }
+        else if (aFoodCourt.equals("Poolside")) {
+            storeName.add("Henry's Western");
+        }
     }
 
-    private static void storeDescs(ArrayList<String> storeDesc){
+    private static void storeDescs(ArrayList<String> storeDesc, String aFoodCourt){
         //store descriptions
-        storeDesc.add("This is the Japanese Stall");
-        storeDesc.add("This is the Bak Ku Teh Stall");
-        storeDesc.add("This is the Ban Mian Stall");
-        storeDesc.add("This is the Western Stall");
-        storeDesc.add("This is the Indonesian Stall");
-        storeDesc.add("This is the Drinks Stall");
-        storeDesc.add("This is the Yogurt Stall");
-        storeDesc.add("This is the Mini Wok Stall");
-        storeDesc.add("This is the Mala Stall");
-        storeDesc.add("This is the Thai Stall");
-        storeDesc.add("This is the Chicken Rice Stall");
-        storeDesc.add("This is the Economical Rice Stall");
-        storeDesc.add("This is the FC Bakery Stall");
+        if (aFoodCourt.equals("FoodClub")) {
+            storeDesc.add("This is the Japanese Stall");
+            storeDesc.add("This is the Bak Ku Teh Stall");
+            storeDesc.add("This is the Ban Mian Stall");
+            storeDesc.add("This is the Western Stall");
+            storeDesc.add("This is the Indonesian Stall");
+            storeDesc.add("This is the Drinks Stall");
+            storeDesc.add("This is the Yogurt Stall");
+            storeDesc.add("This is the Mini Wok Stall");
+            storeDesc.add("This is the Mala Stall");
+            storeDesc.add("This is the Thai Stall");
+            storeDesc.add("This is the Chicken Rice Stall");
+            storeDesc.add("This is the Economical Rice Stall");
+            storeDesc.add("This is the FC Bakery Stall");
+        }
+        else if (aFoodCourt.equals("MKP")) {
+            storeDesc.add("This is the Mala Stall");
+            storeDesc.add("This is the Chicken Rice Stall");
+            storeDesc.add("This is the Drinks Stall");
+            storeDesc.add("This is the Japanese Food Stall");
+        }
+        else if (aFoodCourt.equals("Munch")) {
+            storeDesc.add("This is the Japanese Stall");
+            storeDesc.add("This is the Mala (Halal) Stall");
+            storeDesc.add("This is the Western Stall");
+        }
+        else if (aFoodCourt.equals("Poolside")) {
+            storeDesc.add("This is Henry's Western Stall");
+        }
     }
 
 
@@ -92,6 +129,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent in = new Intent(FoodClubActivity.this, stallMenuActivity.class);
+                        in.putExtra("FoodCourt", foodCourt);
                         in.putExtra("Stall", storeName.get(aPosition));
                         startActivity(in);
                     }
