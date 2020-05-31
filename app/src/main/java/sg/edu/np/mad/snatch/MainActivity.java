@@ -10,6 +10,8 @@ import android.os.Bundle;
 
 import android.renderscript.ScriptGroup;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
@@ -234,8 +236,6 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
     }
-
-
 }
 
 

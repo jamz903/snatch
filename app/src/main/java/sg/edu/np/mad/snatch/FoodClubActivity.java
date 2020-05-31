@@ -1,5 +1,6 @@
 package sg.edu.np.mad.snatch;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -10,6 +11,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -144,5 +147,28 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
         //Show alert
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.credits_option){
+
+        }
+
+        else if(item.getItemId() == R.id.logout_option){
+            Intent signIn = new Intent(FoodClubActivity.this,MainActivity.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

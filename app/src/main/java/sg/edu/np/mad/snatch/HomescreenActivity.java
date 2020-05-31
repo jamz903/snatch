@@ -1,10 +1,14 @@
 package sg.edu.np.mad.snatch;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +20,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     Spinner dropdownList;
     ArrayAdapter<CharSequence> adapter;
     public static String firebaseStall;
+    boolean doubleClickToExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,4 +84,47 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.credits_option){
+
+        }
+
+        else if(item.getItemId() == R.id.logout_option){
+            Intent signIn = new Intent(HomescreenActivity.this,MainActivity.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(doubleClickToExit){
+            super.onBackPressed();
+            Intent exit = new Intent(HomescreenActivity.this, FinishActivity.class);
+            exit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(exit);
+        }
+
+        this.doubleClickToExit = true;
+        Toast.makeText(this,"Click again to exit application", Toast.LENGTH_SHORT).show();
+
+        //to reset click after 2 seconds
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleClickToExit = false;
+            }
+        },2000);
+    }
 }
