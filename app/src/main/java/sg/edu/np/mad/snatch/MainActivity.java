@@ -101,8 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
         //When is login button is pressed check students List with input info
         loginBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                addExistingMembers();
+
                 closeKeyboard();
                 String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
@@ -119,13 +122,24 @@ public class MainActivity extends AppCompatActivity {
                     for(int i = 0; i<studentsList.size(); i++)
                     {
 
-                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString()) && studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString())){
-                            Log.d(TAG, "Login correct");
-                            matchFound = true;
-                            Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                            startActivity(in);
+                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString())){
+                            try{
+                                if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
+                                    Log.d(TAG, "Login correct");
+                                    matchFound = true;
+                                    Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
+                                    startActivity(in);
+
+                                }
+                            } catch (Exception e) {
+                                errorMsgTextView.setText("Wrong password");
+                            }
+
+
 
                         }
+
+
 
 
 
@@ -145,17 +159,52 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addExistingMembers();
+
                 String id = emailEditText.getText().toString().toUpperCase();
                 String pw = pwEditText.getText().toString();
-                
-                Students students = new Students(id,pw);
-                //students.setStudentID(id);
-                //students.setStudentPW(pw);
+
+                if (id == "" || pw == ""){
+                    errorMsgTextView.setText("Empty email/password! Please try again");
+                }
+                else{
+                    boolean matchFound = false;
+                    for(int i = 0; i<studentsList.size(); i++)
+                    {
+                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(id.toString())) {
+                            Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Students students = new Students(id,pw);
+                            //students.setStudentID(id);
+                            //students.setStudentPW(pw);
+
+                            if(id.matches("S[0-9]{8}") && id.length() == 9){
+                                reff.child(id).setValue(students);
+                                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
+                                addExistingMembers();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "invalid student ID", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+                    if (!matchFound) {
+                        Log.d(TAG, "Login Wrong");
+                        errorMsgTextView.setText("Incorrect email/password! Please try again");
+
+                    }
+                }
 
 
-                reff.child(id).setValue(students);
-                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
             }
+                
+
+
+
+
+
         });
 
     }
