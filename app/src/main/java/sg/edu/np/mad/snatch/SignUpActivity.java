@@ -1,5 +1,6 @@
 package sg.edu.np.mad.snatch;
 
+import android.app.VoiceInteractor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,29 +80,30 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 else{
                     boolean matchFound = false;
-                    for(int i = 0; i<studentsList.size(); i++)
+
+                    for(int i = 0; i<studentsList.size() && matchFound == false; i++)
                     {
                         if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(id.toString())) {
-                            Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
+                            matchFound = true;
+                        }
+                    }
+
+                    if (!matchFound) {
+                        Log.d(TAG, "Sign up safe");
+                        if((id.matches("S[0-9]{8}") && id.length() == 9) && (un.matches("\\D"))){
+                            Students students = new Students(id,pw,un);
+                            reff.child(id).setValue(students);
+                            Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
+                            addExistingMembers();
                         }
                         else{
-                            Students students = new Students(id,pw,un);
+                            Toast.makeText(getApplicationContext(), "invalid student ID/ name", Toast.LENGTH_SHORT).show();
 
-                            if(id.matches("S[0-9]{8}") && id.length() == 9){
-                                reff.child(id).setValue(students);
-                                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
-                                addExistingMembers();
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "invalid student ID", Toast.LENGTH_SHORT).show();
-                            }
                         }
 
                     }
-                    if (!matchFound) {
-                        Log.d(TAG, "Login Wrong");
-                        Toast.makeText(getApplicationContext(),"Empty email/password! Please try again",Toast.LENGTH_SHORT).show();
-
+                    else{
+                        Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -118,10 +120,6 @@ public class SignUpActivity extends AppCompatActivity {
                 studentsList.clear();
 
 
-                Log.d(TAG,"connection Success");
-                Log.d(TAG,"Value is" + map);
-                Log.d(TAG,"is a " + map.getClass().getName());
-
                 //add to list
                 Iterator StuList = map.entrySet().iterator();
                 String a = null;
@@ -131,7 +129,6 @@ public class SignUpActivity extends AppCompatActivity {
                 //iterate through database for all child items
                 while(StuList.hasNext()){
                     Map.Entry mapElement = (Map.Entry)StuList.next();
-                    Log.d(TAG,"map key is" + mapElement.getValue());
 
 
                     HashMap hash = (HashMap) mapElement.getValue();
@@ -140,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         Map.Entry hashElement = (Map.Entry)IDLIST.next();
 
-                        Log.d(TAG,"map key s" + hashElement);
+
                         String details = (((String)hashElement.getValue()));
 
                         //check if item is an ID or PW before adding to list

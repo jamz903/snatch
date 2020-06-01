@@ -171,44 +171,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(in);
-                /*addExistingMembers();
-
-                String id = emailEditText.getText().toString().toUpperCase();
-                String pw = pwEditText.getText().toString();
-
-                if (id == "" || pw == ""){
-                    errorMsgTextView.setText("Empty email/password! Please try again");
-                }
-                else{
-                    boolean matchFound = false;
-                    for(int i = 0; i<studentsList.size(); i++)
-                    {
-                        if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(id.toString())) {
-                            Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Students students = new Students(id,pw,"Name");
-                            //students.setStudentID(id);
-                            //students.setStudentPW(pw);
-
-                            if(id.matches("S[0-9]{8}") && id.length() == 9){
-                                reff.child(id).setValue(students);
-                                Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
-                                addExistingMembers();
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "invalid student ID", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                    }
-                    if (!matchFound) {
-                        Log.d(TAG, "Login Wrong");
-                        errorMsgTextView.setText("Incorrect email/password! Please try again");
-
-                    }
-                }*/
-
 
             }
                 
