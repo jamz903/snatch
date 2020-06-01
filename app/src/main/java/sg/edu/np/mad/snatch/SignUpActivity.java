@@ -90,14 +90,14 @@ public class SignUpActivity extends AppCompatActivity {
 
                     if (!matchFound) {
                         Log.d(TAG, "Sign up safe");
-                        if((id.matches("S[0-9]{8}") && id.length() == 9) && (un.matches("\\D"))){
+                        if((id.matches("S[0-9]{8}") && id.length() == 9) ){
                             Students students = new Students(id,pw,un);
                             reff.child(id).setValue(students);
                             Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
                             addExistingMembers();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "invalid student ID/ name", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "invalid student ID", Toast.LENGTH_SHORT).show();
 
                         }
 
