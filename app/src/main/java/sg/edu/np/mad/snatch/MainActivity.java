@@ -297,11 +297,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static boolean getConnectionType(Context context) {
-        boolean result = true; // Returns connection type. 0: none; 1: mobile data; 2: wifi
+        boolean result = true; // If there is no internet connection, bool returns true
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (cm != null) {
                 NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                // if there is internet connection, regardless of what type (wifi, cellular, vpn) return false
                 if (capabilities != null) {
                     if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
                         result = false;
