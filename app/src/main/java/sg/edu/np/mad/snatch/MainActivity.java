@@ -169,7 +169,9 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addExistingMembers();
+                Intent in = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(in);
+                /*addExistingMembers();
 
                 String id = emailEditText.getText().toString().toUpperCase();
                 String pw = pwEditText.getText().toString();
@@ -185,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Students students = new Students(id,pw);
+                            Students students = new Students(id,pw,"Name");
                             //students.setStudentID(id);
                             //students.setStudentPW(pw);
 
@@ -205,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                         errorMsgTextView.setText("Incorrect email/password! Please try again");
 
                     }
-                }
+                }*/
 
 
             }
@@ -236,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 Iterator StuList = map.entrySet().iterator();
                 String a = null;
                 String b = null;
+                String c = null;
 
                 //iterate through database for all child items
                 while(StuList.hasNext()){
@@ -259,6 +262,9 @@ public class MainActivity extends AppCompatActivity {
                         else if (hashElement.getKey().equals("studentPW")){
                             b = (String) details;
                         }
+                        else if(hashElement.getKey().equals("studentName")){
+                            c = (String) details;
+                        }
                         else{
                             Log.d(TAG,"Assignment failure");
                         }
@@ -266,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //make student obkect to add to list
-                        Students student = new Students(a,b);
+                        Students student = new Students(a,b,c);
                         //add student to student list
                         studentsList.add(student);
                         Log.d(TAG, " " + studentsList.get(0).getStudentID());

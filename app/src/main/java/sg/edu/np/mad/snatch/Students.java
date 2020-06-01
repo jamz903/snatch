@@ -10,13 +10,16 @@ public class Students {
 
     private String StudentID;
     private String StudentPW;
+    private String StudentName;
 
 
     private Students(){};
 
-    public Students(String ID, String PW){
+    public Students(String ID, String PW, String NAME){
         this.StudentID = ID;
         this.StudentPW = PW;
+        this.StudentName = NAME;
+
     }
 
 
@@ -36,7 +39,9 @@ public class Students {
         StudentPW = studentPW;
     }
 
+    public String getStudentName(){return  StudentName;}
 
+    public void setStudentName(String studentName){StudentName = studentName;}
 
     @Override
     public String toString(){
