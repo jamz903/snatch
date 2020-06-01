@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
-        errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
+        //errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
 
 
         //Reference for firebase to get studentList
@@ -147,14 +147,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else{
-                    emailEditText.setError("Invalid Login Credentials");
-                    pwEditText.setError("Invalid Login Credentials");
-                }
-                /*else{
                     boolean matchFound = false;
                     for(int i = 0; i<studentsList.size(); i++)
                     {
-
                         if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString())){
                             try{
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
@@ -162,28 +157,24 @@ public class MainActivity extends AppCompatActivity {
                                     matchFound = true;
                                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     startActivity(in);
+                                    SignUpActivity.username = studentsList.get(i).getStudentName();
 
                                 }
-                            } catch (Exception e) {
-                                errorMsgTextView.setText("Wrong password");
+                            } catch (NullPointerException e) {
+                                //errorMsgTextView.setText("Wrong password");
+                                pwEditText.setError("Invalid Login Credentials");
                             }
 
-
-
                         }
-
-
-
-
 
                     }
                     if (!matchFound) {
                         Log.d(TAG, "Login Wrong");
-                        errorMsgTextView.setText("Incorrect email/password! Please try again");
+                        emailEditText.setError("Invalid Login Credentials");
+                        pwEditText.setError("Invalid Login Credentials");
 
                     }
-                }*/
-
+                }
 
             }
         });
@@ -196,12 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(in);
 
             }
-                
-
-
-
-
-
         });
 
     }

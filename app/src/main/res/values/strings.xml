@@ -8,4 +8,8 @@
         <item>Munch</item>
         <item>Poolside</item>
     </string-array>
+
+    <string name="Stalls">Stalls</string>
+    <string name="Store">Store</string>
+    <string name="Order">Cart</string>
 </resources>

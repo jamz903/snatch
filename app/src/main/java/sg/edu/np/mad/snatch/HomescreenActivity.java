@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomescreenActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -21,7 +22,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     ArrayAdapter<CharSequence> adapter;
     public static String firebaseStall;
     boolean doubleClickToExit = false;
-
+    TextView welcomeMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,10 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
         //Toast to show successful login
         Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+        welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
+        String message = "Welcome, " + SignUpActivity.username + "!";
+        welcomeMessage.setText(message);
     }
 
     @Override

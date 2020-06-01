@@ -35,6 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
     Students student;
     MainActivity main = new MainActivity();
     final List<Students> studentsList = new ArrayList();
+    public static String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
                     if (!matchFound) {
                         Log.d(TAG, "Sign up safe");
                         if((id.matches("S[0-9]{8}") && id.length() == 9) ){
+                            username = un;
                             Students students = new Students(id,pw,un);
                             reff.child(id).setValue(students);
                             Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
