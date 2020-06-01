@@ -1,11 +1,17 @@
 package sg.edu.np.mad.snatch;
 
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.renderscript.ScriptGroup;
@@ -114,7 +120,11 @@ public class MainActivity extends AppCompatActivity {
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
                 }*/
-                if (studentID == "" || pw == ""){
+                if(getConnectionType(getApplicationContext())){
+                    errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+                }
+
+                else if (studentID == "" || pw == ""){
                     errorMsgTextView.setText("Empty email/password! Please try again");
                 }
                 else{
@@ -284,6 +294,41 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
+    }
+
+    public static boolean getConnectionType(Context context) {
+        boolean result = true; // Returns connection type. 0: none; 1: mobile data; 2: wifi
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                        result = false;
+                    }
+                }
+            }
+            else { //for older devices
+                if (cm != null) {
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_VPN) {
+                            result = false;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
 
