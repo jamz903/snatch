@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -121,13 +123,34 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(in);
                 }*/
                 if(getConnectionType(getApplicationContext())){
-                    errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setTitle("No Internet Connection")
+                            .setCancelable(false)
+                            .setMessage("You currently have no internet connection. Internet is required to proceed.")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
                 }
 
-                else if (studentID == "" || pw == ""){
-                    errorMsgTextView.setText("Empty email/password! Please try again");
+                else if (studentID.length() == 0){
+                    //errorMsgTextView.setText("Empty email/password! Please try again");
+                    emailEditText.setError("Enter Student ID");
                 }
+
+                else if (pw.length() == 0){
+                    pwEditText.setError("Enter Password");
+                }
+
                 else{
+                    emailEditText.setError("Invalid Login Credentials");
+                    pwEditText.setError("Invalid Login Credentials");
+                }
+                /*else{
                     boolean matchFound = false;
                     for(int i = 0; i<studentsList.size(); i++)
                     {
@@ -159,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         errorMsgTextView.setText("Incorrect email/password! Please try again");
 
                     }
-                }
+                }*/
 
 
             }
