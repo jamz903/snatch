@@ -91,9 +91,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                     if (!matchFound) {
                         Log.d(TAG, "Sign up safe");
-                        if((id.matches("S[0-9]{8}") && id.length() == 9) ){
+                        if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
-                            Students students = new Students(id,pw,un);
+                            Students students = new Students(id.toUpperCase(),pw,un);
                             reff.child(id).setValue(students);
                             Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
                             addExistingMembers();

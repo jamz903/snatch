@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,6 +41,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
     String foodCourtChoice;
     String foodStallChoice;
+    int LAUNCH_SECOND_ACTIVITY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
             public void onClick(View v) {
                 Intent in = new Intent(stallMenuActivity.this, OrderActivity.class);
                 in.putExtra("OrderList", shoppingCart);
-                startActivity(in);
+                LAUNCH_SECOND_ACTIVITY = 1;
+                startActivityForResult(in, LAUNCH_SECOND_ACTIVITY);
             }
         });
     }
@@ -430,5 +433,17 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LAUNCH_SECOND_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+                ArrayList<OrderItem> result = (ArrayList<OrderItem>) data.getSerializableExtra("result");
+                shoppingCart = result;
+            }
+        }
+    }//onActivityResult
 
 }

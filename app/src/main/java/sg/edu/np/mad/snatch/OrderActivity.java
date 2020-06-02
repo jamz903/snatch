@@ -1,12 +1,15 @@
 package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,10 +18,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity implements orderItemAdapterCallback {
 
     ArrayList<OrderItem> shoppingCart;
     TextView grandTotalTextView;
+    OrderItemAdapter adapter;
 
 
     @Override
@@ -57,7 +61,7 @@ public class OrderActivity extends AppCompatActivity {
         RecyclerView rv = findViewById(R.id.recyclerViewOrder);
 
         //change line below for adapter if is other food stall
-        OrderItemAdapter adapter = new OrderItemAdapter(this, shoppingCart);
+        adapter = new OrderItemAdapter(this, shoppingCart, this);
         rv.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(this);
@@ -97,5 +101,31 @@ public class OrderActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void removeOrderItem(OrderItem item, int position) {
+        if (item.quantity > 1) {
+            double oldSubtotal = item.subtotal;
+            item.subtotal = oldSubtotal / item.quantity * (item.quantity - 1);
+            item.quantity -= 1;
+        }
+        else {
+            shoppingCart.remove(position);
+        }
+        TextView grandTotalTextView = (TextView) findViewById(R.id.grandTotalTextView);
+        grandTotalTextView.setText("$" + String.format("%.2f", calculateGrandTotal(shoppingCart)));
+        adapter.notifyDataSetChanged();
+        if (shoppingCart.size() == 0) {
+            setContentView(R.layout.empty_order);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", shoppingCart);
+        setResult(Activity.RESULT_OK, returnIntent);
+        super.onBackPressed();
     }
 }

@@ -87,7 +87,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
         //store descriptions
         if (aFoodCourt.equals("FoodClub")) {
             storeDesc.add("This is the Japanese Stall");
-            storeDesc.add("This is the Bak Ku Teh Stall");
+            storeDesc.add("This is the Bak Kut Teh Stall");
             storeDesc.add("This is the Ban Mian Stall");
             storeDesc.add("This is the Western Stall");
             storeDesc.add("This is the Indonesian Stall");
