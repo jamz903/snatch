@@ -2,6 +2,7 @@ package sg.edu.np.mad.snatch;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull final menuItemViewHolder holder, final int position) {
 
-
+        holder.upvote.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
         //set format for menu items
         if (position < menuItems.size()) {
             FoodItem dish = menuItems.get(position);
@@ -113,6 +114,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
             }
         });
+
+
 
 
 

@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:text="upvote"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/priceTextView"
         app:layout_constraintEnd_toStartOf="@+id/foodImageView"
         app:layout_constraintTop_toTopOf="@+id/priceTextView" />

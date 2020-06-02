@@ -1,6 +1,7 @@
 package sg.edu.np.mad.snatch;
 
 import android.app.VoiceInteractor;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpStuID = (EditText) findViewById(R.id.signUpStuID);
         signUpPassword = (EditText) findViewById(R.id.signUpPassword);
         cfmSignUp = (Button) findViewById(R.id.signUpPgBtn);
+        cfmSignUp.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
 
         reff = FirebaseDatabase.getInstance().getReference().child("Students");

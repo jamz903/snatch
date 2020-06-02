@@ -11,19 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class OrderActivity extends AppCompatActivity implements orderItemAdapterCallback {
+public class OrderActivity extends AppCompatActivity implements orderItemAdapterCallback, View.OnClickListener {
 
     ArrayList<OrderItem> shoppingCart;
     TextView grandTotalTextView;
     OrderItemAdapter adapter;
-
+    Button placeOrderBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,11 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
             initRecyclerView();
             double amount = calculateGrandTotal(shoppingCart);
             grandTotalTextView.setText("$" + String.format("%.2f", amount));
+            placeOrderBtn = findViewById(R.id.placeOrderBtn);
+            placeOrderBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
         }
+
+
     }
 
     @Override
@@ -127,5 +134,13 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         returnIntent.putExtra("result", shoppingCart);
         setResult(Activity.RESULT_OK, returnIntent);
         super.onBackPressed();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent in = new Intent(this, ReceiptActivity.class);
+        in.putExtra("orders", shoppingCart);
+        startActivity(in);
     }
 }

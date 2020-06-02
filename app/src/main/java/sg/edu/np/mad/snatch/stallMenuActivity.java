@@ -307,8 +307,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     public void initDrinksStallMKP() {
         foodMenu.add(new FoodItem("Bandung", "Iced Bandung Drink", 1.3, R.drawable.bandung, 0));
-        foodMenu.add(new FoodItem("Hot Milo", "One cup of Hot Milo", 1, R.drawable.bandung, 0));
-        foodMenu.add(new FoodItem("Iced Milo", "One cup of Iced Milo", 1.5, R.drawable.bandung, 0));
+        foodMenu.add(new FoodItem("Hot Milo", "One cup of Hot Milo", 1, R.drawable.hot_milo, 0));
+        foodMenu.add(new FoodItem("Iced Milo", "One cup of Iced Milo", 1.5, R.drawable.iced_milo, 0));
     }
 
     public void initJapStallMKP() {
@@ -353,7 +353,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     @Override
     public void promptAddItem(final int aPosition) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Go to Food Stall?")
+        builder.setTitle("Add item to cart?")
                 .setCancelable(true)
                 .setMessage("Would you like to add " + foodMenu.get(aPosition).foodName + " to cart?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -444,6 +444,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
                 shoppingCart = result;
             }
         }
-    }//onActivityResult
+    }
 
 }

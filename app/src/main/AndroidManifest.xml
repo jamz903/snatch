@@ -11,12 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderActivity"
-            android:label="@string/Order"/>
-        <activity android:name=".stallMenuActivity"
-            android:label="@string/Store"/>
-        <activity android:name=".FoodClubActivity"
-            android:label="@string/Stalls"/>
+        <activity android:name=".ReceiptActivity"></activity>
+        <activity
+            android:name=".OrderActivity"
+            android:label="@string/Order" />
+        <activity
+            android:name=".stallMenuActivity"
+            android:label="@string/Store" />
+        <activity
+            android:name=".FoodClubActivity"
+            android:label="@string/Stalls" />
         <activity android:name=".HomescreenActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
