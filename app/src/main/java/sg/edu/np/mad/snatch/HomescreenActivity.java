@@ -12,9 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 public class HomescreenActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -23,6 +27,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     public static String firebaseStall;
     boolean doubleClickToExit = false;
     TextView welcomeMessage;
+    private int[] mImages = new int[]{R.drawable.steak, R.drawable.fastfood, R.drawable.desert};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,15 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         String message = "Welcome, " + SignUpActivity.username + "!";
         welcomeMessage.setText(message);
+
+        CarouselView carouselView = findViewById(R.id.carousel);
+        carouselView.setPageCount(mImages.length);
+        carouselView.setImageListener(new ImageListener() {
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(mImages[position]);
+            }
+        });
     }
 
     @Override
