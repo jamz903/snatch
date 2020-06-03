@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             } catch (NullPointerException e) {
                                 //errorMsgTextView.setText("Wrong password");
-                                pwEditText.setError("Invalid Login Credentials");
+                                pwEditText.setError("Incorrect Password");
                             }
 
                         }
