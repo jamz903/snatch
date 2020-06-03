@@ -11,18 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReceiptActivity"></activity>
+        <activity android:name=".ReceiptActivity"
+            android:label="@string/Receipt"></activity>
         <activity
             android:name=".OrderActivity"
             android:label="@string/Order" />
         <activity
             android:name=".stallMenuActivity"
-            android:label="@string/Store" />
+            android:label="@string/Menu" />
         <activity
             android:name=".FoodClubActivity"
             android:label="@string/Stalls" />
         <activity android:name=".HomescreenActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".FinishActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

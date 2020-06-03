@@ -10,6 +10,7 @@
     </string-array>
 
     <string name="Stalls">Stalls</string>
-    <string name="Store">Store</string>
+    <string name="Menu">Menu</string>
     <string name="Order">Cart</string>
+    <string name="Receipt">Receipt</string>
 </resources>
