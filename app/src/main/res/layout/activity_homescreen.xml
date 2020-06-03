@@ -38,7 +38,8 @@
                 app:slideInterval="7000"
                 app:strokeColor="#FFFFFFFF"
                 app:strokeWidth="1dp"
-                app:animateOnBoundary="false" />
+                app:animateOnBoundary="false"
+                app:pageTransformInterval="2000"/>
 
             <Spinner
                 android:id="@+id/dropdownList"
