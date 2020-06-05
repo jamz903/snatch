@@ -79,4 +79,10 @@ This is the dropdown list and it has all of the food courts in Ngee Ann Polytech
 ![Image of Logout](/githubImages/logout.png)\
 Anytime the user wishes to logout, they just have to click on the 3 dots icon located at the top right of the app, and just click on Logout.
 
-###
+### List of stalls
+![Image of List of Stalls](/githubImages/storesList.png)\
+After selecting a food court from the dropdown list, the user would be able to see the list of stalls available.
+
+### Prompt to visit Stall
+![Image of Prompt to visit Stall](/githubImages/stall_prompt.png)\
+When the user clicks on a particular stall, the app will display an AlertDialog asking if the user would like to visit the stall's page. If the user clicks "No", nothing will happen. On the other hand, if the user selects "Yes", the user will be brought to see the selected stall's menu page.
