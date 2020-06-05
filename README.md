@@ -41,6 +41,6 @@ Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys 
 
 ## Appendix
 ### Login
-![Image of Login screen](/githubImages/login.png)
+![Image of Login screen](/githubImages/login.png)\
 This is snatch's login screen. Upon entering a correct student ID and password in Firebase, it will then bring the user to the homescreen. In the event that the user has entered in a wrong account, the app will display an error to the userm as shown below.\
 ![Image of Invalid Login screen](/githubImages/invalid_login.png)
