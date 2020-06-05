@@ -101,4 +101,11 @@ If the user wants to add a food item to his cart, he just has to click on the it
 
 ### Cart
 ![Image of Cart](/githubImages/cart.png)\
-To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the sbutotal and grand total.
+To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the subtotal and grand total.
+
+### Clear Items from Cart
+
+### Empty Cart
+![Image of Empty Cart](/githubImages/emptycart.png)\
+If the user has no items added to his cart and decides to view his cart, it would show an empty cart screen as shown above.
+
