@@ -101,7 +101,10 @@ If the user wants to add a food item to his cart, he just has to click on the it
 
 ### Cart
 ![Image of Cart](/githubImages/cart.png)\
-To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the subtotal and grand total.
+To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the subtotal and grand total. To place the order, the user just has to click on the "PLACE ORDER" button.
+
+### Place Order Validation
+![Image of No Internet Connection when Placing Order](/githubImages/
 
 ### Clear Items from Cart
 ![Image of System Prompting to Clear Cart](/githubImages/leaving_clear_cart.png)\
@@ -117,3 +120,5 @@ If the user wishes to remove an item, the user has to click on the item that he 
 \
 ![Image of Cart after Removal of Item](/githubImages/after_remove.png)\
 Upon successful removal of the selected item, the cart will be updated with the correct subtotal, grand total and quantity.
+
+### Receipt
