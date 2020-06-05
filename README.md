@@ -58,7 +58,13 @@ In addition, if the user has no internet connection, he will be unable to login 
 
 ### Sign Up
 ![Image of Sign Up screen](/githubImages/sign_up.png)\
-This is the sign up page of snatch. Users are prompted for a username, their student ID as well as their password. Upon succesfully creating an account,
+This is the sign up page of snatch. Users are prompted for a username, their student ID as well as their password. Upon succesfully creating an account, it will then redirect users back to the login page to get them to login.
+
+### Sign Up Validation
+![Image of Incorrect Student ID format](/githubImages/sign_up_validation.pmg)\
+There is validation done for the Sign Up page where users have to enter in an valid student ID matching the student ID format.\
+![Image of Existing Student ID](/githubImages/sign_up_existing.png)\
+Furthermore, if the user tries to create an account for an existing student ID, the application will prevent the user from doing so and will display an error message as shown above.
 
 ### Homescreen
 ![Image of Home screen](/githubImages/homescreen.png)\
