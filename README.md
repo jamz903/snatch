@@ -19,7 +19,7 @@ In addition, she also implemented validation regarding the need for internet con
 
 Lastly, she also changed the header title to reflect the different activities in our application, e.g. Menu, stalls etc.
 
-**- Justin**
+**- Justin**\
 Justin implemented the dropdown list (known as Spinner) listing the various food courts in the homescreen activity. When a food court is selected, it will display the respective food stalls there.
 
 In addition, in the homescreen activity, he added a ScrollView so that the user is able to scroll when on smaller devices/landscape orientation.
@@ -32,7 +32,7 @@ He was also involved in the logical aspect of the upvoting system, and helped to
 
 Lastly, he also implemented both the ordering activity and receipt activity to display to users what they have in their cart and the food items they have bought respectively. In the event that the user's cart is empty, it would display an empty card page.
 
-**- Rhys**
+**- Rhys**\
 Rhys played a major part in implemeting the Firebase. Whilst Jamie and Justin were doing the initial recycler view at the start of the project, Rhys did numerous research on trying to implement Firebase to our application. This was crucial to our application so that we are able to make use of both the login system and the upvote system.
 
 He also made the login and sign up system and ensured that the users were registered to the Firebase.
