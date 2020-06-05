@@ -1,7 +1,6 @@
 package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -9,9 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -139,8 +144,60 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
 
     @Override
     public void onClick(View v) {
-        Intent in = new Intent(this, ReceiptActivity.class);
-        in.putExtra("orders", shoppingCart);
-        startActivity(in);
+        if(getConnectionType(OrderActivity.this)){
+            //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+            android.app.AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
+            builder.setTitle("No Internet Connection")
+                    .setCancelable(false)
+                    .setMessage("You currently have no internet connection. Internet is required to proceed.")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }
+        else{
+            Intent in = new Intent(this, ReceiptActivity.class);
+            in.putExtra("orders", shoppingCart);
+            startActivity(in);
+        }
+    }
+
+    public static boolean getConnectionType(Context context) {
+        boolean result = true; // If there is no internet connection, bool returns true
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                // if there is internet connection, regardless of what type (wifi, cellular, vpn) return false
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                        result = false;
+                    }
+                }
+            }
+            else { //for older devices
+                if (cm != null) {
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_VPN) {
+                            result = false;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
