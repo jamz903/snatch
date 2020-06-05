@@ -40,3 +40,5 @@ He also made the login and sign up system and ensured that the users were regist
 Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys was involved in trying to debug the upvote system and trying to sort the menu items by the number of upvotes.
 
 ## Appendix
+### Login
+![Image of Login screen](https://github.com/jamz903/snatch/tree/master/githubImages/login.png)
