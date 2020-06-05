@@ -63,8 +63,8 @@ This is the sign up page of snatch. Users are prompted for a username, their stu
 ### Sign Up Validation
 ![Image of Incorrect Student ID format](/githubImages/sign_up_validation.png)\
 There is validation done for the Sign Up page where users have to enter in an valid student ID matching the student ID format.\
+\
 ![Image of Existing Student ID](/githubImages/sign_up_existing.png)\
-
 Furthermore, if the user tries to create an account for an existing student ID, the application will prevent the user from doing so and will display an error message as shown above.
 
 ### Homescreen
