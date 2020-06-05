@@ -44,11 +44,22 @@ Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys 
 ![Image of Login screen](/githubImages/login.png)\
 This is snatch's login screen. Upon entering a correct student ID and password in Firebase, it will then bring the user to the homescreen.
 
+### Login Successful
+![Image of Successful Login](/githubImages/success_login)\
+Upon successful login, the application will display a successful login message to the user and bring user to the homescreen.
+
 ### Invalid Login
-In the event that the user has entered in a wrong account, the app will display an error to the user as shown below.\
 ![Image of Invalid Login screen](/githubImages/invalid_login.png)\
+In the event that the user has entered in a wrong account, the app will display an error to the user as shown below.
 
 ### No Internet Connection
-In addition, if the user has no internet connection, he will be unable to login and the app will inform the user using an AlertDialog.\
 ![Image of No Internet Connection](/githubImages/no_internet.png)\
+In addition, if the user has no internet connection, he will be unable to login and the app will inform the user using an AlertDialog.
 
+### Homescreen
+![Image of Home screen](/githubImages/homescreen.png)\
+This is the home screen of snatch and it has a carousel/slideshow to display different images of food. It also features a dropdown list that allows user to pick a foodcourt.
+
+### Dropdown List
+![Image of Dropdown List](/githubImages/dropdown_list.png)\
+This is the dropdown list and it has all of the food courts in Ngee Ann Polytechnic (NP) listed. Upon choosing an option, it would redirect the user to a new activity, displaying all the food stalls in that particular food court.
