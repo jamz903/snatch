@@ -56,9 +56,13 @@ In the event that the user has entered in a wrong account, the app will display 
 ![Image of No Internet Connection](/githubImages/no_internet.png)\
 In addition, if the user has no internet connection, he will be unable to login and the app will inform the user using an AlertDialog.
 
+### Sign Up
+![Image of Sign Up screen](/githubImages/sign_up.png)\
+This is the sign up page of snatch. Users are prompted for a username, their student ID as well as a password.
+
 ### Homescreen
 ![Image of Home screen](/githubImages/homescreen.png)\
-This is the home screen of snatch and it has a carousel/slideshow to display different images of food. It also features a dropdown list that allows user to pick a foodcourt.
+This is the home screen of snatch and it has a carousel/slideshow to display different images of food. It also features a dropdown list that allows user to pick a foodcourt. In addition, it also has a welcome message with the user's username entered when he signs up at the sign up page.
 
 ### Dropdown List
 ![Image of Dropdown List](/githubImages/dropdown_list.png)\
