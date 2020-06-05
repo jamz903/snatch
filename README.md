@@ -8,7 +8,7 @@
 ## Description of snatch
 
 ## Individual Roles and Contributions
-**- Jamie**
+**- Jamie**\
 Jamie created the slideshow to display images of food on the homescreen. She researched and implemented the slideshow to ensure that the homescreen was not too empty.
 
 Upon customer logging in, she also implemented a way to prevent users from going back to the login screen when the back button is pressed on Android. Instead of going back to the login activity, it notifies the user that clicking the back button again would cause the user to exit the application.
