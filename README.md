@@ -95,6 +95,10 @@ Making use of the RecyclerView, the app is able to display all of the food items
 ![Image of snatch's Upvote System](/githubImages/upvote.png)\
 If the user clicks on the "UPVOTE" button, the system would ask if the user wanted to upvote the food item. (For now) It will also inform the user that if he clicks on upvote, he would be unable to retract back his vote. If the user agrees to upvote the food item, the food item's number of upvotes would increase by 1. Based on its number of upvotes, its position on the menu will also update accordingly in real time due to Firebase.
 
+### Upvote System Validation
+![Image of No Internet Connection Warning when Upvoting](/githubImages/upvote_no_internet.png)\
+If the user has no Internet when trying to upvote a food item, the system would alert him that he currently has no internet connection and therefore, is unable to upvote the food item now. In addition, the number of upvotes of a food item may also not be accurate.
+
 ### Add Food to Cart
 ![Image of Adding Food to Cart](/githubImages/add_to_cart.png)\
 If the user wants to add a food item to his cart, he just has to click on the item that he would like to add. Next, the system would prompt the user, using an AlertDialog, if he would like to add the item to his cart. The user just has to click on "Yes" to add the item to his cart.
@@ -104,7 +108,8 @@ If the user wants to add a food item to his cart, he just has to click on the it
 To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the subtotal and grand total. To place the order, the user just has to click on the "PLACE ORDER" button.
 
 ### Place Order Validation
-![Image of No Internet Connection when Placing Order](/githubImages/
+![Image of No Internet Connection when Placing Order](/githubImages/place_order_no_internet.png)\
+If a user decides to place an order when he has no Internet connection, the system would alert the user that he currently has no internet connection and is unable to place an order.
 
 ### Clear Items from Cart
 ![Image of System Prompting to Clear Cart](/githubImages/leaving_clear_cart.png)\
@@ -122,3 +127,5 @@ If the user wishes to remove an item, the user has to click on the item that he 
 Upon successful removal of the selected item, the cart will be updated with the correct subtotal, grand total and quantity.
 
 ### Receipt
+![Image of Receipt](/githubImages/receipt.png)\
+After the user has successfully placed an order, the user would be able to see the receipt. On it, their order number is displayed as well as the current date and time (SGT) when the order was placed. In addition, it would display the final amount and the list of items purchased. When the user clicks on the "OK" button, it will bring the user back to the homescreen and clear all items that was previously in the cart.
