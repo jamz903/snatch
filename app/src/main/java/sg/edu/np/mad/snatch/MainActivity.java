@@ -126,13 +126,13 @@ public class MainActivity extends AppCompatActivity {
                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                     startActivity(in);
                 }*/
-                if(getConnectionType(getApplicationContext())){
+                if(getConnectionType(MainActivity.this)){
                     //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)
                             .setMessage("You currently have no internet connection. Internet is required to proceed.")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
@@ -188,8 +188,25 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(in);
+                closeKeyboard();
+                if(getConnectionType(MainActivity.this)){
+                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("No Internet Connection")
+                            .setCancelable(false)
+                            .setMessage("You currently have no internet connection. Internet is required to proceed.")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
+                }
+                else{
+                    Intent in = new Intent(MainActivity.this, SignUpActivity.class);
+                    startActivity(in);
+                }
 
             }
         });
@@ -269,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void closeKeyboard(){
+    private void closeKeyboard(){ //closes keyboard
         View view = this.getCurrentFocus();
         if (view != null){
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
