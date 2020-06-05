@@ -38,9 +38,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         adapter = ArrayAdapter.createFromResource(this, R.array.food_court, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //Toast to show successful login
-        Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         String message = "Welcome, " + SignUpActivity.username + "!";
         welcomeMessage.setText(message);
@@ -64,6 +61,14 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onResume() {
         super.onResume();
+
+        Intent receivingEnd = getIntent();
+        if (receivingEnd.hasExtra("login")) {
+            if (receivingEnd.getStringExtra("login").equals("success")) {
+                //Toast to show successful login
+                Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         dropdownList.setAdapter(adapter);
         dropdownList.setOnItemSelectedListener(this);
