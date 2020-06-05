@@ -45,7 +45,7 @@ Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys 
 This is snatch's login screen. Upon entering a correct student ID and password in Firebase, it will then bring the user to the homescreen.
 
 ### Login Successful
-![Image of Successful Login](/githubImages/success_login)\
+![Image of Successful Login](/githubImages/success_login.png)\
 Upon successful login, the application will display a successful login message to the user and bring user to the homescreen.
 
 ### Invalid Login
@@ -58,7 +58,7 @@ In addition, if the user has no internet connection, he will be unable to login 
 
 ### Sign Up
 ![Image of Sign Up screen](/githubImages/sign_up.png)\
-This is the sign up page of snatch. Users are prompted for a username, their student ID as well as a password.
+This is the sign up page of snatch. Users are prompted for a username, their student ID as well as their password. Upon succesfully creating an account,
 
 ### Homescreen
 ![Image of Home screen](/githubImages/homescreen.png)\
