@@ -42,3 +42,4 @@ Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys 
 ## Appendix
 ### Login
 ![Image of Login screen](/githubImages/login.png)
+This is snatch's login screen. Upon entering a correct student ID and password in Firebase, it will then bring the user to the homescreen.
