@@ -160,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d(TAG, "Login correct");
                                     matchFound = true;
                                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                                    in.putExtra("login", "success");
+                                    //in.putExtra("login", "success");
+                                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
 

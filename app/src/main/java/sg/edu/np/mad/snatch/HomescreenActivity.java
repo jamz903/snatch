@@ -62,13 +62,13 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     protected void onResume() {
         super.onResume();
 
-        Intent receivingEnd = getIntent();
+        /*Intent receivingEnd = getIntent();
         if (receivingEnd.hasExtra("login")) {
             if (receivingEnd.getStringExtra("login").equals("success")) {
                 //Toast to show successful login
                 Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
 
         dropdownList.setAdapter(adapter);
         dropdownList.setOnItemSelectedListener(this);
