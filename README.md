@@ -112,8 +112,8 @@ In the event that the user wishes to exit the current food stall to visit anothe
 If the user has no items added to his cart and decides to view his cart, it would show an empty cart screen as shown above.
 
 ### Remove Items from Cart
-![Image of System Prompting to Remove Item from Cart](/githubImages/removeitem_prompt.png)
+![Image of System Prompting to Remove Item from Cart](/githubImages/remove_item_prompt.png)\
 If the user wishes to remove an item, the user has to click on the item that he wishes to remove. The system would then prompt the user if he wishes to remove the item. If the user agree, 1 quantity of the food item will be removed\
 \
-![Image of Cart after Removal of Item](/githubImages/after_remove.png)
+![Image of Cart after Removal of Item](/githubImages/after_remove.png)\
 Upon successful removal of the selected item, the cart will be updated with the correct subtotal, grand total and quantity.
