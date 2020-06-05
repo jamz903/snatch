@@ -41,4 +41,4 @@ Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys 
 
 ## Appendix
 ### Login
-![Image of Login screen](https://github.com/jamz903/snatch/tree/master/githubImages/login.png)
+![Image of Login screen](/githubImages/login.png)
