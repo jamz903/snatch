@@ -74,3 +74,9 @@ This is the home screen of snatch and it has a carousel/slideshow to display dif
 ### Dropdown List
 ![Image of Dropdown List](/githubImages/dropdown_list.png)\
 This is the dropdown list and it has all of the food courts in Ngee Ann Polytechnic (NP) listed. Upon choosing an option, it would redirect the user to a new activity, displaying all the food stalls in that particular food court.
+
+### Logout
+![Image of Logout](/githubImages/logout.png)\
+Anytime the user wishes to logout, they just have to click on the 3 dots icon located at the top right of the app, and just click on Logout.
+
+###
