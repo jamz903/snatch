@@ -240,6 +240,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,0));
         foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, 0));
         foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0));
+        foodMenu.add(new FoodItem("Gyoza (5 pcs)", "A plate of Fried Gyoza", 2, R.drawable.gyoza, 0));
+        foodMenu.add(new FoodItem("Ramen Bowl", "A bowl of Ramen with Cha Shu", 5, R.drawable.ramen, 0));
+        foodMenu.add(new FoodItem("Sushi Platter", "A plate of Sushi", 4, R.drawable.sushi_platter, 0));
+        foodMenu.add(new FoodItem("Takoyaki (3pcs)", "Takoyaki", 2.1, R.drawable.takoyaki, 0));
     }
 
     public void initBKTFC() {
