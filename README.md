@@ -104,8 +104,16 @@ If the user wants to add a food item to his cart, he just has to click on the it
 To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the subtotal and grand total.
 
 ### Clear Items from Cart
+![Image of System Prompting to Clear Cart](/githubImages/leaving_clear_cart.png)
+In the event that the user wishes to exit the current food stall to visit another food stall, the system would warn the user that leaving the current food stall would clear the current items in the cart (if any). Should the user agree, the items in the cart would be removed.
 
 ### Empty Cart
 ![Image of Empty Cart](/githubImages/emptycart.png)\
 If the user has no items added to his cart and decides to view his cart, it would show an empty cart screen as shown above.
 
+### Remove Items from Cart
+![Image of System Prompting to Remove Item from Cart](/githubImages/removeitem_prompt.png)
+If the user wishes to remove an item, the user has to click on the item that he wishes to remove. The system would then prompt the user if he wishes to remove the item. If the user agree, 1 quantity of the food item will be removed\
+\
+![Image of Cart after Removal of Item](/githubImages/after_remove.png)
+Upon successful removal of the selected item, the cart will be updated with the correct subtotal, grand total and quantity.
