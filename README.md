@@ -69,7 +69,7 @@ Furthermore, if the user tries to create an account for an existing student ID, 
 
 ### Homescreen
 ![Image of Home screen](/githubImages/homescreen.png)\
-This is the home screen of snatch and it has a carousel/slideshow to display different images of food. It also features a dropdown list that allows user to pick a foodcourt. In addition, it also has a welcome message with the user's username entered when he signs up at the sign up page.
+This is the home screen of snatch and it has a carousel/slideshow to display different images of food. It also features a dropdown list that allows user to pick a foodcourt. In addition, it also has a welcome message with the user's username entered when he signs up at the sign up page. It also makes use of a ScrollView to allow users to scroll when on smaller devices/landscape orientation.
 
 ### Dropdown List
 ![Image of Dropdown List](/githubImages/dropdown_list.png)\
@@ -86,3 +86,19 @@ After selecting a food court from the dropdown list, the user would be able to s
 ### Prompt to visit Stall
 ![Image of Prompt to visit Stall](/githubImages/stall_prompt.png)\
 When the user clicks on a particular stall, the app will display an AlertDialog asking if the user would like to visit the stall's page. If the user clicks "No", nothing will happen. On the other hand, if the user selects "Yes", the user will be brought to see the selected stall's menu page.
+
+### Menu Page
+![Image of Japanese Stall's Menu Page](/githubImages/menu.png)\
+Making use of the RecyclerView, the app is able to display all of the food items that the stall offers. Each row shows the name of the food, a short description of the food, the price of the food, an image of the food, and lastly, the number of upvotes the food has. The food is sorted by popularity, determined by the number of upvotes that they have. The more upvotes they have, the higher up in the menu they would be.
+
+### Upvote System
+![Image of snatch's Upvote System](/githubImages/upvote.png)\
+If the user clicks on the "UPVOTE" button, the system would ask if the user wanted to upvote the food item. (For now) It will also inform the user that if he clicks on upvote, he would be unable to retract back his vote. If the user agrees to upvote the food item, the food item's number of upvotes would increase by 1. Based on its number of upvotes, its position on the menu will also update accordingly in real time due to Firebase.
+
+### Add Food to Cart
+![Image of Adding Food to Cart](/githubImages/add_to_cart.png)\
+If the user wants to add a food item to his cart, he just has to click on the item that he would like to add. Next, the system would prompt the user, using an AlertDialog, if he would like to add the item to his cart. The user just has to click on "Yes" to add the item to his cart.
+
+### Cart
+![Image of Cart](/githubImages/cart.png)\
+To see the items in his cart, the user just have to click on the Floating Action Button with the shopping cart icon located at the bottom right corner of the screen. From there, the system will proceed to display all the items the user has added, the quantity, as well as the sbutotal and grand total.
