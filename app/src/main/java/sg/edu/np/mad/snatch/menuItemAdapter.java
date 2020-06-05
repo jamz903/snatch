@@ -1,8 +1,13 @@
 package sg.edu.np.mad.snatch;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,29 +93,45 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
         holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                String string = "Are you sure you want to upvote " + holder.foodNameTextView.getText() + "?";
-                builder.setTitle(string);
-                builder.setMessage("You will not be able to retract this vote.")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String dish = String.valueOf(holder.foodNameTextView.getText());
-                                checkDish(dish);
-                                String text = dish + " succesfully upvoted.";
-                                Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
-                                menuItems.get(position).upVotes++;
-                                Collections.sort(menuItems);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .show();
+                if(getConnectionType(holder.upvote.getContext())){
+                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(holder.upvote.getContext());
+                    builder.setTitle("No Internet Connection")
+                            .setCancelable(false)
+                            .setMessage("You currently have no internet connection. Internet is required to proceed. Upvote Scores currently displayed may also be inaccurate.")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    String string = "Are you sure you want to upvote " + holder.foodNameTextView.getText() + "?";
+                    builder.setTitle(string);
+                    builder.setMessage("You will not be able to retract this vote.")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String dish = String.valueOf(holder.foodNameTextView.getText());
+                                    checkDish(dish);
+                                    String text = dish + " succesfully upvoted.";
+                                    Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
+                                    menuItems.get(position).upVotes++;
+                                    Collections.sort(menuItems);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
+                }
 
             }
         });
@@ -149,5 +170,41 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
 
             }
         });
+    }
+
+    public static boolean getConnectionType(Context context) {
+        boolean result = true; // If there is no internet connection, bool returns true
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                // if there is internet connection, regardless of what type (wifi, cellular, vpn) return false
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                        result = false;
+                    }
+                }
+            }
+            else { //for older devices
+                if (cm != null) {
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_VPN) {
+                            result = false;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

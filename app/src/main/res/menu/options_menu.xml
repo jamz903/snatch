@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <item
+    <!--<item
         android:id="@+id/credits_option"
         android:title="Credits"
-        app:showAsAction="never"/>
+        app:showAsAction="never"/>-->
 
     <item
         android:id="@+id/logout_option"

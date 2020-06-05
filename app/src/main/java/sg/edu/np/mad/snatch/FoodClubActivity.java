@@ -158,11 +158,11 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == R.id.credits_option){
+        /*if(item.getItemId() == R.id.credits_option){
+            to be implemented later on
+        }*/
 
-        }
-
-        else if(item.getItemId() == R.id.logout_option){
+        if(item.getItemId() == R.id.logout_option){
             Intent signIn = new Intent(FoodClubActivity.this,MainActivity.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
