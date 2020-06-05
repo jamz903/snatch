@@ -6,6 +6,7 @@
 3. Shane-Rhys Chua (S10194712H)
 
 ## Description of snatch
+snatch is a food ordering app for Ngee Ann Polytechnic (NP) students and staff. It allows users to visit the different food courts available in NP as well as the different food stalls in the respective food courts. Users are able to add and remove food from their cart and are also able to place an order using snatch. In addition, users are also able to upvote different food items. The food in a stall's menu are sorted based on the number of upvotes it has, hence allowing users to know which are the more popular food in NP.
 
 ## Individual Roles and Contributions
 **- Jamie**\
