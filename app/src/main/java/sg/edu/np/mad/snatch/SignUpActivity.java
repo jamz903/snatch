@@ -85,8 +85,16 @@ public class SignUpActivity extends AppCompatActivity {
                 String pw = signUpPassword.getText().toString();
                 String un = signUpUser.getText().toString();
 
-                if (id == "" || pw == "" ||un ==""){
-                    Toast.makeText(getApplicationContext(),"Empty email/password! Please try again",Toast.LENGTH_SHORT).show();
+                if (un.length() == 0){
+                    signUpUser.setError("Enter Username");
+                }
+
+                else if (id.length() == 0){
+                    signUpStuID.setError("Enter Student ID");
+                }
+
+                else if (pw.length() == 0){
+                    signUpPassword.setError("Enter Password");
                 }
                 else if(getConnectionType(SignUpActivity.this)){
                     //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
@@ -122,13 +130,13 @@ public class SignUpActivity extends AppCompatActivity {
                             addExistingMembers();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "invalid student ID", Toast.LENGTH_SHORT).show();
+                            signUpStuID.setError("Invalid Student ID");
 
                         }
 
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "ID already registered", Toast.LENGTH_SHORT).show();
+                        signUpStuID.setError("Student ID already registered");
                     }
                 }
 
