@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -102,11 +104,32 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         //users cannot go back to cart after placing order
         if(doubleClick){
             //to notify them that it's an app function
-            Toast.makeText(this,"Please click ok to go back to homepage", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(ReceiptActivity.this);
+            builder.setTitle("You cannot go back to cart at this stage")
+                    .setCancelable(false)
+                    .setMessage("Please click back to continue viewing receipt or click go to homepage to continue")
+                    .setPositiveButton("Go to Homepage", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent in = new Intent(ReceiptActivity.this, HomescreenActivity.class);
+                            in.putExtra("Ordered", "Ordered");
+                            in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(in);
+                            ReceiptActivity.this.finish();
+                        }
+                    })
+                    .setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
             this.doubleClick = false;
         }
         else{
             this.doubleClick = true;
         }
     }
+
 }
