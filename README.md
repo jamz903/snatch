@@ -16,7 +16,9 @@ Upon customer logging in, she also implemented a way to prevent users from going
 
 She also set up the upvoting system of the food items in Firebase. She changed the hardcoded code and made it reusable for all the food items. She also came up with the initial method to get the number of upvotes of the food items from Firebase. Other than setting up the upvote system within Firebase, she also played a part in trying to debug errors regarding the sorting of food items in the menu by their number of upvotes.
 
-In addition, she also implemented validation regarding the need for internet connection due to our application using Firebase. In the event that the user is not connected to the Internet, it would inform users to connect to Internet before allowing them to login.
+Besides the upvoting system, Jamie also implemented the kebab icon and logout feature in the application. She researched on how to implement the logout system and also make it permanent at the header section on all relevant pages.
+
+In addition, she also implemented validation regarding the need for internet connection due to our application using Firebase. In the event that the user is not connected to the Internet, it would inform users to connect to Internet before allowing them to login or sign up, inform users when they want to upvote a dish, and also prevent them from ordering any dishes when they do not have an internet connection.
 
 Lastly, she also changed the header title to reflect the different activities in our application, e.g. Menu, stalls etc.
 
@@ -34,11 +36,11 @@ He was also involved in the logical aspect of the upvoting system, and helped to
 Lastly, he also implemented both the ordering activity and receipt activity to display to users what they have in their cart and the food items they have bought respectively. In the event that the user's cart is empty, it would display an empty card page.
 
 **- Rhys**\
-Rhys played a major part in implemeting the Firebase. Whilst Jamie and Justin were doing the initial recycler view at the start of the project, Rhys did numerous research on trying to implement Firebase to our application. This was crucial to our application so that we are able to make use of both the login system and the upvote system.
+Rhys played a major part in implemeting the Firebase. Whilst Jamie and Justin were doing the initial recycler view at the start of the project, Rhys did numerous research on trying to implement Firebase to our application. He spent time setting up and ensuring that there was a connection between the Realtime Database in Firebase to our application. This was crucial to our application so that we are able to make use of both the login system and the upvote system.
 
-He also made the login and sign up system and ensured that the users were registered to the Firebase.
+He also made the login and sign up system. This was done by retriving and storing the data obtained from Firebase into lists, to ensure that the users were registered before they could log in and access other activities. For Sign Up, Rhys ensured that duplicate Student IDs could not be registered completed validation for both the Log In System and the Sign Up System.
 
-Once, when Firebase was not working on both Jamie's and Justin's emulator, Rhys was involved in trying to debug the upvote system and trying to sort the menu items by the number of upvotes.
+Rhys was also involved in debugging Firebase issues. When Firebase was not working on both Jamie's and Justin's emulator, Rhys was involved in trying to solve why Firebase was having connectivity issues on our side, and also helped to debug the upvote system and trying to sort the menu items by the number of upvotes.
 
 ## Appendix
 ### Login
