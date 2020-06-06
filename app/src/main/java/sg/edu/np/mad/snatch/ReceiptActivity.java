@@ -30,6 +30,7 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
     TextView orderDateTimeTextView;
     TextView orderNoTextView;
     Button okBtn;
+    boolean doubleClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,5 +100,13 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         //users cannot go back to cart after placing order
+        if(doubleClick){
+            //to notify them that it's an app function
+            Toast.makeText(this,"Please click ok to go back to homepage", Toast.LENGTH_SHORT).show();
+            this.doubleClick = false;
+        }
+        else{
+            this.doubleClick = true;
+        }
     }
 }
