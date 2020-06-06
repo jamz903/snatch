@@ -136,4 +136,46 @@ After the user has successfully placed an order, the user would be able to see t
 ## Reference Links for Images
 1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM
 2. Gong Bao Chicken - https://www.seriouseats.com/recipes/2017/08/gong-bao-ji-ding-sichuan-kung-pow-chicken-recipe.html
-3.
+3. Salted Egg Rice - http://www.pinkypiggu.com/2019/01/best-salted-egg-rice-in-singapore.html
+4. Yogurt - https://www.pinterest.com/pin/645633296549934334/?autologin=true&nic_v1=1aLhrYQUbBQMZJiifMk5mVrEawFcCDwxehl%2BFxcba1geJmy1x4l6%2BLeHfFOMDduYcg
+5. Iced Lemon Tea - https://www.unileverfoodsolutions.com.au/recipe/american-lemon-iced-tea-R0069771.html
+6. Hot Coffee - https://www.bustle.com/p/how-to-keep-your-coffee-hot-even-if-its-the-dead-of-winter-outside-43770
+7. Hot Milo - https://www.bustle.com/p/how-to-keep-your-coffee-hot-even-if-its-the-dead-of-winter-outside-43770
+8. Iced Milo - https://www.mcdonalds.com.my/menu/iced-milo
+9. Papadom - https://says.com/my/news/studies-show-that-papadom-contains-dangerously-high-levels-of-sodium
+10. Mee Soto - http://netsenger.com/topwok/best-mee-soto.htm
+11. Ayam Penyet - https://www.feastbump.com/menus/sedap-ayam-penyet
+12. Bak Kut Teh - https://www.rotinrice.com/bak-kut-teh-pork-ribs-tea/
+13. Ban Mian - https://asianfoodnetwork.com/en/recipes/cuisine/singaporean/ban-mian.html
+14. Chawanmushi - https://www.justonecookbook.com/instant-pot-chawanmushi/
+15. Cheese Fries - https://en.wikipedia.org/wiki/Cheese_fries
+16. Chicken Chop - https://keeprecipes.com/recipe/howtocook/black-pepper-chicken-chop
+17. Chicken Katsu Curry - https://www.japancentre.com/en/recipes/301-japanese-chicken-katsu-curry
+18. Lemon Chicken Rice -  https://www.burpple.com/f/qKFeo-HR
+19. Roast Chicken Rice - https://www.pinterest.com/pin/433964114075544548/?nic_v1=1axsN99lx1QcFU%2Bm0J494%2FWY3%2BsmgEXu3fOfczUp61lxpOqbjEulkYLDkPoaIdAYz0
+20. Steam Chicken Rice - https://www.thespruceeats.com/hainanese-chicken-rice-very-detailed-recipe-3030408
+21. Fish Soup - https://eatwhattonight.com/2019/10/how-to-make-dried-sole-fish-powder-for-fish-soup/
+22. Instant noodles - https://en.wikipedia.org/wiki/Instant_noodle
+23. Bowl of Rice - https://www.istockphoto.com/sg/photos/bowl-of-rice?mediatype=photography&phrase=bowl%20of%20rice&sort=mostpopular
+24. Salmon Don - https://www.freepik.com/free-photos-vectors/food
+25. Sausage - https://en.wikipedia.org/wiki/Vegetarian_hot_dog
+26. Sliced Fish Noodles - https://www.burpple.com/f/goSJyz7k
+27. Taiwan Sausage - http://xtremetaiwan.com/en/food/show.aspx?num=935
+28. Vinegar Braised Pork - https://breadetbutter.wordpress.com/2012/10/04/billy-laws-vinegar-braised-pork-belly-eggs/
+29. You Tiao - https://thewoksoflife.com/youtiao-recipe/
+30. Basil Pork Rice - https://snapguide.com/guides/make-thai-basil-pork-rice/
+31. Pad Thai - https://www.recipetineats.com/chicken-pad-thai/
+32. Mango Salad - https://food52.com/recipes/53632-thai-green-mango-salad-som-tum-mamuang
+33. Fried Egg - https://www.foodnetwork.com/how-to/articles/how-to-fry-eggs-a-step-by-step-guide
+34. Sweet Sour Pork - https://www.cookipedia.co.uk/recipes_wiki/Sweet_and_sour_pork
+35. Bee Hoon - http://nasilemaklover.blogspot.com/2014/07/economic-fried-bee-hoon-fried-rice.html
+36. Hotdog Bun - http://www.seasaltwithfood.com/2014/11/chinese-hot-dog-bunsrolls.html
+37. Cream Puff - https://www.foodista.com/blog/2011/06/04/gluten-free-foodie-friday-key-lime-cream-puffs
+38. Floss Bun - https://www.flickr.com/photos/acroamatic/2200784817/in/photostream/
+39. Chicken Fuyong - https://www.straitstimes.com/lifestyle/food/cheap-good-chicken-fuyong-omelette-beloved-by-ngee-ann-poly-students
+40. Bandung - https://www.burpple.com/f/Os5NQ37K
+41. Chicken - https://www.thedailymeal.com/eat/internet-still-debating-chicken-sashimi-so-we-found-answer/090717
+42. Tick - "Icon made by Pixel perfect from www.flaticon.com"
+43. Cute Food Icons - https://dlpng.com/png/6774620
+44. Empty cart - https://www.clipartmax.com/middle/m2i8G6A0i8m2N4A0_sign-in-empty-shopping-cart-icon/
+45. Shopping cart icon - https://fontawesome.com/license
