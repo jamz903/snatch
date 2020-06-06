@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,5 +94,10 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(in);
         ReceiptActivity.this.finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //users cannot go back to cart after placing order
     }
 }
