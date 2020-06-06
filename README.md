@@ -134,6 +134,6 @@ Upon successful removal of the selected item, the cart will be updated with the 
 After the user has successfully placed an order, the user would be able to see the receipt. On it, their order number is displayed as well as the current date and time (SGT) when the order was placed. In addition, it would display the final amount and the list of items purchased. When the user clicks on the "OK" button, it will bring the user back to the homescreen and clear all items that was previously in the cart.
 
 ## Reference Links for Images
-1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM\
-2. Gong Bao Chicken - https://www.seriouseats.com/recipes/2017/08/gong-bao-ji-ding-sichuan-kung-pow-chicken-recipe.html\
+1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM
+2. Gong Bao Chicken - https://www.seriouseats.com/recipes/2017/08/gong-bao-ji-ding-sichuan-kung-pow-chicken-recipe.html
 3.
