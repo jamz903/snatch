@@ -33,7 +33,7 @@ Justin was also made use of a FloatingActionButton to bring users from the menu 
 
 He was also involved in the logical aspect of the upvoting system, and helped to debug issues regarding the sorting of menu items by their number of upvotes.
 
-Lastly, he also implemented both the ordering activity and receipt activity to display to users what they have in their cart and the food items they have bought respectively. In the event that the user's cart is empty, it would display an empty card page.
+Lastly, he also implemented both the ordering activity and receipt activity to display to users what they have in their cart and the food items they have bought respectively. In the event that the user's cart is empty, it would display an empty cart page.
 
 **- Rhys**\
 Rhys played a major part in implemeting the Firebase. Whilst Jamie and Justin were doing the initial recycler view at the start of the project, Rhys did numerous research on trying to implement Firebase to our application. He spent time setting up and ensuring that there was a connection between the Realtime Database in Firebase to our application. This was crucial to our application so that we are able to make use of both the login system and the upvote system.
@@ -132,3 +132,8 @@ Upon successful removal of the selected item, the cart will be updated with the 
 ### Receipt
 ![Image of Receipt](/githubImages/receipt.png)\
 After the user has successfully placed an order, the user would be able to see the receipt. On it, their order number is displayed as well as the current date and time (SGT) when the order was placed. In addition, it would display the final amount and the list of items purchased. When the user clicks on the "OK" button, it will bring the user back to the homescreen and clear all items that was previously in the cart.
+
+## Reference Links for Images
+1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM\
+2. Gong Bao Chicken - https://www.seriouseats.com/recipes/2017/08/gong-bao-ji-ding-sichuan-kung-pow-chicken-recipe.html\
+3.
