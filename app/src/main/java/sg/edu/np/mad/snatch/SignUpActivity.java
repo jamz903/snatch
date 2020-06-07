@@ -82,6 +82,9 @@ public class SignUpActivity extends AppCompatActivity {
         cfmSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                signUpUser.setError(null);
+                signUpLayout.setError(null);
+                signUpStuID.setError(null);
                 addExistingMembers();
                 String id = signUpStuID.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = signUpPassword.getText().toString();

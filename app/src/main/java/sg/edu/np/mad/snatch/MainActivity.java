@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                emailEditText.setError(null);
+                inputLayout.setError(null);
                 //add members of database to studentsList
                 addExistingMembers();
                 //closes keyboard when login button is pressed
@@ -183,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                emailEditText.setError(null);
+                inputLayout.setError(null);
                 //closes keyboard when signup button is pressed
                 closeKeyboard();
                 //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
