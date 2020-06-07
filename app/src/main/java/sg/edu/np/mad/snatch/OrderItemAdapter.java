@@ -51,9 +51,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderViewHolder> {
             Double information3 = order.subtotal;
             holder.subtotalTextView.setText(String.format("$%.2f", information3));
         }
+        //when cart item is clicked, item is removed
         holder.parentLayoutOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //alert to inform user of cart item being removed
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Remove item from cart?")
                         .setMessage("Would you like to remove " + shoppingCart.get(position).foodName + " from your cart?")

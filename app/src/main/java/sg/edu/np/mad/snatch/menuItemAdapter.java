@@ -35,8 +35,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     //creating required lists
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
-    Button upvote;
-    TextView numUpvotesTextView;
+    //Button upvote;
+    //TextView numUpvotesTextView;
     DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
     //Assigning items
@@ -73,7 +73,6 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
             Double information3 = dish.price;
             holder.priceTextView.setText(String.format("$%.2f", information3));
 
-            //pretty sure we need to change smth (TBD)
             int information4 = dish.imageID;
             holder.foodImageView.setImageResource(information4);
 
@@ -93,8 +92,8 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
         holder.upvote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
                 if(getConnectionType(holder.upvote.getContext())){
-                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
                     AlertDialog.Builder builder = new AlertDialog.Builder(holder.upvote.getContext());
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)
@@ -108,6 +107,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
                             .show();
                 }
                 else{
+                    //confirms with user about upvoting dish
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     String string = "Are you sure you want to upvote " + holder.foodNameTextView.getText() + "?";
                     builder.setTitle(string);
@@ -120,6 +120,7 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
                                     String text = dish + " succesfully upvoted.";
                                     Toast.makeText(v.getContext(), text, Toast.LENGTH_SHORT).show();
                                     menuItems.get(position).upVotes++;
+                                    //sorts items based on upvoteNo (sorted based on CompareTo in FoodItem class)
                                     Collections.sort(menuItems);
                                     notifyDataSetChanged();
                                 }
@@ -147,19 +148,23 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
         return menuItems.size();
     }
 
+    //gets the name of dish that user is upvoting and updates upvoteNo of dish in firebase
     public void checkDish(final String dish){
         String firebaseDish = dish.replaceAll("\\s+","");
         updateUpvote(firebaseDish);
     }
 
+    //method to be called to update upvoteNo of dish in firebase
     public void updateUpvote(final String firebaseDish){
         reff2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //obtains dish name
                 DataSnapshot dishName = dataSnapshot.child(firebaseDish);
                 long upVotes = (long)dishName.getValue();
                 long upVotesUpdated = upVotes + 1;
                 Object upVotesObject = (Object) upVotesUpdated;
+                //sets value in firebase
                 reff2.child(firebaseDish).setValue(upVotesObject);
                 String string = "Updated value to " + upVotes;
                 Log.d("value",string);

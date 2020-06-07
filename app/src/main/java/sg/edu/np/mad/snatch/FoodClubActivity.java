@@ -20,16 +20,17 @@ import java.util.ArrayList;
 public class FoodClubActivity extends AppCompatActivity implements StoresAdapterCallback {
 
     //Lists for Store activities
-    ArrayList<String> storeName = new ArrayList<>();
-    ArrayList<String> storeDesc = new ArrayList<>();
+    ArrayList<String> storeName = new ArrayList<>(); //stores store name
+    ArrayList<String> storeDesc = new ArrayList<>(); //stores store description
     String foodCourt;
     Intent receivingEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_club);
+        setContentView(R.layout.activity_food_club); //sets the custom created layout
 
+        //receives foodcourt name (using intent string putExtra) from HomescreenActivity
         receivingEnd = getIntent();
         foodCourt = receivingEnd.getStringExtra("FoodCourt");
         storeNames(storeName, foodCourt);
@@ -159,11 +160,14 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on
+            to be implemented later on in phase 2
         }*/
 
+        //logout button on kebab icon on top right corner of the app
+        //brings user to log in page
         if(item.getItemId() == R.id.logout_option){
             Intent signIn = new Intent(FoodClubActivity.this,MainActivity.class);
+            //clears backstack so user cannot click back to go back to main page of application after logging out
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
             finish();

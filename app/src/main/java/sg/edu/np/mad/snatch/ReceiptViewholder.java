@@ -16,7 +16,7 @@ public class ReceiptViewholder extends RecyclerView.ViewHolder {
 
     public ReceiptViewholder(@NonNull View itemView) {
         super(itemView);
-
+        //Assign view items to variables
         quantityTextView = itemView.findViewById(R.id.quantityTextView);
         foodNameTextView = itemView.findViewById(R.id.foodOrderNameTextView);
         subtotalTextView = itemView.findViewById(R.id.subtotalTextView);

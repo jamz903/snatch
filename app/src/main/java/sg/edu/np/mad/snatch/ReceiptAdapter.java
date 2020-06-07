@@ -23,6 +23,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptViewholder> {
     @Override
     public ReceiptViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
+        //get View holder for recycler
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_listitem, parent, false);
 
         return new ReceiptViewholder(v);
@@ -30,6 +31,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptViewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull ReceiptViewholder holder, int position) {
+        //set format for shopping cart items
         if (position < shoppingCart.size()) {
             OrderItem order = shoppingCart.get(position);
             int information1 = order.quantity;

@@ -16,7 +16,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
 
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
-        //Assign Variables to page widgits
+        //Assign Variables to page widgets
         foodOrderNameTextView = itemView.findViewById(R.id.foodOrderNameTextView);
         subtotalTextView = itemView.findViewById(R.id.subtotalTextView);
         quantityTextView = itemView.findViewById(R.id.quantityTextView);

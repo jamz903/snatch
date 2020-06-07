@@ -57,13 +57,12 @@ public class MainActivity extends AppCompatActivity {
     Button signUpBtn;
     EditText emailEditText;
     EditText pwEditText;
-    TextView errorMsgTextView;
 
     DatabaseReference reff;
-    Students student;
+    //Students student;
 
 
-    RequestQueue requestQueue;
+    //RequestQueue requestQueue;
     final List<Students> studentsList = new ArrayList();
 
 
@@ -79,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
-        //errorMsgTextView = (TextView) findViewById(R.id.errorMsgTextView);
 
 
         //Reference for firebase to get studentList
@@ -88,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         //Function to add all Students to studentsLIst from firebase
         addExistingMembers();
 
+        //sets buttons to colour blue
         loginBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
         signUpBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
@@ -97,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "Started");
-
-
     }
 
 
@@ -107,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d(TAG, "Resumed");
 
-        //assign values to studentsList incase of change
+        //assign values to studentsList in case of change
         addExistingMembers();
 
 
@@ -116,18 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                //add members of database to studentsList
                 addExistingMembers();
-
+                //closes keyboard when login button is pressed
                 closeKeyboard();
                 String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
-                /*if (email.equals("s1234567") && pw.equals("12345678")) {
-                    Log.d(TAG, "Login successful!");
-                    Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                    startActivity(in);
-                }*/
+
+                //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
                 if(getConnectionType(MainActivity.this)){
-                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)
@@ -141,11 +135,12 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                 }
 
+                //if studentID field is not filled in
                 else if (studentID.length() == 0){
-                    //errorMsgTextView.setText("Empty email/password! Please try again");
                     emailEditText.setError("Enter Student ID");
                 }
 
+                //if password field is not filled in
                 else if (pw.length() == 0){
                     pwEditText.setError("Enter Password");
                 }
@@ -154,20 +149,20 @@ public class MainActivity extends AppCompatActivity {
                     boolean matchFound = false;
                     for(int i = 0; i<studentsList.size(); i++)
                     {
+                        //in list of registered users in firebase, obtain studentID
                         if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString())){
                             try{
+                                //obtain password of studentID in list and check if it matches the keyed in password
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
-                                    Log.d(TAG, "Login correct");
+                                    Log.d(TAG, "Login successful");
                                     matchFound = true;
                                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
-                                    //in.putExtra("login", "success");
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
 
                                 }
-                            } catch (NullPointerException e) {
-                                //errorMsgTextView.setText("Wrong password");
+                            } catch (NullPointerException e) { //password does not match value in firebase
                                 pwEditText.setError("Incorrect Password");
                             }
 
@@ -175,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     if (!matchFound) {
-                        Log.d(TAG, "Login Wrong");
+                        Log.d(TAG, "Login Unsuccessful");
                         emailEditText.setError("Invalid Login Credentials");
                         pwEditText.setError("Invalid Login Credentials");
 
@@ -189,9 +184,10 @@ public class MainActivity extends AppCompatActivity {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //closes keyboard when signup button is pressed
                 closeKeyboard();
+                //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
                 if(getConnectionType(MainActivity.this)){
-                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)
@@ -205,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                 }
                 else{
+                    //there is internet connection, start new activity
                     Intent in = new Intent(MainActivity.this, SignUpActivity.class);
                     startActivity(in);
                 }

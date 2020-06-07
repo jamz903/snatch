@@ -40,8 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
     EditText signUpPassword;
     Button cfmSignUp;
     DatabaseReference reff;
-    Students student;
-    MainActivity main = new MainActivity();
+    //Students student;
+    //MainActivity main = new MainActivity();
     final List<Students> studentsList = new ArrayList();
     public static String username;
 
@@ -50,16 +50,18 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+        //find and assign buttons/EditText to variables
         signUpUser = (EditText) findViewById(R.id.signUpUsername);
         signUpStuID = (EditText) findViewById(R.id.signUpStuID);
         signUpPassword = (EditText) findViewById(R.id.signUpPassword);
         cfmSignUp = (Button) findViewById(R.id.signUpPgBtn);
+        //set button colour to blue
         cfmSignUp.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
-
+        //firebase reference to obtain data
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
 
-
+        //add members of database to studentsList
         addExistingMembers();
 
     }
@@ -68,36 +70,39 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(TAG, "Started");
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        //add members of database to studentsList
         addExistingMembers();
 
         cfmSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addExistingMembers();
-                String id = signUpStuID.getText().toString().toUpperCase();
+                String id = signUpStuID.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = signUpPassword.getText().toString();
                 String un = signUpUser.getText().toString();
 
+                //if username field is not filled in
                 if (un.length() == 0){
                     signUpUser.setError("Enter Username");
                 }
 
+                //if studentID field not filled in
                 else if (id.length() == 0){
                     signUpStuID.setError("Enter Student ID");
                 }
 
+                //if password field not filled in
                 else if (pw.length() == 0){
                     signUpPassword.setError("Enter Password");
                 }
+
+                //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
                 else if(getConnectionType(SignUpActivity.this)){
-                    //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)
@@ -121,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     if (!matchFound) {
-                        Log.d(TAG, "Sign up safe");
+                        Log.d(TAG, "Sign up successful");
                         if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
                             Students students = new Students(id.toUpperCase(),pw,un);

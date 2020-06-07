@@ -57,6 +57,8 @@ public class FoodItem implements Comparable {
         upVotes = aUpVotes;
     }
 
+    //sorting system for upvote system, it sorts the upvotes in the list in descending order
+    //called using Collections.sort()
     @Override
     public int compareTo(Object o) {
         int compareUpVotes = ((FoodItem)o).getUpVotes();

@@ -36,12 +36,14 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         //find and assign views
         dropdownList = findViewById(R.id.dropdownList);
         adapter = ArrayAdapter.createFromResource(this, R.array.food_court, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //sets the dropdown list
 
+        //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         String message = "Welcome, " + SignUpActivity.username + "!";
         welcomeMessage.setText(message);
 
+        //sets carousel view
         CarouselView carouselView = findViewById(R.id.carousel);
         carouselView.setPageCount(mImages.length);
         carouselView.setImageListener(new ImageListener() {
@@ -62,14 +64,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     protected void onResume() {
         super.onResume();
 
-        /*Intent receivingEnd = getIntent();
-        if (receivingEnd.hasExtra("login")) {
-            if (receivingEnd.getStringExtra("login").equals("success")) {
-                //Toast to show successful login
-                Toast.makeText(HomescreenActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
         dropdownList.setAdapter(adapter);
         dropdownList.setOnItemSelectedListener(this);
     }
@@ -78,12 +72,15 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Intent in;
 
+        //position 0 is a label "select food court" and thus the if statement
         //Actions when food court is chosen
-
         if (position != 0){
             String foodCourt = parent.getItemAtPosition(position).toString();
+            //storing the selected food court from the drop down list without spaces to extract data from firebase in other activites
             firebaseStall = foodCourt.replaceAll("\\s+","");
+            //when user selects food court from drop down list/spinner, new activity is started
             in = new Intent(HomescreenActivity.this, FoodClubActivity.class);
+            //putExtra to send the foodcourt name to FoodClubActivity.java
             if (foodCourt.equals("Food Club")){
                 in.putExtra("FoodCourt", "FoodClub");
             }
@@ -99,6 +96,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             startActivity(in);
         }
         else{
+            //to guide user
             Toast.makeText(HomescreenActivity.this, "Please select a Food Court", Toast.LENGTH_SHORT).show();
         }
     }
@@ -118,11 +116,14 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on
+            to be implemented later on in phase 2
         }*/
 
+        //logout button on kebab icon on top right corner of the app
+        //brings user to log in page
         if(item.getItemId() == R.id.logout_option){
             Intent signIn = new Intent(HomescreenActivity.this,MainActivity.class);
+            //clears backstack so user cannot click back to go back to main page of application after logging out
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
             finish();
@@ -131,16 +132,22 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
 
+    //prevents user from clicking back from homepage to go back to login activity
+    //when user clicks the back button twice, he is sent back to phone's homescreen
     @Override
     public void onBackPressed() {
+        //when back button is double clicked
         if(doubleClickToExit){
             super.onBackPressed();
             Intent exit = new Intent(HomescreenActivity.this, FinishActivity.class);
+            //clears backstack
             exit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(exit);
         }
 
+        //on first click, set doubleClick to true
         this.doubleClickToExit = true;
+        //to inform user after first click
         Toast.makeText(this,"Click again to exit application", Toast.LENGTH_SHORT).show();
 
         //to reset click after 2 seconds

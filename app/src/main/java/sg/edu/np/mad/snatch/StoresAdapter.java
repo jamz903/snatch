@@ -51,9 +51,9 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
             @Override
             public void onClick(View v) {
                 String string = storeName.get(position); //show store name
+                //get storename without spaces to get value from firebase
                 firebaseStoreName = string.replaceAll("\\s+","");
                 Log.d("snatch",firebaseStoreName);
-                //Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
                 listener.promptFoodStore(position);
             }
         });

@@ -37,14 +37,14 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         //create array list for shopping cart objects
         shoppingCart = (ArrayList<OrderItem>) getIntent().getSerializableExtra("OrderList");
+
+        //checks if cart is empty and sets layout
         if (shoppingCart.size() == 0) {
             setContentView(R.layout.empty_order);
         }
-        else {
+        else { //lists the cart items through recyclerview
             setContentView(R.layout.activity_order);
             grandTotalTextView = (TextView) findViewById(R.id.grandTotalTextView);
             initRecyclerView();
@@ -60,8 +60,6 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
 
     @Override
@@ -84,6 +82,7 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 
+    //calculates total for items in cart
     public double calculateGrandTotal(ArrayList<OrderItem> aShoppingCart) {
         double total = 0;
         for (OrderItem item : aShoppingCart) {
@@ -102,11 +101,14 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on
+            to be implemented later on in phase 2
         }*/
 
+        //logout button on kebab icon on top right corner of the app
+        //brings user to log in page
         if(item.getItemId() == R.id.logout_option){
             Intent signIn = new Intent(OrderActivity.this,MainActivity.class);
+            //clears backstack so user cannot click back to go back to main page of application after logging out
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
             finish();
@@ -115,8 +117,10 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         return super.onOptionsItemSelected(item);
     }
 
+    //to remove order item from cart and from layout
     @Override
     public void removeOrderItem(OrderItem item, int position) {
+        //"deduct" item quantity
         if (item.quantity > 1) {
             double oldSubtotal = item.subtotal;
             item.subtotal = oldSubtotal / item.quantity * (item.quantity - 1);
@@ -144,8 +148,8 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
 
     @Override
     public void onClick(View v) {
+        //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
         if(getConnectionType(OrderActivity.this)){
-            //errorMsgTextView.setText("You have no internet connection. Please try again when you have access to the internet");
             android.app.AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
             builder.setTitle("No Internet Connection")
                     .setCancelable(false)
@@ -159,6 +163,7 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
                     .show();
         }
         else{
+            //starts new activity
             Intent in = new Intent(this, ReceiptActivity.class);
             in.putExtra("orders", shoppingCart);
             startActivity(in);

@@ -94,8 +94,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     @Override
     public void onBackPressed() {
-        //prevents alertDialog from closing immediately when backbutton is pressed
-        //super.onBackPressed();
+        //prevents alertDialog from closing immediately when back button is pressed
         if (shoppingCart.size() > 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Warning! Clearing cart?")
@@ -214,7 +213,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         }
     }
 
-    //Food Stalls for FC
+    //Food Stalls for FC (Chicken Rice, Mala, Western, Jap, BKT, Ban Mian, Indo, Drinks Stall, Yogurt, MiniWok, Thai, etc.)
     public void initChickenRiceFC() {
         foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, R.drawable.chicken_rice1,0));
         foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, R.drawable.chicken_rice2,0));
@@ -302,7 +301,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,R.drawable.floss_bun,0));
     }
 
-    //Food stalls for MKP
+    //Food stalls for MKP (Chicken Rice, Drinks Stall, Jap Stall, Mala Stall)
     public void initChickenRiceMKP() {
         foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice Description", 3.5, R.drawable.chicken_rice1, 0));
         foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice Description", 3, R.drawable.chicken_rice2, 0));
@@ -328,7 +327,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         foodMenu.add(new FoodItem("Taiwanese Sausage", "One slice of Taiwan Sausage", 0.7, R.drawable.taiwan_sausage, 0));
     }
 
-    //Food stalls for Munch
+    //Food stalls for Munch (Japanese, Mala, Western)
     public void initJapMunch() {
         foodMenu.add(new FoodItem("Chawanmushi", "One bowl of Japanese Steam Egg", 0.8, R.drawable.chawanmushi, 0));
         foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Japanese Curry with Chicken Cutlet and Rice", 5.5, R.drawable.chicken_katsu_curry, 0));
@@ -354,8 +353,10 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         foodMenu.add(new FoodItem("Fish and Chips", "Fried Dory with Fries", 5, R.drawable.fish_and_chips, 0));
     }
 
+    //adds item to cart
     @Override
     public void promptAddItem(final int aPosition) {
+        //alert dialog to check with user
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add item to cart?")
                 .setCancelable(true)
@@ -392,7 +393,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     }
 
     public void getUpvote(final ArrayList<FoodItem> foodMenu, final menuItemAdapter aAdapter){
-        //final int[] upVotes = {0};
         for (final FoodItem food : foodMenu) {
             final String dishName = food.getFoodName().replaceAll("\\s+","");
             reference.addValueEventListener(new ValueEventListener() {
@@ -400,8 +400,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Long upvotes = (Long) dataSnapshot.child(dishName).getValue();
                     Log.d("snatchwork", "upvote here is " + String.valueOf(upvotes));
-                    //upvote[0] = Integer.parseInt(String.valueOf(upvotes));
                     food.setUpVotes(Integer.parseInt(String.valueOf(upvotes)));
+                    //sorts items based on UpvoteNo (sorted based on CompareTo in FoodItem class)
                     Collections.sort(foodMenu);
                     aAdapter.notifyDataSetChanged();
                 }
@@ -425,11 +425,14 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on
+            to be implemented later on in phase 2
         }*/
 
+        //logout button on kebab icon on top right corner of the app
+        //brings user to log in page
         if(item.getItemId() == R.id.logout_option){
             Intent signIn = new Intent(stallMenuActivity.this,MainActivity.class);
+            //clears backstack so user cannot click back to go back to main page of application after logging out
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
             finish();
@@ -438,6 +441,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         return super.onOptionsItemSelected(item);
     }
 
+    //to get the updated list of cart items from OrderActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
