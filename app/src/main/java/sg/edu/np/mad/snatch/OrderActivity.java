@@ -143,6 +143,9 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         TextView grandTotalTextView = (TextView) findViewById(R.id.grandTotalTextView);
         grandTotalTextView.setText("$" + String.format("%.2f", calculateGrandTotal(shoppingCart)));
         adapter.notifyDataSetChanged();
+        if (shoppingCart.size() == 0) {
+            setContentView(R.layout.empty_order);
+        }
     }
 
     @Override
