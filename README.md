@@ -43,6 +43,9 @@ He also made the login and sign up system. This was done by retriving and storin
 Rhys was also involved in debugging Firebase issues. When Firebase was not working on both Jamie's and Justin's emulator, Rhys was involved in trying to solve why Firebase was having connectivity issues on our side, and also helped to debug the upvote system and trying to sort the menu items by the number of upvotes.
 
 ## Appendix
+### Video Demo of snatch
+[Watch a video demo on how to use snatch!](https://drive.google.com/file/d/105g6VSNkDnVi_JQgz6x8lSOuuCmcnaFU/view?usp=sharing "snatch's Demo")
+
 ### Login
 ![Image of Login screen](/githubImages/login.png)\
 This is snatch's login screen. Upon entering a correct student ID and password in Firebase, it will then bring the user to the homescreen.
