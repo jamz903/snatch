@@ -75,6 +75,29 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderViewHolder> {
 
             }
         });
+
+        holder.parentLayoutOrder.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Remove all of current item from cart?")
+                        .setMessage("Would you like to remove all " + shoppingCart.get(position).foodName + " from your cart?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                listener.removeAllOrderItems(position);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
+                return true;
+            }
+        });
     }
 
     @Override

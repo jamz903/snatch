@@ -138,6 +138,14 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
     }
 
     @Override
+    public void removeAllOrderItems(int position) {
+        shoppingCart.remove(position);
+        TextView grandTotalTextView = (TextView) findViewById(R.id.grandTotalTextView);
+        grandTotalTextView.setText("$" + String.format("%.2f", calculateGrandTotal(shoppingCart)));
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
         returnIntent.putExtra("result", shoppingCart);
