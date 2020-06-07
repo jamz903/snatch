@@ -136,6 +136,9 @@ Upon successful removal of the selected item, the cart will be updated with the 
 ### Mass Remove Selected Item from Cart
 ![Image of System Prompting to Clear all of a Selected Item from Cart](/githubImages/remove_all_item.png)\
 If a user wishes to remove all of an item, he is able to long press the item from the cart. Upon doing so, the system will ask if the user wants to clear all of it from the cart (e.g. clear all Japanese Chicken Katsu from cart). If the user agrees, all of that particular item will be removed from the cart.
+\
+![Image of Cart after Mass Removal of Item](/githubImages/after_mass_remove.png)\
+Similarly, upon successful removal, the cart will update and display the correct grand total of the remaining items.
 
 ### Receipt
 ![Image of Receipt](/githubImages/receipt.png)\
