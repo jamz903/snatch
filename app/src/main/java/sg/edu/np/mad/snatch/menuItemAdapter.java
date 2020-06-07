@@ -35,8 +35,6 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     //creating required lists
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
-    //Button upvote;
-    //TextView numUpvotesTextView;
     DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
     //Assigning items

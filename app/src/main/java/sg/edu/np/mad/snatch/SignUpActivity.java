@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,10 +41,9 @@ public class SignUpActivity extends AppCompatActivity {
     EditText signUpPassword;
     Button cfmSignUp;
     DatabaseReference reff;
-    //Students student;
-    //MainActivity main = new MainActivity();
     final List<Students> studentsList = new ArrayList();
     public static String username;
+    TextInputLayout signUpLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpStuID = (EditText) findViewById(R.id.signUpStuID);
         signUpPassword = (EditText) findViewById(R.id.signUpPassword);
         cfmSignUp = (Button) findViewById(R.id.signUpPgBtn);
+        signUpLayout = (TextInputLayout) findViewById(R.id.signUpLayout);
         //set button colour to blue
         cfmSignUp.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
@@ -98,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 //if password field not filled in
                 else if (pw.length() == 0){
-                    signUpPassword.setError("Enter Password");
+                    signUpLayout.setError("Enter Password");
                 }
 
                 //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection

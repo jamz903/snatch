@@ -22,21 +22,30 @@
         android:text="Password:"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pwEditText"
+        app:layout_constraintStart_toStartOf="@+id/inputLayout"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText"
         app:layout_constraintVertical_bias="0.02" />
 
-    <EditText
-        android:id="@+id/pwEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passWTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/pwEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/emailEditText"
@@ -57,8 +66,8 @@
         android:text="Log In"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/pwEditText"
-        app:layout_constraintTop_toBottomOf="@+id/pwEditText"
+        app:layout_constraintStart_toStartOf="@+id/inputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/inputLayout"
         app:layout_constraintVertical_bias="0.15" />
 
     <Button
@@ -67,7 +76,7 @@
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/pwEditText"
+        app:layout_constraintEnd_toEndOf="@+id/inputLayout"
         app:layout_constraintTop_toTopOf="@+id/loginBtn" />
 
     <ImageView

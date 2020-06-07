@@ -34,6 +34,7 @@ import com.android.volley.RequestQueue;
 
 import com.android.volley.toolbox.Volley;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,12 +58,9 @@ public class MainActivity extends AppCompatActivity {
     Button signUpBtn;
     EditText emailEditText;
     EditText pwEditText;
+    TextInputLayout inputLayout;
 
     DatabaseReference reff;
-    //Students student;
-
-
-    //RequestQueue requestQueue;
     final List<Students> studentsList = new ArrayList();
 
 
@@ -73,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Created");
 
 
-        //Assign Buttons to variables
+        //Assign Buttons, Edit Text and Input Layout to variables
         loginBtn = (Button) findViewById(R.id.loginBtn);
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
+        inputLayout = (TextInputLayout) findViewById(R.id.inputLayout);
 
 
         //Reference for firebase to get studentList
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //if password field is not filled in
                 else if (pw.length() == 0){
-                    pwEditText.setError("Enter Password");
+                    inputLayout.setError("Enter Password");
                 }
 
                 else{
@@ -163,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
-                                pwEditText.setError("Incorrect Password");
+                                inputLayout.setError("Incorrect Password");
                             }
 
                         }
@@ -172,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!matchFound) {
                         Log.d(TAG, "Login Unsuccessful");
                         emailEditText.setError("Invalid Login Credentials");
-                        pwEditText.setError("Invalid Login Credentials");
+                        inputLayout.setError("Invalid Login Credentials");
 
                     }
                 }
