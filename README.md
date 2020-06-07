@@ -59,6 +59,10 @@ In the event that the user has entered in a wrong account, the app will display 
 ![Image of No Internet Connection](/githubImages/no_internet.png)\
 In addition, if the user has no internet connection, he will be unable to login and the app will inform the user using an AlertDialog.
 
+### View Password
+![Image of View Password](/githubImages/view_password.png)\
+Users can also click on the eye icon at the password field to see the characters that they have entered. This is implemeted both at the login activity as well as the sign up activity.
+
 ### Sign Up
 ![Image of Sign Up screen](/githubImages/sign_up.png)\
 This is the sign up page of snatch. Users are prompted for a username, their student ID as well as their password. Upon succesfully creating an account, it will then redirect users back to the login page to get them to login.
@@ -128,6 +132,10 @@ If the user wishes to remove an item, the user has to click on the item that he 
 \
 ![Image of Cart after Removal of Item](/githubImages/after_remove.png)\
 Upon successful removal of the selected item, the cart will be updated with the correct subtotal, grand total and quantity.
+
+### Mass Remove Selected Item from Cart
+![Image of System Prompting to Clear all of a Selected Item from Cart](/githubImages/remove_all_item.png)\
+If a user wishes to remove all of an item, he is able to long press the item from the cart. Upon doing so, the system will ask if the user wants to clear all of it from the cart (e.g. clear all Japanese Chicken Katsu from cart). If the user agrees, all of that particular item will be removed from the cart.
 
 ### Receipt
 ![Image of Receipt](/githubImages/receipt.png)\
