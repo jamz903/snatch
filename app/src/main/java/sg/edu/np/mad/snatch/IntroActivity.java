@@ -5,12 +5,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -26,6 +28,7 @@ public class IntroActivity extends AppCompatActivity {
     int position;
     Button btnGetStarted;
     Animation btnAnimation;
+    TextView skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,11 @@ public class IntroActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //find Views
-        nextButton =findViewById(R.id.nextButton);
-        tabIndicator = findViewById(R.id.tabIndicator);
-        btnGetStarted = findViewById(R.id.getStarted);
-        btnAnimation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
+        nextButton = (Button) findViewById(R.id.nextButton);
+        tabIndicator = (TabLayout) findViewById(R.id.tabIndicator);
+        btnGetStarted = (Button) findViewById(R.id.getStarted);
+        btnAnimation = (Animation) AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
+        skip = (TextView) findViewById(R.id.tv_skip);
 
         //fill item list (for screen)
         final List<ScreenItem> mList = new ArrayList<>();
@@ -97,11 +101,22 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        //get started button onclick listener, goes to home activity when this is clicked
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent in = new Intent(IntroActivity.this, HomescreenActivity.class);
                 startActivity(in);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        //skip button onclick listener, goes to last slide when clicked
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screenPager.setCurrentItem(mList.size());
             }
         });
 
