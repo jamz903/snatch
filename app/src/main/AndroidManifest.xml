@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_snatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReceiptActivity"
-            android:label="@string/Receipt"></activity>
+        <activity android:name=".IntroActivity"></activity>
+        <activity
+            android:name=".ReceiptActivity"
+            android:label="@string/Receipt" />
         <activity
             android:name=".OrderActivity"
             android:label="@string/Order" />
@@ -23,9 +25,10 @@
             android:name=".FoodClubActivity"
             android:label="@string/Stalls" />
         <activity android:name=".HomescreenActivity" />
-        <activity android:name=".SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FinishActivity"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".FinishActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -157,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
                                     Log.d(TAG, "Login successful");
                                     matchFound = true;
+                                    //Intent in = new Intent(MainActivity.this, IntroActivity.class);
                                     Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
-
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
                                 inputLayout.setError("Incorrect Password");

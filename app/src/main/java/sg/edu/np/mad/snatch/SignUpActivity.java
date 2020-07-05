@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
@@ -133,10 +134,12 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d(TAG, "Sign up successful");
                         if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
+                            String newUser = "true";
                             Students students = new Students(id.toUpperCase(),pw,un);
                             reff.child(id).setValue(students);
                             Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
                             addExistingMembers();
+                            Intent in = new Intent(SignUpActivity.this, MainActivity.class);
                         }
                         else{
                             signUpStuID.setError("Invalid Student ID");
