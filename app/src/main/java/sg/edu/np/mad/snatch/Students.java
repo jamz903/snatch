@@ -11,15 +11,16 @@ public class Students {
     private String StudentID;
     private String StudentPW;
     private String StudentName;
+    private String NewUser;
 
 
     private Students(){};
 
-    public Students(String ID, String PW, String NAME){
+    public Students(String ID, String PW, String NAME, String newUser){
         this.StudentID = ID;
         this.StudentPW = PW;
         this.StudentName = NAME;
-
+        this.NewUser = newUser;
     }
 
 
@@ -42,6 +43,14 @@ public class Students {
     public String getStudentName(){return  StudentName;}
 
     public void setStudentName(String studentName){StudentName = studentName;}
+
+    public String getNewUser(){
+        return NewUser;
+    }
+
+    public void setNewUser(String newUser){
+        NewUser = newUser;
+    }
 
     @Override
     public String toString(){

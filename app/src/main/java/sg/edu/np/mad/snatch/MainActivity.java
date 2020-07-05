@@ -157,8 +157,16 @@ public class MainActivity extends AppCompatActivity {
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
                                     Log.d(TAG, "Login successful");
                                     matchFound = true;
+                                    Intent in;
+                                    if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
+                                        in = new Intent(MainActivity.this, IntroActivity.class);
+                                        updateUserStatus(studentsList.get(i).getStudentID());
+                                    }
+                                    else{
+                                        in = new Intent(MainActivity.this, HomescreenActivity.class);
+                                    }
                                     //Intent in = new Intent(MainActivity.this, IntroActivity.class);
-                                    Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
+                                    //Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
@@ -232,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                 String a = null;
                 String b = null;
                 String c = null;
+                String d = null;
 
                 //iterate through database for all child items
                 while(StuList.hasNext()){
@@ -258,6 +267,9 @@ public class MainActivity extends AppCompatActivity {
                         else if(hashElement.getKey().equals("studentName")){
                             c = (String) details;
                         }
+                        else if(hashElement.getKey().equals("newUser")){
+                            d = (String) details;
+                        }
                         else{
                             Log.d(TAG,"Assignment failure");
                         }
@@ -265,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //make student obkect to add to list
-                        Students student = new Students(a,b,c);
+                        Students student = new Students(a,b,c,d);
                         //add student to student list
                         studentsList.add(student);
                         Log.d(TAG, " " + studentsList.get(0).getStudentID());
@@ -329,6 +341,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return result;
+    }
+
+    public void updateUserStatus(String studentID){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("newUser");
+        reference.setValue("no");
+        Log.d("Snatch","Updated User Status");
     }
 }
 

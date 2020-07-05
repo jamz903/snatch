@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_snatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".IntroActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ReceiptActivity"
             android:label="@string/Receipt" />
