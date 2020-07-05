@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
+    public static String FirebaseStudentID;
 
 
     @Override
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent in;
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
                                         in = new Intent(MainActivity.this, IntroActivity.class);
-                                        updateUserStatus(studentsList.get(i).getStudentID());
+                                        FirebaseStudentID = studentsList.get(i).getStudentID();
                                     }
                                     else{
                                         in = new Intent(MainActivity.this, HomescreenActivity.class);
@@ -341,12 +342,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return result;
-    }
-
-    public void updateUserStatus(String studentID){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("newUser");
-        reference.setValue("no");
-        Log.d("Snatch","Updated User Status");
     }
 }
 

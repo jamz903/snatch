@@ -5,7 +5,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,8 +15,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +34,8 @@ public class IntroActivity extends AppCompatActivity {
     Button btnGetStarted;
     Animation btnAnimation;
     TextView skip;
+    boolean doubleClickToExit = false;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.FirebaseStudentID).child("newUser");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +112,7 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateUserStatus(MainActivity.FirebaseStudentID);
                 Intent in = new Intent(IntroActivity.this, HomescreenActivity.class);
                 startActivity(in);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -130,5 +137,38 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setVisibility(View.VISIBLE);
         //button animation
         btnGetStarted.setAnimation(btnAnimation);
+    }
+
+    //prevents user from clicking back from homepage to go back to login activity
+    //when user clicks the back button twice, he is sent back to phone's homescreen
+    @Override
+    public void onBackPressed() {
+        //when back button is double clicked
+        if(doubleClickToExit){
+            super.onBackPressed();
+            Intent exit = new Intent(IntroActivity.this, FinishActivity.class);
+            //clears backstack
+            exit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(exit);
+        }
+
+        //on first click, set doubleClick to true
+        this.doubleClickToExit = true;
+        //to inform user after first click
+        Toast.makeText(this,"Click again to exit application", Toast.LENGTH_SHORT).show();
+
+        //to reset click after 2 seconds
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleClickToExit = false;
+            }
+        },2000);
+    }
+
+    public void updateUserStatus(String studentID){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("newUser");
+        reference.setValue("no");
+        Log.d("Snatch","Updated User Status");
     }
 }
