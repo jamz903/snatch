@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_snatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity"></activity>
+        <activity android:name=".FoodCourtVacancyActivity"></activity>
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ReceiptActivity"
             android:label="@string/Receipt" />
@@ -36,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyANOcfEnKUALhZCX4IQMYw1J_zsM3h3Yns"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

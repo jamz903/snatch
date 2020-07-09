@@ -104,6 +104,13 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
             to be implemented later on in phase 2
         }*/
 
+        //Food courts' vacancy button on kebab icon on top right corner of the app
+        //brings user to see the number of people in each food court
+        if (item.getItemId() == R.id.vacancy_option) {
+            Intent in = new Intent(this, FoodCourtVacancyActivity.class);
+            startActivity(in);
+        }
+
         //logout button on kebab icon on top right corner of the app
         //brings user to log in page
         if(item.getItemId() == R.id.logout_option){
