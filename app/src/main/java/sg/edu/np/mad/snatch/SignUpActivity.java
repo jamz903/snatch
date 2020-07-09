@@ -44,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
     public static String username;
+    public static int userpoints;
     TextInputLayout signUpLayout;
 
     @Override
@@ -134,8 +135,9 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d(TAG, "Sign up successful");
                         if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
+
                             String newUser = "true";
-                            Students students = new Students(id.toUpperCase(),pw,un);
+                            Students students = new Students(id.toUpperCase(),pw,un,0);
                             reff.child(id).setValue(students);
                             Toast.makeText(getApplicationContext(), "New Account registered", Toast.LENGTH_SHORT).show();
                             addExistingMembers();
@@ -170,6 +172,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String a = null;
                 String b = null;
                 String c = null;
+                int d = 0;
 
                 //iterate through database for all child items
                 while(StuList.hasNext()){
@@ -195,6 +198,9 @@ public class SignUpActivity extends AppCompatActivity {
                         else if(hashElement.getKey().equals("studentName")){
                             c = (String) details;
                         }
+                        else if(hashElement.getKey().equals("studentPOINTS")){
+                            d = Integer.parseInt(details);
+                        }
                         else{
                             Log.d(TAG,"Assignment failure");
                         }
@@ -202,7 +208,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                         //make student obkect to add to list
-                        Students student = new Students(a,b,c);
+                        Students student = new Students(a,b,c,d);
                         //add student to student list
                         studentsList.add(student);
                         Log.d(TAG, " " + studentsList.get(0).getStudentID());

@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="20dp"
+                app:animateOnBoundary="false"
                 app:fillColor="#FFFFFFFF"
                 app:layout_constraintBottom_toTopOf="@+id/welcomeMessage"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +35,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:pageColor="#FFFFFFFF"
+                app:pageTransformInterval="2000"
                 app:radius="3dp"
                 app:slideInterval="7000"
                 app:strokeColor="#FFFFFFFF"
-                app:strokeWidth="1dp"
-                app:animateOnBoundary="false"
-                app:pageTransformInterval="2000"/>
+                app:strokeWidth="1dp" />
 
             <Spinner
                 android:id="@+id/dropdownList"
@@ -78,6 +78,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/welcomeMessage"
                 app:layout_constraintVertical_bias="0.055" />
+
+            <TextView
+                android:id="@+id/PointsTextView"
+                android:layout_width="186dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="36dp"
+                android:text="Points:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dropdownList" />
+
+            <Button
+                android:id="@+id/RedeemPointsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="72dp"
+                android:text="Redeem points"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.87"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.681" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

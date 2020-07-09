@@ -11,14 +11,16 @@ public class Students {
     private String StudentID;
     private String StudentPW;
     private String StudentName;
+    private int StudentPoints;
 
 
     private Students(){};
 
-    public Students(String ID, String PW, String NAME){
+    public Students(String ID, String PW, String NAME, int POINTS){
         this.StudentID = ID;
         this.StudentPW = PW;
         this.StudentName = NAME;
+        this.StudentPoints = POINTS;
 
     }
 
@@ -42,6 +44,10 @@ public class Students {
     public String getStudentName(){return  StudentName;}
 
     public void setStudentName(String studentName){StudentName = studentName;}
+
+    public  int getStudentPoints(){return  StudentPoints;}
+
+    public void setStudentPoints(int studentPoints){StudentPoints = studentPoints;}
 
     @Override
     public String toString(){

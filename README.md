@@ -16,7 +16,8 @@ Upon customer logging in, she also implemented a way to prevent users from going
 
 She also set up the upvoting system of the food items in Firebase. She changed the hardcoded code and made it reusable for all the food items. She also came up with the initial method to get the number of upvotes of the food items from Firebase. Other than setting up the upvote system within Firebase, she also played a part in trying to debug errors regarding the sorting of food items in the menu by their number of upvotes.
 
-Besides the upvoting system, Jamie also implemented the kebab icon and logout feature in the application. She researched on how to implement the logout system and also make it permanent at the header section on all relevant pages.
+Besides the upvoting system, Jamie also im
+plemented the kebab icon and logout feature in the application. She researched on how to implement the logout system and also make it permanent at the header section on all relevant pages.
 
 In addition, she also implemented validation regarding the need for internet connection due to our application using Firebase. In the event that the user is not connected to the Internet, it would inform users to connect to Internet before allowing them to login or sign up, inform users when they want to upvote a dish, and also prevent them from ordering any dishes when they do not have an internet connection.
 

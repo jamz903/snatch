@@ -28,6 +28,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     boolean doubleClickToExit = false;
     TextView welcomeMessage;
     private int[] mImages = new int[]{R.drawable.steak, R.drawable.fastfood, R.drawable.desert};
+    TextView pointsTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +43,10 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         String message = "Welcome, " + SignUpActivity.username + "!";
         welcomeMessage.setText(message);
+
+        //show current points
+        pointsTextView = (TextView) findViewById(R.id.PointsTextView);
+        pointsTextView.setText("Points: " + MainActivity.userpoints);
 
         //sets carousel view
         CarouselView carouselView = findViewById(R.id.carousel);
