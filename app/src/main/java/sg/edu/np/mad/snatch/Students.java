@@ -12,15 +12,17 @@ public class Students {
     private String StudentPW;
     private String StudentName;
     private String NewUser;
+    private int StudentPoints;
 
 
     private Students(){};
 
-    public Students(String ID, String PW, String NAME, String newUser){
+    public Students(String ID, String PW, String NAME, String newUser, int POINTS){
         this.StudentID = ID;
         this.StudentPW = PW;
         this.StudentName = NAME;
         this.NewUser = newUser;
+        this.StudentPoints = POINTS;
     }
 
 
@@ -50,6 +52,14 @@ public class Students {
 
     public void setNewUser(String newUser){
         NewUser = newUser;
+    }
+
+    public int getStudentPoints() {
+        return StudentPoints;
+    }
+
+    public void setStudentPoints(int studentPoints) {
+        StudentPoints = studentPoints;
     }
 
     @Override

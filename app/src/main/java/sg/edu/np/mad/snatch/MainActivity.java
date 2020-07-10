@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
     public static String FirebaseStudentID;
+    public static int userpoints;
+    public static String usingID;
 
 
     @Override
@@ -162,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
                                         in = new Intent(MainActivity.this, IntroActivity.class);
                                         FirebaseStudentID = studentsList.get(i).getStudentID();
+                                        userpoints = studentsList.get(i).getStudentPoints();
+                                        usingID = studentsList.get(i).getStudentID();
                                     }
                                     else{
                                         in = new Intent(MainActivity.this, HomescreenActivity.class);
@@ -242,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 String b = null;
                 String c = null;
                 String d = null;
+                int e = 0;
 
                 //iterate through database for all child items
                 while(StuList.hasNext()){
@@ -256,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                         Map.Entry hashElement = (Map.Entry)IDLIST.next();
 
                         Log.d(TAG,"map key s" + hashElement);
-                        String details = (((String)hashElement.getValue()));
+                        String details = (((String)hashElement.getValue().toString()));
 
                         //check if item is an ID or PW before adding to list
                         if (hashElement.getKey().equals("studentID")){
@@ -271,6 +276,9 @@ public class MainActivity extends AppCompatActivity {
                         else if(hashElement.getKey().equals("newUser")){
                             d = (String) details;
                         }
+                        else if(hashElement.getKey().equals("studentPOINTS")){
+                            e = Integer.parseInt(details);
+                        }
                         else{
                             Log.d(TAG,"Assignment failure");
                         }
@@ -278,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         //make student obkect to add to list
-                        Students student = new Students(a,b,c,d);
+                        Students student = new Students(a,b,c,d,e);
                         //add student to student list
                         studentsList.add(student);
                         Log.d(TAG, " " + studentsList.get(0).getStudentID());

@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,6 +62,12 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
 
         okBtn = findViewById(R.id.okBtn);
         okBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
+
+        //calculate and add points to database
+        DatabaseReference updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID);
+
+        int value = (int)(calculateGrandTotal(orderList) * 100);
+        updatePoints.child("studentPOINTS").setValue(MainActivity.userpoints + (value));
 
     }
 
