@@ -35,7 +35,6 @@ public class IntroActivity extends AppCompatActivity {
     Animation btnAnimation;
     TextView skip;
     boolean doubleClickToExit = false;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.FirebaseStudentID).child("newUser");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
