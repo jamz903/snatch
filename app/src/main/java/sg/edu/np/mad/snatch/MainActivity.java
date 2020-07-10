@@ -51,7 +51,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    //test
     //TAG and variables
     private static final String TAG = "snatch";
     Button loginBtn;
