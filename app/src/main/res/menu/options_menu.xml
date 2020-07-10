@@ -18,6 +18,10 @@
     <item
         android:id="@+id/logout_option"
         android:title="Logout"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/profile_option"
+        android:title="Profile"
         app:showAsAction="never"/>
     <item
         android:id="@+id/help_option"
