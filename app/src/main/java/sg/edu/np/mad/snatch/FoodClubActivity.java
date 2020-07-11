@@ -8,11 +8,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -24,6 +32,10 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
     ArrayList<String> storeDesc = new ArrayList<>(); //stores store description
     String foodCourt;
     Intent receivingEnd;
+    //Help pop-up dialog
+    Dialog helpDialog;
+    ImageView close;
+    Button getHelpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +184,13 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
 
         //logout button on kebab icon on top right corner of the app
         //brings user to log in page
-        if(item.getItemId() == R.id.logout_option){
+        else if(item.getItemId() == R.id.logout_option){
+            //shared preferences
+            SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("remember", "false");
+            editor.apply();
+
             Intent signIn = new Intent(FoodClubActivity.this,MainActivity.class);
             //clears backstack so user cannot click back to go back to main page of application after logging out
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -180,12 +198,37 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
             finish();
         }
 
-
-
-
+        else if(item.getItemId() == R.id.help_option){
+            helpDialog = new Dialog(this);
+            ShowPopUp();
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void ShowPopUp(){
+        helpDialog.setContentView(R.layout.help_layout);
+        close = (ImageView) helpDialog.findViewById(R.id.close);
+        getHelpButton = (Button) helpDialog.findViewById(R.id.getHelpButton);
 
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpDialog.dismiss();
+            }
+        });
+
+        getHelpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //todo: create a google form to link
+                //sends user to google form to give feedback
+                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.sg"));
+                startActivity(in);
+            }
+        });
+        //sets the background to 'blur' so that the pop up dialog is clearer
+        helpDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        helpDialog.show();
+    }
 }

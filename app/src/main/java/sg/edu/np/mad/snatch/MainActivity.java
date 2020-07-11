@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -25,6 +26,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     EditText emailEditText;
     EditText pwEditText;
     TextInputLayout inputLayout;
+    CheckBox rememberCheckBox;
+    String checked;
 
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         pwEditText = (EditText) findViewById(R.id.pwEditText);
         inputLayout = (TextInputLayout) findViewById(R.id.inputLayout);
-
+        rememberCheckBox = (CheckBox) findViewById(R.id.rememberCheckBox);
 
         //Reference for firebase to get studentList
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
@@ -170,11 +175,25 @@ public class MainActivity extends AppCompatActivity {
                                     else{
                                         in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     }
-                                    //Intent in = new Intent(MainActivity.this, IntroActivity.class);
-                                    //Intent in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
+
+                                    //allows user to stay logged in
+                                    if  (checked.equals("true")){
+                                        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("remember", "true");
+                                        editor.apply();
+                                        Log.d(TAG, "Remember Me Checked");
+                                    }
+                                    else{
+                                        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("remember", "false");
+                                        editor.apply();
+                                        Log.d(TAG, "Remember Me Not Checked");
+                                    }
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
                                 inputLayout.setError("Incorrect Password");
@@ -222,6 +241,19 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(in);
                 }
 
+            }
+        });
+
+        //allows user to stay logged in
+        rememberCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if  (buttonView.isChecked()){
+                    checked = "true";
+                }
+                else if (!buttonView.isChecked()){
+                    checked = "false";
+                }
             }
         });
 

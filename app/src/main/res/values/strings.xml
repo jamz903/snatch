@@ -13,4 +13,6 @@
     <string name="Menu">Menu</string>
     <string name="Order">Cart</string>
     <string name="Receipt">Receipt</string>
+
+    <string name="help_message">Facing any issues or would like to give us feedback? Feel free to do so through the form linked below! We will get back to you as soon as possible.</string>
 </resources>
