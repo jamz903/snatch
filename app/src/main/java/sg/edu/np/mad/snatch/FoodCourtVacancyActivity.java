@@ -77,11 +77,9 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         LatLng poolsideLocation = new LatLng(1.335179, 103.77629);
         LatLng munchLocation = new LatLng(1.331992, 103.776518);
 
-        /*googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MainActivity.this));*/
-
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(makanPlaceLocation, 15);
         googleMap.addMarker(new MarkerOptions().position(makanPlaceLocation).title("Makan Place"));
-        googleMap.addMarker(new MarkerOptions().position(foodClubLocation).title("Food Club").snippet("50 users here!")/*.icon(BitmapDescriptorFactory.fromBitmap(smallMarker))*/);
+        googleMap.addMarker(new MarkerOptions().position(foodClubLocation).title("Food Club"));
         googleMap.addMarker(new MarkerOptions().position(poolsideLocation).title("Poolside"));
         googleMap.addMarker(new MarkerOptions().position(munchLocation).title("Munch"));
         googleMap.animateCamera(cameraUpdate);
@@ -91,9 +89,19 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
             public boolean onMarkerClick(final Marker marker) {
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15);
                 googleMap.animateCamera(cameraUpdate);
-                marker.setSnippet(GetNumPpl(marker.getTitle()) + " users currently!");
+                /*marker.setSnippet(GetNumPpl(marker.getTitle()) + " users currently!");*/
+                googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(FoodCourtVacancyActivity.this, marker.getTitle()));
                 marker.showInfoWindow();
                 return true;
+            }
+        });
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent in = new Intent(FoodCourtVacancyActivity.this, Pop.class);
+                in.putExtra("FoodCourt", marker.getTitle());
+                startActivity(in);
             }
         });
     }
@@ -146,7 +154,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         mMapView.onLowMemory();
     }
 
-    public int GetNumPpl(String foodCourt) {
+    /*public int GetNumPpl(String foodCourt) {
         StrictMode.ThreadPolicy policy = new
         StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -194,7 +202,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
             e.printStackTrace();
         }
         return numOfPpl;
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

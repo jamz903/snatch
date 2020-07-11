@@ -132,235 +132,235 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
     public void determineFoodCourt(String aFoodCourtChoice, String aFoodStallChoice) {
         if (aFoodCourtChoice.equals("FoodClub")) {
-            determineFoodStallFoodClub(aFoodStallChoice);
+            determineFoodStallFoodClub(aFoodCourtChoice, aFoodStallChoice);
         }
         else if(aFoodCourtChoice.equals("MKP")) {
-            determineFoodStallMKP(aFoodStallChoice);
+            determineFoodStallMKP(aFoodCourtChoice, aFoodStallChoice);
         }
         else if(aFoodCourtChoice.equals("Poolside")) {
-            determineFoodStallPoolside(aFoodStallChoice);
+            determineFoodStallPoolside(aFoodCourtChoice, aFoodStallChoice);
         }
         else if(aFoodCourtChoice.equals("Munch")) {
-            determineFoodStallMunch(aFoodStallChoice);
+            determineFoodStallMunch(aFoodCourtChoice, aFoodStallChoice);
         }
 
     }
 
-    public void determineFoodStallMKP(String aFoodStallChoice) {
+    public void determineFoodStallMKP(String aFoodCourt, String aFoodStallChoice) {
         if (aFoodStallChoice.equals("Chicken Rice")) {
-            initChickenRiceMKP();
+            initChickenRiceMKP(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Drinks Stall")) {
-            initDrinksStallMKP();
+            initDrinksStallMKP(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Japanese Food")) {
-            initJapStallMKP();
+            initJapStallMKP(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Mala")) {
-            initMalaMKP();
+            initMalaMKP(aFoodCourt, aFoodStallChoice);
         }
     }
 
-    public void determineFoodStallPoolside(String aFoodStallChoice) {
+    public void determineFoodStallPoolside(String aFoodCourt, String aFoodStallChoice) {
         if (aFoodStallChoice.equals("Henry's Western")) {
-            initHenrysWesternPoolside();
+            initHenrysWesternPoolside(aFoodCourt, aFoodStallChoice);
         }
     }
 
-    public void determineFoodStallMunch(String aFoodStallChoice) {
+    public void determineFoodStallMunch(String aFoodCourt, String aFoodStallChoice) {
         if (aFoodStallChoice.equals("Japanese")) {
-            initJapMunch();
+            initJapMunch(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Mala (Halal)")) {
-            initMalaMunch();
+            initMalaMunch(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Western")) {
-            initWesternMunch();
+            initWesternMunch(aFoodCourt, aFoodStallChoice);
         }
     }
 
     //incomplete, need continue for remaining stalls
     //Check for each singular stall in food court
-    public void determineFoodStallFoodClub( String aFoodStallChoice) {
+    public void determineFoodStallFoodClub(String aFoodCourt, String aFoodStallChoice) {
         if (aFoodStallChoice.equals("Chicken Rice")) {
-            initChickenRiceFC();
+            initChickenRiceFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Mala")) {
-            initMalaFC();
+            initMalaFC(aFoodCourt, aFoodStallChoice);
         }
         else if(aFoodStallChoice.equals("Western")) {
-            initWesternFC();
+            initWesternFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Japanese Food")) {
-            initJapFC();
+            initJapFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Bak Kut Teh")) {
-            initBKTFC();
+            initBKTFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Ban Mian")) {
-            initBanMianFC();
+            initBanMianFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Indonesian")) {
-            initIndoFC();
+            initIndoFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Drinks Stall")) {
-            initDrinksFC();
+            initDrinksFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Yogurt")) {
-            initYogurtFC();
+            initYogurtFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Mini Wok")) {
-            initMiniWokFC();
+            initMiniWokFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Thai")) {
-            initThaiFC();
+            initThaiFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("Economical Rice")) {
-            initEconRiceFC();
+            initEconRiceFC(aFoodCourt, aFoodStallChoice);
         }
         else if (aFoodStallChoice.equals("FC Bakery")) {
-            initBakeryFC();
+            initBakeryFC(aFoodCourt, aFoodStallChoice);
         }
     }
 
     //Food Stalls for FC (Chicken Rice, Mala, Western, Jap, BKT, Ban Mian, Indo, Drinks Stall, Yogurt, MiniWok, Thai, etc.)
-    public void initChickenRiceFC() {
-        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, R.drawable.chicken_rice1,0));
-        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, R.drawable.chicken_rice2,0));
-        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5, R.drawable.chicken_rice3, 0));
+    public void initChickenRiceFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice description", 3, R.drawable.chicken_rice1,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice description", 2.5, R.drawable.chicken_rice2,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice description", 2.5, R.drawable.chicken_rice3, 0, aFoodCourt, aFoodStall));
     }
 
 
-    public void initMalaFC() {
-        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1, R.drawable.sausage,0));
-        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1, R.drawable.taiwan_sausage,0));
-        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5, R.drawable.rice,0));
-        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5, R.drawable.noodle,0));
+    public void initMalaFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Sausage", "1 stick of hotdog", 1, R.drawable.sausage,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Taiwan Sausage", "1 stick of Taiwan Sausage", 1, R.drawable.taiwan_sausage,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Rice", "1 bowl of rice", 0.5, R.drawable.rice,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Noodles", "1 packet of Instant Noodles", 1.5, R.drawable.noodle,0, aFoodCourt, aFoodStall));
     }
 
-    public void initWesternFC() {
-        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5, R.drawable.chicken_chop,0));
-        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6, R.drawable.fish_and_chips,0));
-        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3, R.drawable.cheese_fries,0));
+    public void initWesternFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Chicken Chop", "Chicken Chop with Mushroom Sauce", 5, R.drawable.chicken_chop,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fish and Chips with tartar sauce", 6, R.drawable.fish_and_chips,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries with Mayo", 3, R.drawable.cheese_fries,0, aFoodCourt, aFoodStall));
     }
 
 
-    public void initJapFC() {
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,0));
-        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, 0));
-        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0));
-        foodMenu.add(new FoodItem("Gyoza (5 pcs)", "A plate of Fried Gyoza", 2, R.drawable.gyoza, 0));
-        foodMenu.add(new FoodItem("Ramen Bowl", "A bowl of Ramen with Cha Shu", 5, R.drawable.ramen, 0));
-        foodMenu.add(new FoodItem("Sushi Platter", "A plate of Sushi", 4, R.drawable.sushi_platter, 0));
-        foodMenu.add(new FoodItem("Takoyaki (3pcs)", "Takoyaki", 2.1, R.drawable.takoyaki, 0));
+    public void initJapFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Chicken Katsu served with Japanese Curry and Rice", 4.5, R.drawable.chicken_katsu_curry,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Japanese Rice", 4, R.drawable.salmon_don, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Chawanmushi", "Bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Gyoza (5 pcs)", "A plate of Fried Gyoza", 2, R.drawable.gyoza, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Ramen Bowl", "A bowl of Ramen with Cha Shu", 5, R.drawable.ramen, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Sushi Platter", "A plate of Sushi", 4, R.drawable.sushi_platter, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Takoyaki (3pcs)", "Takoyaki", 2.1, R.drawable.takoyaki, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initBKTFC() {
-        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4, R.drawable.bakkutteh,0));
-        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5, R.drawable.youtiao, 0));
-        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4, R.drawable.vinegar_braised_pork,0));
+    public void initBKTFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Bak Kut Teh", "1 bowl of Bak Kut Teh with Rice", 4, R.drawable.bakkutteh,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("You Tiao (5pcs)", "5 sticks of You Tiao", 1.5, R.drawable.youtiao, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Vinegar Braised Pork", "Braised Pork in Vinegar sauce", 4, R.drawable.vinegar_braised_pork,0, aFoodCourt, aFoodStall));
     }
 
-    public void initBanMianFC() {
-        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5, R.drawable.sliced_fish_noodle_soup,0));
-        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4, R.drawable.banmian,0));
-        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5, R.drawable.fish_soup,0));
+    public void initBanMianFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Sliced Fish Noodles Soup", "Fish slices with Noodles", 5, R.drawable.sliced_fish_noodle_soup,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Ban Mian", "Ban Mian with egg", 4, R.drawable.banmian,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Fish Soup", "Sliced Fish in Soup", 3.5, R.drawable.fish_soup,0, aFoodCourt, aFoodStall));
     }
 
-    public void initIndoFC() {
-        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5, R.drawable.ayam_penyet,0));
-        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3, R.drawable.mee_soto,0));
-        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1, R.drawable.papadom,0));
+    public void initIndoFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Ayam Penyet", "Fried Chicken with Rice", 3.5, R.drawable.ayam_penyet,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Mee Soto", "Noodles in Chicken broth", 3, R.drawable.mee_soto,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Papadoms (3pcs)", "3 pieces of crispy papadoms", 0.1, R.drawable.papadom,0, aFoodCourt, aFoodStall));
     }
 
-    public void initDrinksFC() {
-        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5, R.drawable.iced_milo,0));
-        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7, R.drawable.hot_milo,0));
-        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7, R.drawable.hot_coffee,0));
-        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5, R.drawable.iced_lemon_tea,0));
+    public void initDrinksFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Iced Milo", "Cup of Iced Milo", 1.5, R.drawable.iced_milo,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Hot Milo", "Cup of Hot Milo", 0.7, R.drawable.hot_milo,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Hot Coffee", "Cup of Hot Coffee", 0.7, R.drawable.hot_coffee,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Iced Lemon Tea", "Cup of Iced Lemon Tea", 1.5, R.drawable.iced_lemon_tea,0, aFoodCourt, aFoodStall));
     }
 
-    public void initYogurtFC() {
-        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9, R.drawable.yogurt,0));
-        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9, R.drawable.yogurt,0));
-        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9, R.drawable.yogurt,0));
+    public void initYogurtFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Yogurt (Small)", "Small cup of Yogurt", 3.9, R.drawable.yogurt,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Yogurt (Med)", "Medium cup of Yogurt", 4.9, R.drawable.yogurt,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Yogurt (Large)", "Large cup of Yogurt", 5.9, R.drawable.yogurt,0, aFoodCourt, aFoodStall));
     }
 
-    public void initMiniWokFC() {
-        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4, R.drawable.gongbao_chicken,0));
-        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4, R.drawable.horfun,0));
-        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5, R.drawable.salted_egg_rice,0));
+    public void initMiniWokFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Gong Bao Chicken Rice", "Diced chicken cubes in Gong Bao sauce", 4, R.drawable.gongbao_chicken,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Hor Fun", "Sliced Fish Hor Fun with Prawns", 4, R.drawable.horfun,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Salted Egg Rice", "Salted Egg Chicken with Rice", 3.5, R.drawable.salted_egg_rice,0, aFoodCourt, aFoodStall));
     }
 
-    public void initThaiFC() {
-        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5, R.drawable.basil_pork_rice,0));
-        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5, R.drawable.padthai,0));
-        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3, R.drawable.mangosalad,0));
+    public void initThaiFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Basil Pork Rice", "Basil Pork Rice with Egg (Spicy)", 5, R.drawable.basil_pork_rice,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Pad Thai", "Pad Thai Noodles with Prawns", 4.5, R.drawable.padthai,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Mango Salad", "Green Mango Salad", 3, R.drawable.mangosalad,0, aFoodCourt, aFoodStall));
     }
 
-    public void initEconRiceFC() {
-        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5, R.drawable.rice,0));
-        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7, R.drawable.beehoon,0));
-        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8, R.drawable.sweet_sour_pork,0));
-        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5, R.drawable.fried_egg,0));
+    public void initEconRiceFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Rice", "1 bowl of Rice", 0.5, R.drawable.rice,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Bee Hoon", "1 bowl of Bee Hoon", 0.7, R.drawable.beehoon,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Sweet and Sour Pork", "1 portion of Sweet and Sour Pork", 0.8, R.drawable.sweet_sour_pork,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Fried Egg", "1 slice of Fried Egg", 0.5, R.drawable.fried_egg,0, aFoodCourt, aFoodStall));
     }
 
-    public void initBakeryFC() {
-        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1, R.drawable.hotdog_bun,0));
-        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8, R.drawable.cream_puff,0));
-        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,R.drawable.floss_bun,0));
+    public void initBakeryFC(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Hot Dog Bun", "Sausage in a Bun", 1, R.drawable.hotdog_bun,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Cream Puff (1pc)", "1 piece of Cream Puff", 0.8, R.drawable.cream_puff,0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Floss Bun", "Chicken Floss Bun", 1,R.drawable.floss_bun,0, aFoodCourt, aFoodStall));
     }
 
     //Food stalls for MKP (Chicken Rice, Drinks Stall, Jap Stall, Mala Stall)
-    public void initChickenRiceMKP() {
-        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice Description", 3.5, R.drawable.chicken_rice1, 0));
-        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice Description", 3, R.drawable.chicken_rice2, 0));
-        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice Description", 3, R.drawable.chicken_rice3, 0));
+    public void initChickenRiceMKP(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Lemon Chicken Rice", "Lemon Chicken Rice Description", 3.5, R.drawable.chicken_rice1, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Roasted Chicken Rice", "Roasted Chicken Rice Description", 3, R.drawable.chicken_rice2, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Steam Chicken Rice", "Steam Chicken Rice Description", 3, R.drawable.chicken_rice3, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initDrinksStallMKP() {
-        foodMenu.add(new FoodItem("Bandung", "Iced Bandung Drink", 1.3, R.drawable.bandung, 0));
-        foodMenu.add(new FoodItem("Hot Milo", "One cup of Hot Milo", 1, R.drawable.hot_milo, 0));
-        foodMenu.add(new FoodItem("Iced Milo", "One cup of Iced Milo", 1.5, R.drawable.iced_milo, 0));
+    public void initDrinksStallMKP(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Bandung", "Iced Bandung Drink", 1.3, R.drawable.bandung, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Hot Milo", "One cup of Hot Milo", 1, R.drawable.hot_milo, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Iced Milo", "One cup of Iced Milo", 1.5, R.drawable.iced_milo, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initJapStallMKP() {
-        foodMenu.add(new FoodItem("Chawanmushi", "One bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0));
-        foodMenu.add(new FoodItem("Chicken Fuyong", "Chicken Fuyong Omelette", 3.3, R.drawable.chicken_fuyong, 0));
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Japanese Curry with Chicken Cutlet", 5, R.drawable.chicken_katsu_curry, 0));
+    public void initJapStallMKP(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Chawanmushi", "One bowl of Chawanmushi", 1, R.drawable.chawanmushi, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Chicken Fuyong", "Chicken Fuyong Omelette", 3.3, R.drawable.chicken_fuyong, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Japanese Curry with Chicken Cutlet", 5, R.drawable.chicken_katsu_curry, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initMalaMKP() {
-        foodMenu.add(new FoodItem("Noodles", "One packet of Instant Noodles", 1, R.drawable.noodle, 0));
-        foodMenu.add(new FoodItem("Rice", "One bowl of Rice", 0.5, R.drawable.rice, 0));
-        foodMenu.add(new FoodItem("Sausage", "One slice of Hotdog", 0.5, R.drawable.sausage, 0));
-        foodMenu.add(new FoodItem("Taiwanese Sausage", "One slice of Taiwan Sausage", 0.7, R.drawable.taiwan_sausage, 0));
+    public void initMalaMKP(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Noodles", "One packet of Instant Noodles", 1, R.drawable.noodle, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Rice", "One bowl of Rice", 0.5, R.drawable.rice, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Sausage", "One slice of Hotdog", 0.5, R.drawable.sausage, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Taiwanese Sausage", "One slice of Taiwan Sausage", 0.7, R.drawable.taiwan_sausage, 0, aFoodCourt, aFoodStall));
     }
 
     //Food stalls for Munch (Japanese, Mala, Western)
-    public void initJapMunch() {
-        foodMenu.add(new FoodItem("Chawanmushi", "One bowl of Japanese Steam Egg", 0.8, R.drawable.chawanmushi, 0));
-        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Japanese Curry with Chicken Cutlet and Rice", 5.5, R.drawable.chicken_katsu_curry, 0));
-        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Egg and Rice", 6, R.drawable.salmon_don, 0));
+    public void initJapMunch(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Chawanmushi", "One bowl of Japanese Steam Egg", 0.8, R.drawable.chawanmushi, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Japanese Curry Chicken Katsu", "Japanese Curry with Chicken Cutlet and Rice", 5.5, R.drawable.chicken_katsu_curry, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Salmon Don", "Salmon with Egg and Rice", 6, R.drawable.salmon_don, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initMalaMunch() {
-        foodMenu.add(new FoodItem("Chicken", "100g of chicken", 2, R.drawable.chicken, 0));
-        foodMenu.add(new FoodItem("Noodles", "One packet of Instant Noodles", 1.5, R.drawable.noodle, 0));
-        foodMenu.add(new FoodItem("Rice", "One bowl of Rice", 0.5, R.drawable.rice, 0));
+    public void initMalaMunch(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Chicken", "100g of chicken", 2, R.drawable.chicken, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Noodles", "One packet of Instant Noodles", 1.5, R.drawable.noodle, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Rice", "One bowl of Rice", 0.5, R.drawable.rice, 0, aFoodCourt, aFoodStall));
     }
 
-    public void initWesternMunch() {
-        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries", 2, R.drawable.cheese_fries, 0));
-        foodMenu.add(new FoodItem("Chicken Chop", "Grilled Chicken Chop", 4, R.drawable.chicken_chop, 0));
-        foodMenu.add(new FoodItem("Fish and Chips", "Fried Dory with Fries", 5, R.drawable.fish_and_chips, 0));
+    public void initWesternMunch(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries", 2, R.drawable.cheese_fries, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Chicken Chop", "Grilled Chicken Chop", 4, R.drawable.chicken_chop, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fried Dory with Fries", 5, R.drawable.fish_and_chips, 0, aFoodCourt, aFoodStall));
     }
 
     //Food stalls for Poolside
-    public void initHenrysWesternPoolside() {
-        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries", 2, R.drawable.cheese_fries, 0));
-        foodMenu.add(new FoodItem("Chicken Chop", "Grilled Chicken Chop", 4, R.drawable.chicken_chop, 0));
-        foodMenu.add(new FoodItem("Fish and Chips", "Fried Dory with Fries", 5, R.drawable.fish_and_chips, 0));
+    public void initHenrysWesternPoolside(String aFoodCourt, String aFoodStall) {
+        foodMenu.add(new FoodItem("Cheezy Fries", "Cheese Fries", 2, R.drawable.cheese_fries, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Chicken Chop", "Grilled Chicken Chop", 4, R.drawable.chicken_chop, 0, aFoodCourt, aFoodStall));
+        foodMenu.add(new FoodItem("Fish and Chips", "Fried Dory with Fries", 5, R.drawable.fish_and_chips, 0, aFoodCourt, aFoodStall));
     }
 
     //adds item to cart
