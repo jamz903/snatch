@@ -500,7 +500,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
             public void onClick(View v) {
                 //todo: create a google form to link
                 //sends user to google form to give feedback
-                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.sg"));
+                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });

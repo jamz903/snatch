@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -210,7 +211,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             public void onClick(View v) {
                 //todo: create a google form to link
                 //sends user to google form to give feedback
-                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com.sg"));
+                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });
