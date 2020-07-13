@@ -170,23 +170,31 @@ public class MainActivity extends AppCompatActivity {
                                     userpoints = studentsList.get(i).getStudentPoints();
                                     usingID = studentsList.get(i).getStudentID();
                                     matchFound = true;
-                                    if (checked.equals("true")){
+                                    Intent in;
+                                    if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
+                                        in = new Intent(MainActivity.this, IntroActivity.class);
+                                        FirebaseStudentID = studentsList.get(i).getStudentID();
+                                    }
+                                    else{
+                                        in = new Intent(MainActivity.this, HomescreenActivity.class);
+                                    }
+                                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    startActivity(in);
+                                    SignUpActivity.username = studentsList.get(i).getStudentName();
+                                    if (checked.equals("true")) {
                                         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putString("remember", "true");
                                         editor.putString("studentID", studentsList.get(i).getStudentID());
+                                        editor.putString("studentUsername", studentsList.get(i).getStudentName());
                                         editor.apply();
-                                        Intent in;
-                                        if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
-                                            in = new Intent(MainActivity.this, IntroActivity.class);
-                                            FirebaseStudentID = studentsList.get(i).getStudentID();
-                                        }
-                                        else{
-                                            in = new Intent(MainActivity.this, HomescreenActivity.class);
-                                        }
-                                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(in);
-                                        SignUpActivity.username = studentsList.get(i).getStudentName();
+                                    }
+                                    else{
+                                        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("remember", "false");
+                                        editor.putString("studentUsername", studentsList.get(i).getStudentName());
+                                        editor.apply();
                                     }
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
@@ -246,10 +254,7 @@ public class MainActivity extends AppCompatActivity {
                     checked = "true";
                 }
                 else if (!buttonView.isChecked()){
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "false");
-                    editor.apply();
+                    checked = "false";
                 }
             }
         });

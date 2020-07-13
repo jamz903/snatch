@@ -51,9 +51,20 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         adapter = ArrayAdapter.createFromResource(this, R.array.food_court, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); //sets the dropdown list
 
+        //Shared Preferences
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        final String checkbox = preferences.getString("remember","");
+        final String username = preferences.getString("studentUsername","");
+
         //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
-        String message = "Welcome, " + SignUpActivity.username + "!";
+        String message;
+        if (checkbox.equals("true")){
+            message = "Welcome, " + username + "!";
+        }
+        else{
+            message = "Welcome, " + SignUpActivity.username + "!";
+        }
         welcomeMessage.setText(message);
 
         //show current points
