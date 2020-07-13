@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     public static String FirebaseStudentID;
     public static int userpoints;
     public static String usingID;
-
     public static String testPain;
 
     @Override
@@ -171,33 +170,24 @@ public class MainActivity extends AppCompatActivity {
                                     userpoints = studentsList.get(i).getStudentPoints();
                                     usingID = studentsList.get(i).getStudentID();
                                     matchFound = true;
-                                    Intent in;
-                                    if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
-                                        //allows user to stay logged in
-                                        if  (checked.equals("true")){
-                                            SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = preferences.edit();
-                                            editor.putString("remember", studentsList.get(i).getStudentID());
-                                            editor.apply();
-                                            Log.d(TAG, "Remember Me Checked, store student ID");
-                                        }
-                                        else{
-                                            SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = preferences.edit();
-                                            editor.putString("remember", "false");
-                                            editor.apply();
-                                            Log.d(TAG, "Remember Me Not Checked, do not store student ID");
+                                    if (checked.equals("true")){
+                                        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = preferences.edit();
+                                        editor.putString("remember", "true");
+                                        editor.putString("studentID", studentsList.get(i).getStudentID());
+                                        editor.apply();
+                                        Intent in;
+                                        if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
+                                            in = new Intent(MainActivity.this, IntroActivity.class);
                                             FirebaseStudentID = studentsList.get(i).getStudentID();
                                         }
-                                        in = new Intent(MainActivity.this, IntroActivity.class);
-
+                                        else{
+                                            in = new Intent(MainActivity.this, HomescreenActivity.class);
+                                        }
+                                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(in);
+                                        SignUpActivity.username = studentsList.get(i).getStudentName();
                                     }
-                                    else{
-                                        in = new Intent(MainActivity.this, HomescreenActivity.class);
-                                    }
-                                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                    startActivity(in);
-                                    SignUpActivity.username = studentsList.get(i).getStudentName();
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
                                 inputLayout.setError("Incorrect Password");
@@ -256,7 +246,10 @@ public class MainActivity extends AppCompatActivity {
                     checked = "true";
                 }
                 else if (!buttonView.isChecked()){
-                    checked = "false";
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
                 }
             }
         });

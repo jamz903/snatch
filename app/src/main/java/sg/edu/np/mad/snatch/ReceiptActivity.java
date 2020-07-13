@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,16 +66,17 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         okBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
         //calculate and add points to database
+        //Shared Preferences
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        String username = preferences.getString("checkbox","");
+        final String checkbox = preferences.getString("remember","");
+        final String studentID = preferences.getString("studentID","");
+
         DatabaseReference updatePoints;
-        if (username != "false"){
-             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID).child("studentPoints");
+        if (checkbox.equals("false")){
+            updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID).child("studentPoints");
         }
         else{
-
-            updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(username).child("studentPoints");
+            updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("studentPoints");
         }
 
         int value = (int)(calculateGrandTotal(orderList) * 100);
