@@ -48,7 +48,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, vacancyRVAdapterCallback {
 
     MapView mMapView;
     //Help pop-up dialog
@@ -87,9 +87,13 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15);
+                //Retrieves the position of the selected marker
+                LatLng location = marker.getPosition();
+                //Ensure that after zoom, the full info window can be read and is not cropped off
+                LatLng zoomLocation = new LatLng(location.latitude+0.0025, location.longitude);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(zoomLocation, 15);
+                //Animates Google Maps to zoom to the selected marker
                 googleMap.animateCamera(cameraUpdate);
-                /*marker.setSnippet(GetNumPpl(marker.getTitle()) + " users currently!");*/
                 googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(FoodCourtVacancyActivity.this, marker.getTitle()));
                 marker.showInfoWindow();
                 return true;
@@ -265,5 +269,13 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         //sets the background to 'blur' so that the pop up dialog is clearer
         helpDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         helpDialog.show();
+    }
+
+    @Override
+    public void visitFoodStall(String foodCourt, String foodStall) {
+        Intent in = new Intent(FoodCourtVacancyActivity.this, stallMenuActivity.class);
+        in.putExtra("FoodCourt", foodCourt);
+        in.putExtra("Stall", foodStall);
+        startActivity(in);
     }
 }

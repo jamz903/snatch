@@ -57,6 +57,8 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         TextView showMoreTextView = (TextView)view.findViewById(R.id.showMoreTextView);
         PieChart pieChart = (PieChart)view.findViewById(R.id.chart1);
         setupPieChart(pieChart);
+        TextView apiFoodCourtNameTextView = (TextView)view.findViewById(R.id.apiFoodCourtNameTextView);
+        apiFoodCourtNameTextView.setText(foodCourt);
 
         noOfUsersTextView.setText(GetNumPpl(foodCourt) + " user(s) currently");
     }
