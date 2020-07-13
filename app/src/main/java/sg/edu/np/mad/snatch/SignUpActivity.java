@@ -202,7 +202,7 @@ public class SignUpActivity extends AppCompatActivity {
                         else if(hashElement.getKey().equals("newUser")){
                             d = (String) details;
                         }
-                        else if(hashElement.getKey().equals("studentPOINTS")){
+                        else if(hashElement.getKey().equals("studentPoints")){
                             e = Integer.parseInt(details);
                         }
                         else{

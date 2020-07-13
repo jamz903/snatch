@@ -95,6 +95,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             String foodCourt = parent.getItemAtPosition(position).toString();
             //storing the selected food court from the drop down list without spaces to extract data from firebase in other activites
             firebaseStall = foodCourt.replaceAll("\\s+","");
+            Log.d("snatch","Store court " + firebaseStall);
             //when user selects food court from drop down list/spinner, new activity is started
             in = new Intent(HomescreenActivity.this, FoodClubActivity.class);
             //putExtra to send the foodcourt name to FoodClubActivity.java

@@ -53,7 +53,7 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
                 String string = storeName.get(position); //show store name
                 //get storename without spaces to get value from firebase
                 firebaseStoreName = string.replaceAll("\\s+","");
-                Log.d("snatch",firebaseStoreName);
+                Log.d("snatch","Store name" + firebaseStoreName);
                 listener.promptFoodStore(position);
             }
         });

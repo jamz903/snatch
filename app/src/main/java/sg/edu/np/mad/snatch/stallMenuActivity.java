@@ -44,7 +44,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     ArrayList<FoodItem> foodMenu;
     ArrayList<OrderItem> shoppingCart;
     FloatingActionButton menuFAB;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+    DatabaseReference reference;
+
     String foodCourtChoice;
     String foodStallChoice;
     int LAUNCH_SECOND_ACTIVITY;
@@ -56,6 +57,9 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Snatch", "error test : " + HomescreenActivity.firebaseStall);
+        Log.d("Snatch", "error test : " + StoresAdapter.firebaseStoreName);
+        reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
         setContentView(R.layout.activity_stall_menu);
         shoppingCart = new ArrayList<>();
