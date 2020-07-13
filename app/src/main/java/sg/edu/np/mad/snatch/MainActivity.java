@@ -171,19 +171,19 @@ public class MainActivity extends AppCompatActivity {
                                         if  (checked.equals("true")){
                                             SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                             SharedPreferences.Editor editor = preferences.edit();
-                                            editor.putString("remember", "true");
+                                            editor.putString("remember", studentsList.get(i).getStudentID());
                                             editor.apply();
-                                            Log.d(TAG, "Remember Me Checked");
+                                            Log.d(TAG, "Remember Me Checked, store student ID");
                                         }
                                         else{
                                             SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                             SharedPreferences.Editor editor = preferences.edit();
                                             editor.putString("remember", "false");
                                             editor.apply();
-                                            Log.d(TAG, "Remember Me Not Checked");
+                                            Log.d(TAG, "Remember Me Not Checked, do not store student ID");
+                                            FirebaseStudentID = studentsList.get(i).getStudentID();
                                         }
                                         in = new Intent(MainActivity.this, IntroActivity.class);
-                                        FirebaseStudentID = studentsList.get(i).getStudentID();
                                         userpoints = studentsList.get(i).getStudentPoints();
                                         usingID = studentsList.get(i).getStudentID();
                                     }

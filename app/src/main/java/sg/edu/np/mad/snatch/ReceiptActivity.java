@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
@@ -64,10 +65,19 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         okBtn.getBackground().setColorFilter(0xFF2a8cd6, PorterDuff.Mode.MULTIPLY);
 
         //calculate and add points to database
-        DatabaseReference updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID);
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        String username = preferences.getString("checkbox","");
+        DatabaseReference updatePoints;
+        if (username == "false"){
+             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.FirebaseStudentID).child("studentPoints");
+        }
+        else{
+            updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(username).child("studentPoints");
+        }
 
         int value = (int)(calculateGrandTotal(orderList) * 100);
-        updatePoints.child("studentPOINTS").setValue(MainActivity.userpoints + (value));
+        updatePoints.setValue(MainActivity.userpoints + (value));
 
     }
 
