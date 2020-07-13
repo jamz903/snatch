@@ -2,6 +2,7 @@ package sg.edu.np.mad.snatch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,8 +56,9 @@ public class SplashActivity extends AppCompatActivity {
                     else{
                         in = new Intent(SplashActivity.this,MainActivity.class);
                     }
-                    startActivity(in);
-                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                    ActivityOptions options = ActivityOptions.makeCustomAnimation(SplashActivity.this,android.R.anim.fade_in, android.R.anim.fade_out);
+                    startActivity(in,options.toBundle());
+                    //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                     finish();
                 }
             }
