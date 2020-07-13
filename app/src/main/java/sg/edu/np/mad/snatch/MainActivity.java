@@ -31,6 +31,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Application;
 
 
 import com.android.volley.RequestQueue;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public static int userpoints;
     public static String usingID;
 
+    public static String testPain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Created");
 
-
+        testPain = "SUCCESS";
         //Assign Buttons, Edit Text and Input Layout to variables
         loginBtn = (Button) findViewById(R.id.loginBtn);
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
@@ -164,6 +166,10 @@ public class MainActivity extends AppCompatActivity {
                                 //obtain password of studentID in list and check if it matches the keyed in password
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
                                     Log.d(TAG, "Login successful");
+                                    Log.d(TAG, studentsList.get(i).getStudentPoints()+ "");
+                                    Log.d(TAG,""+studentsList.get(i).getStudentID());
+                                    userpoints = studentsList.get(i).getStudentPoints();
+                                    usingID = studentsList.get(i).getStudentID();
                                     matchFound = true;
                                     Intent in;
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
@@ -184,8 +190,7 @@ public class MainActivity extends AppCompatActivity {
                                             FirebaseStudentID = studentsList.get(i).getStudentID();
                                         }
                                         in = new Intent(MainActivity.this, IntroActivity.class);
-                                        userpoints = studentsList.get(i).getStudentPoints();
-                                        usingID = studentsList.get(i).getStudentID();
+
                                     }
                                     else{
                                         in = new Intent(MainActivity.this, HomescreenActivity.class);

@@ -58,7 +58,11 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
         //show current points
         pointsTextView = (TextView) findViewById(R.id.PointsTextView);
+        Log.d("Points", "Points = " + MainActivity.userpoints);
         pointsTextView.setText("Points: " + MainActivity.userpoints);
+
+        Log.d("TEst", "TEST: " + MainActivity.testPain);
+
 
         //sets carousel view
         CarouselView carouselView = findViewById(R.id.carousel);

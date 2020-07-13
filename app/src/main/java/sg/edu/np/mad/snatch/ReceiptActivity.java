@@ -69,10 +69,11 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences.Editor editor = preferences.edit();
         String username = preferences.getString("checkbox","");
         DatabaseReference updatePoints;
-        if (username == "false"){
-             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.FirebaseStudentID).child("studentPoints");
+        if (username != "false"){
+             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID).child("studentPoints");
         }
         else{
+
             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(username).child("studentPoints");
         }
 

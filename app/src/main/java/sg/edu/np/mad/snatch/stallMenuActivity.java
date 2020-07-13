@@ -57,7 +57,12 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         Log.d("Snatch", "error test : " + HomescreenActivity.firebaseStall);
+
+
         Log.d("Snatch", "error test : " + StoresAdapter.firebaseStoreName);
         reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
 
