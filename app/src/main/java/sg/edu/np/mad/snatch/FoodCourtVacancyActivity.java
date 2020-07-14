@@ -2,6 +2,10 @@ package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -126,6 +130,37 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
     protected void onResume() {
         super.onResume();
         mMapView.onResume();
+
+        //Below is test values for the recycler view, just leave it here for now
+        FoodCourt foodClub = new FoodCourt(25,400,"FoodClub");
+        ArrayList<FoodItem> foodList = new ArrayList<>();
+        foodList.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodList.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodList.add(new FoodItem("Sausage2", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodClub.popularDishes = foodList;
+
+        FoodCourt foodClub2 = new FoodCourt(25,400,"FoodClub");
+        ArrayList<FoodItem> foodList2 = new ArrayList<>();
+        foodList2.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodList2.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodList2.add(new FoodItem("Sausage2", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
+        foodClub2.popularDishes = foodList2;
+
+        ArrayList<FoodCourt> foodCourtList = new ArrayList<>();
+        foodCourtList.add(foodClub);
+        foodCourtList.add(foodClub2);
+
+
+        RecyclerView rv = findViewById(R.id.vacancyRecyclerView);
+        vacancyRVAdapter adapter = new vacancyRVAdapter(this,foodCourtList,this);
+        rv.setAdapter(adapter);
+
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        rv.setLayoutManager(layout);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        //adds a divider in-between items
+        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @Override
@@ -157,56 +192,6 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         super.onLowMemory();
         mMapView.onLowMemory();
     }
-
-    /*public int GetNumPpl(String foodCourt) {
-        StrictMode.ThreadPolicy policy = new
-        StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        URL url;
-        int numOfPpl = 0;
-        try {
-            if (foodCourt.equals("Munch")) {
-                url = new URL("https://www1.np.edu.sg/npnet/wifiatcanteen/CMXService.asmx/getChartData?Location=System%20Campus%3EBlk%2073%3ELevel%201%3EMunch");
-            }
-            else if (foodCourt.equals("Makan Place")) {
-                url = new URL("https://www1.np.edu.sg/npnet/wifiatcanteen/CMXService.asmx/getChartData?Location=System%20Campus%3EBlk%2051%3ELevel%202%20-%20Canteen%3ECoverageArea-B51L02");
-            }
-            else if (foodCourt.equals("Poolside")) {
-                url = new URL("https://www1.np.edu.sg/npnet/wifiatcanteen/CMXService.asmx/getChartData?Location=System%20Campus%3EBlk%2018%3ELevel%201%20-%20Canteen%3ECoverageArea-B18L01");
-            }
-            else {
-                url = new URL("https://www1.np.edu.sg/npnet/wifiatcanteen/CMXService.asmx/getChartData?Location=System%20Campus%3EBlk%2022%3ELevel%201%3ECoverageArea-B22L01");
-            }
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new InputSource(url.openStream()));
-            doc.getDocumentElement().normalize();
-
-            NodeList nodeList = doc.getElementsByTagName("string");
-            Element bodyElement = (Element) nodeList.item(0);
-            NodeList bodyList = bodyElement.getChildNodes();
-            Node nodeContent = (Node) bodyList.item(0);
-            String xmlString = nodeContent.getNodeValue();
-            Log.d("Content", xmlString);
-            JSONArray objArray = new JSONArray(xmlString);
-            JSONObject obj = objArray.getJSONObject(0);
-            String numOfPpl1 = obj.getString("value");
-            Log.d("Content", numOfPpl1);
-            numOfPpl = Integer.parseInt(numOfPpl1);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
-        return numOfPpl;
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -276,6 +261,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         Intent in = new Intent(FoodCourtVacancyActivity.this, stallMenuActivity.class);
         in.putExtra("FoodCourt", foodCourt);
         in.putExtra("Stall", foodStall);
+        in.putExtra("prevActivity", "FoodCourtVacancyActivity");
         startActivity(in);
     }
 }

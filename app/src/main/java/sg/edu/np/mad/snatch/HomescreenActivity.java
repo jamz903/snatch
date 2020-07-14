@@ -118,7 +118,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
                 in.putExtra("FoodCourt", "FoodClub");
             }
             else if (foodCourt.equals("Makan Place")) {
-                in.putExtra("FoodCourt", "MKP");
+                in.putExtra("FoodCourt", "Makan Place");
             }
             else if (foodCourt.equals("Munch")) {
                 in.putExtra("FoodCourt", "Munch");

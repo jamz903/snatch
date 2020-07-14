@@ -58,19 +58,28 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
+        foodCourtChoice = getIntent().getStringExtra("FoodCourt");
+        foodStallChoice = getIntent().getStringExtra("Stall");
         Log.d("Snatch", "error test : " + HomescreenActivity.firebaseStall);
 
 
         Log.d("Snatch", "error test : " + StoresAdapter.firebaseStoreName);
-        reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+
+
+        if(getIntent().hasExtra("prevActivity")) {
+            String foodCourtString = foodCourtChoice.replaceAll("\\s+", "");
+            String foodStallString = foodStallChoice.replaceAll("\\s+", "");
+
+            reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(foodCourtString).child(foodStallString);
+        }
+        else {
+            reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+        }
 
         setContentView(R.layout.activity_stall_menu);
         shoppingCart = new ArrayList<>();
         menuFAB = (FloatingActionButton) findViewById(R.id.menuFAB);
-        foodCourtChoice = getIntent().getStringExtra("FoodCourt");
-        foodStallChoice = getIntent().getStringExtra("Stall");
+
     }
 
     @Override
@@ -85,8 +94,8 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
 
         //change line below for adapter if is other food stall
 
-        menuItemAdapter adapter = new menuItemAdapter(foodMenu, this);
         determineFoodCourt(foodCourtChoice, foodStallChoice);
+        menuItemAdapter adapter = new menuItemAdapter(foodMenu, this);
         getUpvote(foodMenu, adapter);
         rv.setAdapter(adapter);
 
@@ -143,7 +152,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         if (aFoodCourtChoice.equals("FoodClub")) {
             determineFoodStallFoodClub(aFoodCourtChoice, aFoodStallChoice);
         }
-        else if(aFoodCourtChoice.equals("MKP")) {
+        else if(aFoodCourtChoice.equals("Makan Place")) {
             determineFoodStallMKP(aFoodCourtChoice, aFoodStallChoice);
         }
         else if(aFoodCourtChoice.equals("Poolside")) {

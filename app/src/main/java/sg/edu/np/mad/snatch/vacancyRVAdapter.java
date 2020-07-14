@@ -2,6 +2,7 @@ package sg.edu.np.mad.snatch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +39,12 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
 
         final FoodCourt foodCourt = foodCourtList.get(position);
         holder.bind(foodCourt);
-        ArrayList<FoodItem> top3Dishes = foodCourt.getPopularDishes();
+        ArrayList<FoodItem> top3Dishes = foodCourt.popularDishes;
 
         if (foodCourt.getName().equals("FoodClub")) {
             holder.listitem_foodCourtNameTextView.setText("Food Club");
         }
-        else if (foodCourt.getName().equals("MKP")) {
+        else if (foodCourt.getName().equals("Makan Place")) {
             holder.listitem_foodCourtNameTextView.setText("Makan Place");
         }
         else if (foodCourt.getName().equals("Poolside")) {
@@ -81,21 +82,21 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
         holder.visitTextView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.visitFoodStall(dish1.foodCourt, dish1.foodName);
+                listener.visitFoodStall(dish1.foodCourt, dish1.stallName);
             }
         });
 
         holder.visitTextView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.visitFoodStall(dish2.foodCourt, dish2.foodName);
+                listener.visitFoodStall(dish2.foodCourt, dish2.stallName);
             }
         });
 
         holder.visitTextView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.visitFoodStall(dish3.foodCourt, dish3.foodName);
+                listener.visitFoodStall(dish3.foodCourt, dish3.stallName);
             }
         });
     }

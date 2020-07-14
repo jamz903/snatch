@@ -80,7 +80,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
             storeName.add("Economical Rice");
             storeName.add("FC Bakery");
         }
-        else if (aFoodCourt.equals("MKP")) {
+        else if (aFoodCourt.equals("Makan Place")) {
             storeName.add("Mala");
             storeName.add("Chicken Rice");
             storeName.add("Drinks Stall");
@@ -113,7 +113,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
             storeDesc.add("This is the Economical Rice Stall");
             storeDesc.add("This is the FC Bakery Stall");
         }
-        else if (aFoodCourt.equals("MKP")) {
+        else if (aFoodCourt.equals("Makan Place")) {
             storeDesc.add("This is the Mala Stall");
             storeDesc.add("This is the Chicken Rice Stall");
             storeDesc.add("This is the Drinks Stall");

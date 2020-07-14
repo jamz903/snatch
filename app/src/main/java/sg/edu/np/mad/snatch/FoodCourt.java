@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class FoodCourt {
 
-    private int noOfPpl;
+    public int noOfPpl;
 
-    private int capacity;
+    public int capacity;
 
-    private String name;
+    public String name;
 
-    private ArrayList<FoodItem> popularDishes;
+    public ArrayList<FoodItem> popularDishes;
 
-    private boolean expanded;
+    public boolean expanded;
 
     public FoodCourt(int aNoOfPpl, int aCapacity, String aName) {
         this.noOfPpl = aNoOfPpl;

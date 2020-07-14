@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,12 +36,22 @@ public class menuItemAdapter extends RecyclerView.Adapter<menuItemViewHolder>{
     //creating required lists
     ArrayList<FoodItem> menuItems;
     menuItemAdapterCallback listener;
-    DatabaseReference reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+    DatabaseReference reff2;
 
     //Assigning items
     public menuItemAdapter(ArrayList<FoodItem> aMenuItems, menuItemAdapterCallback aListener) {
         this.menuItems = aMenuItems;
         this.listener = aListener;
+
+        if (HomescreenActivity.firebaseStall == null && StoresAdapter.firebaseStoreName == null) {
+            String foodCourtString = aMenuItems.get(0).foodCourt.replaceAll("\\s+", "");
+            String foodStallString = aMenuItems.get(0).stallName.replaceAll("\\s+", "");
+
+            reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(foodCourtString).child(foodStallString);
+        }
+        else {
+            reff2 = FirebaseDatabase.getInstance().getReference().child("FoodCourt").child(HomescreenActivity.firebaseStall).child(StoresAdapter.firebaseStoreName);
+        }
     }
 
     @NonNull
