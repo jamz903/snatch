@@ -53,7 +53,8 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
 
         orderNoTextView = findViewById(R.id.orderNoTextView);
         Random random = new Random();
-        String orderNo = String.format("Order Number %04d", random.nextInt(10000));
+        int orderNumber = random.nextInt(10000);
+        String orderNo = String.format("Order Number %04d", orderNumber);
         orderNoTextView.setText(orderNo);
 
         Intent receivingEnd = getIntent();
@@ -82,6 +83,11 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         int value = (int)(calculateGrandTotal(orderList) * 100);
         updatePoints.setValue(MainActivity.userpoints + (value));
 
+        //add order to database
+        DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders");
+        Orders order = new Orders(StoresAdapter.firebaseStallWithSpace,orderNumber,"no");
+        orderRef.child(String.valueOf(orderNumber)).setValue(order);
+        addAllItems(orderList,orderNumber);
     }
 
     @Override
@@ -151,6 +157,17 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         }
         else{
             this.doubleClick = true;
+        }
+    }
+
+    public void addAllItems(ArrayList<OrderItem> orderList, int orderNumber){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Orders").child(String.valueOf(orderNumber));
+        ArrayList<String> itemList = new ArrayList<String>();
+        for (OrderItem item : orderList) {
+            itemList.add(item.foodName);
+        }
+        for (int i=0; i<itemList.size(); i++){
+            ref.child("OrderItems").child(String.format("Item%d", i+1)).setValue(String.valueOf(itemList.get(i)));
         }
     }
 

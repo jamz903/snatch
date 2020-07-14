@@ -129,9 +129,12 @@ public class MainActivity extends AppCompatActivity {
                 closeKeyboard();
                 String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
-
+                if (studentID.equalsIgnoreCase("stall123") && pw.equals("123123")){
+                    Intent in = new Intent(MainActivity.this, StallOwnerActivity.class);
+                    startActivity(in);
+                }
                 //checks if there is no internet connection, if no internet, informs user that login is not possible without an internet connection
-                if(getConnectionType(MainActivity.this)){
+                else if(getConnectionType(MainActivity.this)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle("No Internet Connection")
                             .setCancelable(false)

@@ -14,4 +14,9 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="AppTheme.StallOwnerTheme">
+        <item name="colorPrimary">@color/yellowColor</item>
+        <item name="colorPrimaryDark">@color/yellowColorDark</item>
+    </style>
+
 </resources>
