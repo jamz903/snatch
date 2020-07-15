@@ -22,7 +22,6 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
     ArrayList<String> storeDesc;
     StoresAdapterCallback listener;
     public static String firebaseStoreName;
-    public static String firebaseStallWithSpace;
 
     public StoresAdapter(ArrayList<String> aStoreName, ArrayList<String> aStoreDesc, Context context, StoresAdapterCallback aListener){
         //Assign variables to items
@@ -55,7 +54,6 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
                 //get storename without spaces to get value from firebase
                 firebaseStoreName = string.replaceAll("\\s+","");
                 Log.d("snatch","Store name" + firebaseStoreName);
-                firebaseStallWithSpace = string;
                 listener.promptFoodStore(position);
             }
         });
