@@ -38,6 +38,7 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
     public void onBindViewHolder(@NonNull vacancyViewHolder holder, final int position) {
 
         final FoodCourt foodCourt = foodCourtList.get(position);
+        foodCourt.getAllDishes(foodCourt.getAllStalls(foodCourt.name));
         holder.bind(foodCourt);
         ArrayList<FoodItem> top3Dishes = foodCourt.popularDishes;
 
@@ -105,4 +106,5 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
     public int getItemCount() {
         return foodCourtList.size();
     }
+
 }

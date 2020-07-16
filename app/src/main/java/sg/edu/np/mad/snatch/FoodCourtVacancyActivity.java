@@ -132,14 +132,14 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         mMapView.onResume();
 
         //Below is test values for the recycler view, just leave it here for now
-        FoodCourt foodClub = new FoodCourt(25,400,"FoodClub");
+        FoodCourt foodClub = new FoodCourt(25,400,"Poolside");
         ArrayList<FoodItem> foodList = new ArrayList<>();
         foodList.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
         foodList.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
         foodList.add(new FoodItem("Sausage2", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
         foodClub.popularDishes = foodList;
 
-        FoodCourt foodClub2 = new FoodCourt(25,400,"FoodClub");
+        FoodCourt foodClub2 = new FoodCourt(25,400,"Poolside");
         ArrayList<FoodItem> foodList2 = new ArrayList<>();
         foodList2.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
         foodList2.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
