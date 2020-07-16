@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_snatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StallOwnerActivity"
-            android:theme="@style/AppTheme.StallOwnerTheme"></activity>
+        <activity android:name=".OwnerOrdersActivity"></activity>
+        <activity
+            android:name=".StallOwnerActivity"
+            android:theme="@style/AppTheme.StallOwnerTheme" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
