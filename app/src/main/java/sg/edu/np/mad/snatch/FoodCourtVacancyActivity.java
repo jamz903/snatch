@@ -205,7 +205,10 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         /*if(item.getItemId() == R.id.credits_option){
             to be implemented later on in phase 2
         }*/
-
+        if(item.getItemId() == R.id.profile_option){
+            Intent in = new Intent(this, ProfileActivity.class);
+            startActivity(in);
+        }
         //logout button on kebab icon on top right corner of the app
         //brings user to log in page
         if(item.getItemId() == R.id.logout_option){

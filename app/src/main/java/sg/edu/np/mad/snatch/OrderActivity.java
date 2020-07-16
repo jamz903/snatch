@@ -118,7 +118,7 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         //brings user to see the number of people in each food court
         //bring user to pofile page
         if(item.getItemId() == R.id.profile_option){
-            Intent in = new Intent(getApplicationContext(), ProfileActivity.class);
+            Intent in = new Intent(this, ProfileActivity.class);
             startActivity(in);
         }
 

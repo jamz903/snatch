@@ -175,6 +175,7 @@ public class FoodClubActivity extends AppCompatActivity implements StoresAdapter
             to be implemented later on in phase 2
         }*/
 
+        if(item.getItemId() == R.id.profile_option)
         //Food courts' vacancy button on kebab icon on top right corner of the app
         //brings user to see the number of people in each food court
         if (item.getItemId() == R.id.vacancy_option) {

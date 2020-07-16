@@ -44,6 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
     public static String username;
+    public static String password;
     public static int userpoints;
     TextInputLayout signUpLayout;
 
@@ -135,6 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Log.d(TAG, "Sign up successful");
                         if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
+                            password = pw;
                             String newUser = "yes";
                             Students students = new Students(id.toUpperCase(),pw,un,newUser,0);
                             reff.child(id).setValue(students);

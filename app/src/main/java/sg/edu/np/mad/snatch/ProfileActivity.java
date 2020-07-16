@@ -45,6 +45,13 @@ public class ProfileActivity extends AppCompatActivity{
     EditText profileName;
     EditText profilePW;
     TextView profilePoints;
+    Button updateButton;
+
+
+    String password;
+    String message;
+
+    DatabaseReference reff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,31 +64,54 @@ public class ProfileActivity extends AppCompatActivity{
         profileName = (EditText) findViewById(R.id.profileName);
         profilePW = (EditText) findViewById(R.id.profilePassword);
         profilePoints = (TextView) findViewById(R.id.profilePoints);
+        updateButton = (Button) findViewById(R.id.UpdateButton);
 
         //Shared Preferences
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         final String checkbox = preferences.getString("remember","");
         final String username = preferences.getString("studentUsername","");
+        final String pw = preferences.getString("studentPW", "");
+
         //set hints of current user name and pw
 
-        String message;
         if (checkbox.equals("true")){
             message = username ;
+            password = pw;
         }
         else{
-            message = SignUpActivity.username;
+            message = MainActivity.usingName;
+            password = MainActivity.usingPW;
+
         }
-        profileName.setHint(message);
+        profileName.setText(message);
+        profilePW.setText(password);
+
 
 
     }
     @Override
     protected void onStart() {
         super.onStart();
-
+        profilePoints.setText("Points: " + MainActivity.userpoints);
     }
     @Override
     protected void onResume() {
         super.onResume();
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (profileName.getText().toString() != message|| profilePW.getText().toString() != password){
+                    //means that the user has updated sth here
+
+                    //update database
+                    reff = FirebaseDatabase.getInstance().getReference().child("Students");
+                    reff.child(MainActivity.usingID).child("studentName").setValue(profileName.getText().toString());
+                    reff.child(MainActivity.usingID).child("studentPW").setValue(profilePW.getText().toString());
+                };
+            }
+        });
+
+
     }
 }

@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
     public static String FirebaseStudentID;
     public static int userpoints;
     public static String usingID;
-    public static String testPain;
+    public static String usingPW;
+    public static String usingName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "Created");
 
-        testPain = "SUCCESS";
+
         //Assign Buttons, Edit Text and Input Layout to variables
         loginBtn = (Button) findViewById(R.id.loginBtn);
         signUpBtn = (Button) findViewById(R.id.signUpBtn);
@@ -172,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d(TAG,""+studentsList.get(i).getStudentID());
                                     userpoints = studentsList.get(i).getStudentPoints();
                                     usingID = studentsList.get(i).getStudentID();
+                                    usingPW = studentsList.get(i).getStudentPW();
+                                    usingName = studentsList.get(i).getStudentName();
                                     matchFound = true;
                                     Intent in;
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
@@ -190,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                                         editor.putString("remember", "true");
                                         editor.putString("studentID", studentsList.get(i).getStudentID());
                                         editor.putString("studentUsername", studentsList.get(i).getStudentName());
+                                        editor.putString("studentPW", studentsList.get(i).getStudentPW());
                                         editor.apply();
                                     }
                                     else{

@@ -72,7 +72,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         Log.d("Points", "Points = " + MainActivity.userpoints);
         pointsTextView.setText("Points: " + MainActivity.userpoints);
 
-        Log.d("TEst", "TEST: " + MainActivity.testPain);
+
 
 
         //sets carousel view
@@ -151,7 +151,10 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         /*if(item.getItemId() == R.id.credits_option){
             to be implemented later on in phase 2
         }*/
-
+        if(item.getItemId() == R.id.profile_option){
+            Intent in = new Intent(this, ProfileActivity.class);
+            startActivity(in);
+        }
         //Food courts' vacancy button on kebab icon on top right corner of the app
         //brings user to see the number of people in each food court
         if (item.getItemId() == R.id.vacancy_option) {
