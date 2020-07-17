@@ -77,11 +77,6 @@ public class FoodItem implements Comparable {
         stallName = aStallName;
     }
 
-    public FoodItem(String aFoodName, int aUpVotes) {
-        this.foodName = aFoodName;
-        this.upVotes = aUpVotes;
-    }
-
     //sorting system for upvote system, it sorts the upvotes in the list in descending order
     //called using Collections.sort()
     @Override

@@ -6,16 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/listitem_foodCourtImageView"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <TextView
         android:id="@+id/listitem_foodCourtNameTextView"
         android:layout_width="wrap_content"
@@ -25,18 +15,20 @@
         android:text="TextView"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/listitem_foodCourtImageView"
-        app:layout_constraintTop_toTopOf="@+id/listitem_foodCourtImageView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/capacityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/listitem_foodCourtImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/listitem_foodCourtNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/listitem_foodCourtNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/listitem_foodCourtNameTextView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/expandLayout"
@@ -45,8 +37,9 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listitem_foodCourtImageView">
+        app:layout_constraintTop_toBottomOf="@+id/capacityTextView">
 
         <ImageView
             android:id="@+id/dishImageView1"
@@ -93,7 +86,7 @@
             android:id="@+id/visitTextView1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
             android:onClick="onClick"
             android:text="TextView"
@@ -118,25 +111,25 @@
             android:id="@+id/visitTextView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:onClick="onClick"
             android:text="TextView"
             android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/visitTextView1"
             app:layout_constraintEnd_toEndOf="@+id/foodNameTextView2"
             app:layout_constraintStart_toStartOf="@+id/foodNameTextView2"
-            app:layout_constraintTop_toBottomOf="@+id/foodNameTextView2" />
+            app:layout_constraintTop_toTopOf="@+id/visitTextView1" />
 
         <TextView
             android:id="@+id/visitTextView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:onClick="onClick"
             android:text="TextView"
             android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/visitTextView2"
             app:layout_constraintEnd_toEndOf="@+id/foodNameTextView3"
             app:layout_constraintStart_toStartOf="@+id/foodNameTextView3"
-            app:layout_constraintTop_toBottomOf="@+id/foodNameTextView3" />
+            app:layout_constraintTop_toTopOf="@+id/visitTextView2" />
 
         <TextView
             android:id="@+id/foodNameTextView3"

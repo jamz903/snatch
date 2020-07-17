@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
@@ -38,9 +40,13 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
     public void onBindViewHolder(@NonNull vacancyViewHolder holder, final int position) {
 
         final FoodCourt foodCourt = foodCourtList.get(position);
-        foodCourt.getAllDishes(foodCourt.getAllStalls(foodCourt.name));
+/*        foodCourt.getAllDishes(foodCourt.getAllStalls(foodCourt.name));*/
         holder.bind(foodCourt);
         ArrayList<FoodItem> top3Dishes = foodCourt.popularDishes;
+        Collections.sort(top3Dishes);
+        for(FoodItem dish : top3Dishes) {
+            Log.d("snatchwork", dish.foodName + " HAS " + dish.upVotes + " UPVOTES!!!");
+        }
 
         if (foodCourt.getName().equals("FoodClub")) {
             holder.listitem_foodCourtNameTextView.setText("Food Club");
@@ -55,6 +61,7 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
             holder.listitem_foodCourtNameTextView.setText("Munch");
         }
 
+        holder.capacityTextView.setText("Seating Capacity: " + String.valueOf(foodCourt.capacity));
         final FoodItem dish1 = top3Dishes.get(0);
         String visitText = "Visit Store";
         holder.foodNameTextView1.setText(dish1.foodName);

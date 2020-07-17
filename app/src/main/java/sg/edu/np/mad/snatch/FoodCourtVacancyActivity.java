@@ -31,6 +31,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +51,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -59,12 +65,14 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
     Dialog helpDialog;
     ImageView close;
     Button getHelpButton;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_court_vacancy);
 
+        reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt");
         mMapView = findViewById(R.id.vacancyMapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
@@ -131,28 +139,33 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         super.onResume();
         mMapView.onResume();
 
-        //Below is test values for the recycler view, just leave it here for now
-        FoodCourt foodClub = new FoodCourt(25,400,"Poolside");
-        ArrayList<FoodItem> foodList = new ArrayList<>();
-        foodList.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodList.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodList.add(new FoodItem("Sausage2", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodClub.popularDishes = foodList;
+        FoodCourt foodClub = new FoodCourt(400, "FoodClub");
+        foodClub.setPopularDishes(foodClub.getAllDishes(foodClub.name));
 
-        FoodCourt foodClub2 = new FoodCourt(25,400,"Poolside");
-        ArrayList<FoodItem> foodList2 = new ArrayList<>();
-        foodList2.add(new FoodItem("Sausage", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodList2.add(new FoodItem("Sausage1", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodList2.add(new FoodItem("Sausage2", "1 stick of hotdog", 1, 0,0, "FoodClub", "Mala"));
-        foodClub2.popularDishes = foodList2;
+        //Below is test values for the recycler view, just leave it here for now
+        FoodCourt makanPlace = new FoodCourt(500,"Makan Place");
+        makanPlace.setPopularDishes(makanPlace.getAllDishes(makanPlace.name));
+
+        FoodCourt poolside = new FoodCourt(250, "Poolside");
+        poolside.setPopularDishes(poolside.getAllDishes(poolside.name));
+
+        FoodCourt munch = new FoodCourt(200, "Munch");
+        munch.setPopularDishes(munch.getAllDishes(munch.name));
 
         ArrayList<FoodCourt> foodCourtList = new ArrayList<>();
         foodCourtList.add(foodClub);
-        foodCourtList.add(foodClub2);
-
+        foodCourtList.add(makanPlace);
+        foodCourtList.add(poolside);
+        foodCourtList.add(munch);
 
         RecyclerView rv = findViewById(R.id.vacancyRecyclerView);
         vacancyRVAdapter adapter = new vacancyRVAdapter(this,foodCourtList,this);
+        for (FoodCourt fc : foodCourtList) {
+            Log.d("snatchwork", "NEW FOOD COURT IS " + fc.name);
+            fc.popularDishes = fc.getAllDishes(fc.name);
+
+            getUpvote(fc.popularDishes, adapter);
+        }
         rv.setAdapter(adapter);
 
         LinearLayoutManager layout = new LinearLayoutManager(this);
@@ -266,5 +279,32 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         in.putExtra("Stall", foodStall);
         in.putExtra("prevActivity", "FoodCourtVacancyActivity");
         startActivity(in);
+    }
+
+    public void getUpvote(final ArrayList<FoodItem> listOfDishes, final vacancyRVAdapter aAdapter){
+        for (final FoodItem food : listOfDishes) {
+            final String dishName = food.getFoodName().replaceAll("\\s+","");
+            Log.d("snatchwork", "DISH NAME IS " + dishName);
+            DatabaseReference reference2 = reference.child(food.foodCourt.replaceAll("\\s+","")).child(food.stallName.replaceAll("\\s+",""));
+            reference2.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Long upvotes = (Long) dataSnapshot.child(dishName).getValue();
+                    Log.d("snatchwork", "KEY IS " + dataSnapshot.child(dishName).getKey() + " FROM " + food.foodCourt);
+                    Log.d("snatchwork", "upvote here is " + String.valueOf(upvotes));
+                    food.setUpVotes(Integer.parseInt(String.valueOf(upvotes)));
+                    food.upVotes = Integer.parseInt(String.valueOf(upvotes));
+                    //sorts items based on UpvoteNo (sorted based on CompareTo in FoodItem class)
+                    Collections.sort(listOfDishes);
+                    aAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+/*            Log.d("snatchwork", food.getFoodName() + " has " + food.getUpVotes());*/
+        }
     }
 }

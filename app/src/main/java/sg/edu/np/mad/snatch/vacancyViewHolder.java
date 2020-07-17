@@ -29,7 +29,6 @@ public class vacancyViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         foodNameTextView1 = itemView.findViewById(R.id.foodNameTextView1);
-        listitem_foodCourtImageView = itemView.findViewById(R.id.listitem_foodCourtImageView);
         listitem_foodCourtNameTextView = itemView.findViewById(R.id.listitem_foodCourtNameTextView);
         capacityTextView = itemView.findViewById(R.id.capacityTextView);
         dishImageView1 = itemView.findViewById(R.id.dishImageView1);
