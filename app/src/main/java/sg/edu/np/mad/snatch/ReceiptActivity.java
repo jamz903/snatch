@@ -85,11 +85,7 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
 
         //add order to database
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders");
-        //Shared Preferences
-        SharedPreferences pref = getSharedPreferences("store", MODE_PRIVATE);
-        final String foodCourt = pref.getString("foodCourt","");
-        final String stall = pref.getString("stall","");
-        Orders order = new Orders(foodCourt,stall,orderNumber,"no",currentDateTime,calculateGrandTotal(orderList));
+        Orders order = new Orders(HomescreenActivity.firebaseStall,StoresAdapter.firebaseStoreName,orderNumber,"no",currentDateTime,calculateGrandTotal(orderList));
         orderRef.child(String.valueOf(orderNumber)).setValue(order);
         addAllItems(orderList,orderNumber);
     }

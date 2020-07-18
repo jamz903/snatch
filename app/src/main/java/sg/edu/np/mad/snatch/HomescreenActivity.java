@@ -111,11 +111,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             //storing the selected food court from the drop down list without spaces to extract data from firebase in other activites
             firebaseStall = foodCourt.replaceAll("\\s+","");
 
-            //store foodcourt in sharedpreferences
-            SharedPreferences preferences = getSharedPreferences("store", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("foodCourt", foodCourt.replaceAll("\\s+",""));
-
             Log.d("snatch","Store court " + firebaseStall);
             //when user selects food court from drop down list/spinner, new activity is started
             in = new Intent(HomescreenActivity.this, FoodClubActivity.class);

@@ -26,6 +26,7 @@ public class OwnerOrdersActivity extends AppCompatActivity {
     private static final String TAG = "SNATCH";
     DatabaseReference reference;
     final ArrayList<Orders> ordersList = new ArrayList();
+    final ArrayList<Orders> orderListNoDuplicate = new ArrayList();
     OwnerOrdersAdapter adapter;
 
     @Override
@@ -35,13 +36,17 @@ public class OwnerOrdersActivity extends AppCompatActivity {
 
         //Reference for firebase to get studentList
         reference = FirebaseDatabase.getInstance().getReference().child("Orders");
+        addUncompletedOrders();
+        for (Orders o : ordersList){
+            Log.d(TAG,"Order " + o.getOrderNumber());
+        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         RecyclerView rv = findViewById(R.id.ordersRecyclerView);
-        addUncompletedOrders();
         adapter = new OwnerOrdersAdapter(this, ordersList);
         rv.setAdapter(adapter);
         LinearLayoutManager layout = new LinearLayoutManager(this);
@@ -70,17 +75,15 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                     Map.Entry mapElement = (Map.Entry)orderList.next();
                     Log.d(TAG,"map key is" + mapElement.getValue());
 
-
                     HashMap hash = (HashMap) mapElement.getValue();
                     Iterator IDLIST = hash.entrySet().iterator();
                     while (IDLIST.hasNext()) {
 
                         Map.Entry hashElement = (Map.Entry)IDLIST.next();
 
-                        Log.d(TAG,"map key s" + hashElement);
+                        Log.d(TAG,"map key" + hashElement);
                         String details = (((String)hashElement.getValue().toString()));
 
-                        //check if item is an ID or PW before adding to list
                         if (hashElement.getKey().equals("foodCourt")){
                             a = (String) details;
                         }
@@ -104,9 +107,20 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                         }
 
                         Orders order = new Orders(a,b,c,d,e,f);
-                        //add student to student list
                         ordersList.add(order);
-                        Log.d(TAG, " " + ordersList.get(0).getOrderNumber());
+                        break;
+                        /*for (Orders o : ordersList){
+                            if(o.getOrderNumber() == order.getOrderNumber()){
+
+                            }
+                            else{
+                                ordersList.add(order);
+                            }
+                            if(o.getOrderNumber() == 0){
+                                ordersList.remove(o);
+                            }
+                            Log.d(TAG, "order number: " + o.getOrderNumber());
+                        }*/
 
                         /*if(d.equals("no")){
                             Orders order = new Orders(a,b,c,d,e,f);

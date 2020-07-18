@@ -28,10 +28,11 @@ public class OwnerOrdersAdapter extends RecyclerView.Adapter<OwnerOrdersViewhold
 
     @Override
     public void onBindViewHolder(@NonNull OwnerOrdersViewholder holder, int position) {
+
         if (position < ordersArrayList.size()){
             Orders order = ordersArrayList.get(position);
             int info1 = order.getOrderNumber();
-            String orderNumber = "Order #" + String.valueOf(info1);
+            String orderNumber = "Order #" + info1;
             holder.orderNumberTextView.setText(orderNumber);
 
             String info2 = order.getDateTime();
