@@ -278,6 +278,11 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         in.putExtra("FoodCourt", foodCourt);
         in.putExtra("Stall", foodStall);
         in.putExtra("prevActivity", "FoodCourtVacancyActivity");
+        //store foodcourt in sharedpreferences
+        SharedPreferences preferences = getSharedPreferences("store", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("foodCourt", foodCourt.replaceAll("\\s+",""));
+        editor.putString("stall", foodStall.replaceAll("\\s",""));
         startActivity(in);
     }
 

@@ -2,6 +2,9 @@ package sg.edu.np.mad.snatch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +25,8 @@ public class OwnerOrdersActivity extends AppCompatActivity {
 
     private static final String TAG = "SNATCH";
     DatabaseReference reference;
-    final List<Orders> ordersList = new ArrayList();
+    final ArrayList<Orders> ordersList = new ArrayList();
+    OwnerOrdersAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,18 @@ public class OwnerOrdersActivity extends AppCompatActivity {
 
         //Reference for firebase to get studentList
         reference = FirebaseDatabase.getInstance().getReference().child("Orders");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerView rv = findViewById(R.id.ordersRecyclerView);
         addUncompletedOrders();
+        adapter = new OwnerOrdersAdapter(this, ordersList);
+        rv.setAdapter(adapter);
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        rv.setLayoutManager(layout);
+        rv.setItemAnimator(new DefaultItemAnimator());
     }
 
     protected void addUncompletedOrders(){
@@ -48,6 +63,7 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                 int c = 0;
                 String d = null;
                 String e = null;
+                double f = 0;
 
                 //iterate through database for all child items
                 while(orderList.hasNext()){
@@ -65,30 +81,42 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                         String details = (((String)hashElement.getValue().toString()));
 
                         //check if item is an ID or PW before adding to list
-                        if (hashElement.getKey().equals("FoodCourt")){
+                        if (hashElement.getKey().equals("foodCourt")){
                             a = (String) details;
                         }
-                        else if (hashElement.getKey().equals("Stall")){
+                        else if (hashElement.getKey().equals("stall")){
                             b = (String) details;
                         }
-                        else if(hashElement.getKey().equals("OrderNumber")){
+                        else if(hashElement.getKey().equals("orderNumber")){
                             c = Integer.parseInt(details);
                         }
-                        else if(hashElement.getKey().equals("OrderFufilled")){
+                        else if(hashElement.getKey().equals("orderFufilled")){
                             d = (String) details;
                         }
-                        else if(hashElement.getKey().equals("DateTime")){
+                        else if(hashElement.getKey().equals("dateTime")){
                             e = (String) details;
+                        }
+                        else if(hashElement.getKey().equals("totalCost")){
+                            f = Double.parseDouble(details);
                         }
                         else{
                             Log.d(TAG,"fail");
                         }
 
-                        Orders order = new Orders(a,b,c,d,e);
+                        Orders order = new Orders(a,b,c,d,e,f);
                         //add student to student list
                         ordersList.add(order);
                         Log.d(TAG, " " + ordersList.get(0).getOrderNumber());
 
+                        /*if(d.equals("no")){
+                            Orders order = new Orders(a,b,c,d,e,f);
+                            //add student to student list
+                            ordersList.add(order);
+                            Log.d(TAG, " " + ordersList.get(0).getOrderNumber());
+                        }
+                        else{
+                            Log.d(TAG, "order completed, not added to list");
+                        }*/
                     }
 
                 }

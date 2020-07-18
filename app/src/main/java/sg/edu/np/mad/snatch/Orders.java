@@ -6,15 +6,17 @@ public class Orders {
     private int OrderNumber;
     private String OrderFufilled;
     private String DateTime;
+    private double TotalCost;
 
     private Orders(){};
 
-    public Orders(String foodCourt, String stall, int orderNumber, String orderFufilled, String dateTime){
+    public Orders(String foodCourt, String stall, int orderNumber, String orderFufilled, String dateTime, double totalCost){
         this.FoodCourt = foodCourt;
         this.Stall = stall;
         this.OrderNumber = orderNumber;
         this.OrderFufilled = orderFufilled;
         this.DateTime = dateTime;
+        this.TotalCost = totalCost;
     }
 
     public String getFoodCourt() {
@@ -55,5 +57,13 @@ public class Orders {
 
     public void setDateTime(String dateTime) {
         DateTime = dateTime;
+    }
+
+    public double getTotalCost() {
+        return TotalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        TotalCost = totalCost;
     }
 }

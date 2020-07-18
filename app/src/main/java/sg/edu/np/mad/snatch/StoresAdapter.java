@@ -3,6 +3,7 @@ package sg.edu.np.mad.snatch;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,10 @@ public class StoresAdapter extends RecyclerView.Adapter<StoresViewHolder>{
                 String string = storeName.get(position); //show store name
                 //get storename without spaces to get value from firebase
                 firebaseStoreName = string.replaceAll("\\s+","");
+                //store stall in sharedpreferences
+                SharedPreferences preferences = context.getSharedPreferences("store", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("stall", string.replaceAll("\\s+",""));
                 Log.d("snatch","Store name" + firebaseStoreName);
                 listener.promptFoodStore(position);
             }
