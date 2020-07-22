@@ -31,7 +31,7 @@ public class OwnerOrdersAdapter extends RecyclerView.Adapter<OwnerOrdersViewhold
 
         if (position < ordersArrayList.size()){
             Orders order = ordersArrayList.get(position);
-            int info1 = order.getOrderNumber();
+            String info1 = order.getOrderNumber();
             String orderNumber = "Order #" + info1;
             holder.orderNumberTextView.setText(orderNumber);
 

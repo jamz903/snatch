@@ -17,16 +17,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 public class OwnerOrdersActivity extends AppCompatActivity {
 
     private static final String TAG = "SNATCH";
     DatabaseReference reference;
     final ArrayList<Orders> ordersList = new ArrayList();
-    final ArrayList<Orders> orderListNoDuplicate = new ArrayList();
+    ArrayList<String> parent = new ArrayList<>();
     OwnerOrdersAdapter adapter;
 
     @Override
@@ -34,8 +37,10 @@ public class OwnerOrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders);
 
+
         //Reference for firebase to get studentList
         reference = FirebaseDatabase.getInstance().getReference().child("Orders");
+        getOrderNumber();
         addUncompletedOrders();
         for (Orders o : ordersList){
             Log.d(TAG,"Order " + o.getOrderNumber());
@@ -54,18 +59,34 @@ public class OwnerOrdersActivity extends AppCompatActivity {
         rv.setItemAnimator(new DefaultItemAnimator());
     }
 
+    protected void getOrderNumber(){
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    parent.add(childSnapshot.getKey());
+                    Log.d(TAG,"order number is" + childSnapshot.getKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     protected void addUncompletedOrders(){
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                 ordersList.clear();
-
                 //add to list
                 Iterator orderList = map.entrySet().iterator();
                 String a = null;
                 String b = null;
-                int c = 0;
+                String c = null;
                 String d = null;
                 String e = null;
                 double f = 0;
@@ -74,7 +95,6 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                 while(orderList.hasNext()){
                     Map.Entry mapElement = (Map.Entry)orderList.next();
                     Log.d(TAG,"map key is" + mapElement.getValue());
-
                     HashMap hash = (HashMap) mapElement.getValue();
                     Iterator IDLIST = hash.entrySet().iterator();
                     while (IDLIST.hasNext()) {
@@ -91,7 +111,7 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                             b = (String) details;
                         }
                         else if(hashElement.getKey().equals("orderNumber")){
-                            c = Integer.parseInt(details);
+                            c = (String) details;
                         }
                         else if(hashElement.getKey().equals("orderFufilled")){
                             d = (String) details;
@@ -102,35 +122,17 @@ public class OwnerOrdersActivity extends AppCompatActivity {
                         else if(hashElement.getKey().equals("totalCost")){
                             f = Double.parseDouble(details);
                         }
+                        else if(hashElement.getKey().equals("OrderItems")){
+
+                        }
                         else{
                             Log.d(TAG,"fail");
                         }
-
-                        Orders order = new Orders(a,b,c,d,e,f);
+                        Random random = new Random();
+                        Orders order = new Orders(a,b,String.valueOf(random.nextInt(10000)),d,e,f);
                         ordersList.add(order);
+                        adapter.notifyDataSetChanged();
                         break;
-                        /*for (Orders o : ordersList){
-                            if(o.getOrderNumber() == order.getOrderNumber()){
-
-                            }
-                            else{
-                                ordersList.add(order);
-                            }
-                            if(o.getOrderNumber() == 0){
-                                ordersList.remove(o);
-                            }
-                            Log.d(TAG, "order number: " + o.getOrderNumber());
-                        }*/
-
-                        /*if(d.equals("no")){
-                            Orders order = new Orders(a,b,c,d,e,f);
-                            //add student to student list
-                            ordersList.add(order);
-                            Log.d(TAG, " " + ordersList.get(0).getOrderNumber());
-                        }
-                        else{
-                            Log.d(TAG, "order completed, not added to list");
-                        }*/
                     }
 
                 }

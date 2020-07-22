@@ -3,14 +3,14 @@ package sg.edu.np.mad.snatch;
 public class Orders {
     private String FoodCourt;
     private String Stall;
-    private int OrderNumber;
+    private String OrderNumber;
     private String OrderFufilled;
     private String DateTime;
     private double TotalCost;
 
     private Orders(){};
 
-    public Orders(String foodCourt, String stall, int orderNumber, String orderFufilled, String dateTime, double totalCost){
+    public Orders(String foodCourt, String stall, String orderNumber, String orderFufilled, String dateTime, double totalCost){
         this.FoodCourt = foodCourt;
         this.Stall = stall;
         this.OrderNumber = orderNumber;
@@ -35,11 +35,11 @@ public class Orders {
         Stall = stall;
     }
 
-    public int getOrderNumber() {
+    public String getOrderNumber() {
         return OrderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(String orderNumber) {
         OrderNumber = orderNumber;
     }
 
