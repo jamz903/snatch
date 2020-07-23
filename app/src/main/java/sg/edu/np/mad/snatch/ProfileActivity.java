@@ -46,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity{
     EditText profilePW;
     TextView profilePoints;
     Button updateButton;
+    Button redeemButton;
 
 
     String password;
@@ -65,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity{
         profilePW = (EditText) findViewById(R.id.profilePassword);
         profilePoints = (TextView) findViewById(R.id.profilePoints);
         updateButton = (Button) findViewById(R.id.UpdateButton);
+        redeemButton = (Button) findViewById(R.id.RedeemPointsButtonProfile);
 
         //Shared Preferences
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -109,6 +111,15 @@ public class ProfileActivity extends AppCompatActivity{
                     reff.child(MainActivity.usingID).child("studentName").setValue(profileName.getText().toString());
                     reff.child(MainActivity.usingID).child("studentPW").setValue(profilePW.getText().toString());
                 };
+            }
+        });
+
+
+        redeemButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent in = new Intent(ProfileActivity.this, RewardsActivity.class);
+                startActivity(in);
             }
         });
 
