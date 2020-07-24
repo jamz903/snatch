@@ -7,12 +7,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.StrictMode;
@@ -72,10 +79,60 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_court_vacancy);
 
+        if(getConnectionType(FoodCourtVacancyActivity.this)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(FoodCourtVacancyActivity.this);
+            builder.setTitle("No Internet Connection")
+                    .setCancelable(false)
+                    .setMessage("You currently have no internet connection. Internet is required to proceed. Popular dishes displayed for each stall may also be inaccurate")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }
+
         reference = FirebaseDatabase.getInstance().getReference().child("FoodCourt");
         mMapView = findViewById(R.id.vacancyMapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
+
+        FoodCourt foodClub = new FoodCourt(400, "FoodClub");
+        foodClub.setPopularDishes(foodClub.getAllDishes(foodClub.name));
+
+        //Below is test values for the recycler view, just leave it here for now
+        FoodCourt makanPlace = new FoodCourt(500,"Makan Place");
+        makanPlace.setPopularDishes(makanPlace.getAllDishes(makanPlace.name));
+
+        FoodCourt poolside = new FoodCourt(250, "Poolside");
+        poolside.setPopularDishes(poolside.getAllDishes(poolside.name));
+
+        FoodCourt munch = new FoodCourt(200, "Munch");
+        munch.setPopularDishes(munch.getAllDishes(munch.name));
+
+        ArrayList<FoodCourt> foodCourtList = new ArrayList<>();
+        foodCourtList.add(foodClub);
+        foodCourtList.add(makanPlace);
+        foodCourtList.add(poolside);
+        foodCourtList.add(munch);
+
+        RecyclerView rv = findViewById(R.id.vacancyRecyclerView);
+        vacancyRVAdapter adapter = new vacancyRVAdapter(this,foodCourtList,this);
+        for (FoodCourt fc : foodCourtList) {
+            Log.d("snatchwork", "NEW FOOD COURT IS " + fc.name);
+            fc.popularDishes = fc.getAllDishes(fc.name);
+
+            getUpvote(fc.popularDishes, adapter);
+        }
+        rv.setAdapter(adapter);
+
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        rv.setLayoutManager(layout);
+        rv.setItemAnimator(new DefaultItemAnimator());
+
+        //adds a divider in-between items
+        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @Override
@@ -139,41 +196,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         super.onResume();
         mMapView.onResume();
 
-        FoodCourt foodClub = new FoodCourt(400, "FoodClub");
-        foodClub.setPopularDishes(foodClub.getAllDishes(foodClub.name));
 
-        //Below is test values for the recycler view, just leave it here for now
-        FoodCourt makanPlace = new FoodCourt(500,"Makan Place");
-        makanPlace.setPopularDishes(makanPlace.getAllDishes(makanPlace.name));
-
-        FoodCourt poolside = new FoodCourt(250, "Poolside");
-        poolside.setPopularDishes(poolside.getAllDishes(poolside.name));
-
-        FoodCourt munch = new FoodCourt(200, "Munch");
-        munch.setPopularDishes(munch.getAllDishes(munch.name));
-
-        ArrayList<FoodCourt> foodCourtList = new ArrayList<>();
-        foodCourtList.add(foodClub);
-        foodCourtList.add(makanPlace);
-        foodCourtList.add(poolside);
-        foodCourtList.add(munch);
-
-        RecyclerView rv = findViewById(R.id.vacancyRecyclerView);
-        vacancyRVAdapter adapter = new vacancyRVAdapter(this,foodCourtList,this);
-        for (FoodCourt fc : foodCourtList) {
-            Log.d("snatchwork", "NEW FOOD COURT IS " + fc.name);
-            fc.popularDishes = fc.getAllDishes(fc.name);
-
-            getUpvote(fc.popularDishes, adapter);
-        }
-        rv.setAdapter(adapter);
-
-        LinearLayoutManager layout = new LinearLayoutManager(this);
-        rv.setLayoutManager(layout);
-        rv.setItemAnimator(new DefaultItemAnimator());
-
-        //adds a divider in-between items
-        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 
     @Override
@@ -311,5 +334,41 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
             });
 /*            Log.d("snatchwork", food.getFoodName() + " has " + food.getUpVotes());*/
         }
+    }
+
+    public static boolean getConnectionType(Context context) {
+        boolean result = true; // If there is no internet connection, bool returns true
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                // if there is internet connection, regardless of what type (wifi, cellular, vpn) return false
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                        result = false;
+                    }
+                }
+            }
+            else { //for older devices
+                if (cm != null) {
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_VPN) {
+                            result = false;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
