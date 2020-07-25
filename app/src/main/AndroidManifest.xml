@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_snatch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OwnerOrdersActivity"></activity>
+        <activity android:name=".FormActivity"
+            android:theme="@style/AppTheme.FormTheme"></activity>
+        <activity android:name=".OwnerOrdersActivity" />
         <activity
             android:name=".StallOwnerActivity"
             android:theme="@style/AppTheme.StallOwnerTheme" />
@@ -38,7 +40,9 @@
         <activity
             android:name=".FoodClubActivity"
             android:label="@string/Stalls" />
-        <activity android:name=".RewardsActivity" android:label = "rewards"></activity>
+        <activity
+            android:name=".RewardsActivity"
+            android:label="rewards" />
         <activity android:name=".HomescreenActivity" />
         <activity
             android:name=".SignUpActivity"

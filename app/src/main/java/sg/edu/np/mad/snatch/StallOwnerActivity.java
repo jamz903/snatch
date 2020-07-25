@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -125,9 +126,10 @@ public class StallOwnerActivity extends AppCompatActivity {
         getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent in = new Intent(StallOwnerActivity.this, FormActivity.class);
                 //todo: create a google form to link
                 //sends user to google form to give feedback
-                Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
+                //Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });

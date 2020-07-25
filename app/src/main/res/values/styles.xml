@@ -19,4 +19,10 @@
         <item name="colorPrimaryDark">@color/yellowColorDark</item>
     </style>
 
+    <style name="AppTheme.FormTheme">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/lightGreyColor</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
 </resources>

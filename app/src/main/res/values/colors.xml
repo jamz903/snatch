@@ -28,4 +28,6 @@
     <color name="yellowColorDark">#ff9f00</color>
     <color name="greenColor">#00bfa5</color>
     <color name="pinkColor">#ff4081</color>
+
+    <color name="black">#000000</color>
 </resources>

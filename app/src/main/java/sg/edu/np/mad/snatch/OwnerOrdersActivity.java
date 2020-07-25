@@ -37,8 +37,6 @@ public class OwnerOrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders);
 
-
-        //Reference for firebase to get studentList
         reference = FirebaseDatabase.getInstance().getReference().child("Orders");
         getOrderNumber();
         addUncompletedOrders();
