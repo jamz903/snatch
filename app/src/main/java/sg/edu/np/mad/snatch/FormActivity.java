@@ -3,7 +3,9 @@ package sg.edu.np.mad.snatch;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -19,7 +21,9 @@ public class FormActivity extends AppCompatActivity {
 
     //WebView
     private WebView webView;
+    private ProgressDialog progDialog;
 
+    //@SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,9 @@ public class FormActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);// set drawable icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progDialog = ProgressDialog.show(FormActivity.this, "Loading","Please wait...", true);
+        progDialog.setCancelable(false);
+
         webView = (WebView) findViewById(R.id.webView);
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -39,16 +46,13 @@ public class FormActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if( URLUtil.isNetworkUrl(url) ) {
-                    return false;
-                }
-                if (appInstalledOrNot(url)) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity( intent );
-                } else {
-                    // do something if app is not installed
-                }
+                progDialog.show();
+                view.loadUrl(url);
                 return true;
+            }
+            @Override
+            public void onPageFinished(WebView view, final String url){
+                progDialog.dismiss();
             }
 
         });
@@ -84,17 +88,6 @@ public class FormActivity extends AppCompatActivity {
         else{
             super.onBackPressed();
         }
-    }
-
-    private boolean appInstalledOrNot(String uri) {
-        PackageManager pm = getPackageManager();
-        try {
-            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-        }
-
-        return false;
     }
 }
 
