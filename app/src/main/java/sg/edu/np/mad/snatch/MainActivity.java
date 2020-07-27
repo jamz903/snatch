@@ -196,12 +196,18 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
-                                    SignUpActivity.username = studentsList.get(i).getStudentName();
+                                    String username = studentsList.get(i).getStudentName();
+                                    SignUpActivity.username = username;
                                     SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("studentID", studentsList.get(i).getStudentID());
-                                    editor.putString("studentUsername", studentsList.get(i).getStudentName());
-                                    editor.putString("studentPW", studentsList.get(i).getStudentPW());
+                                    editor.putString("studentUsername", username);
+                                    for (Students student: studentsList){
+                                        if (student.getStudentName().equals(username)){
+                                            editor.putString("studentID", student.getStudentID());
+                                            editor.putString("studentPW", student.getStudentName());
+                                            break;
+                                        }
+                                    }
                                     editor.apply();
                                     //if "remember me" is checked, store user's information
                                     if (checked.equals("true")) {
