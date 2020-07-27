@@ -62,7 +62,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
 
     DatabaseReference reff;
     final List<Students> studentsList = new ArrayList();
-    private static final String TAG = "snatch";
+    private static final String TAG = "snatchworks";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +84,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
                     .show();
         }
         else{
+            Log.d(TAG, "RUNNING");
             addExistingMembers();
         }
 
@@ -108,14 +109,18 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         if (checkbox.equals("true")){
             message = "Welcome, " + username + "!";
             if (getConnectionType(HomescreenActivity.this)){
+                Log.d("snatchworks", "Student ID Is " + studentID);
+                points = 0;
+            }
+            else{
+                Log.d("snatchworks", "SIZE IS " + studentsList.size());
                 for(int i = 0; i<studentsList.size(); i++){
                     if (studentsList.get(i).getStudentID().equalsIgnoreCase(studentID)){
                         points = studentsList.get(i).getStudentPoints();
+                        Log.d("snatchworks", "Points HERE is " + points);
                     }
                 }
-            }
-            else{
-                points = 0;
+                Log.d("snatchworks", "else Student ID Is " + studentID);
             }
             pointsText = "Points: " + points;
         }
