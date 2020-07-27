@@ -152,6 +152,17 @@ After the user has successfully placed an order, the user would be able to see t
 ### Presentation Slides
 [Slides used for Presentation](https://docs.google.com/presentation/d/1EyHYaZNn5Ivg7DkswJTTFgeQ20STXJnDcjCZc1PpXpU/edit?usp=sharing)
 
+# Stage 2
+## Justin Ng (Individual)
+## NP Food Court Vacancy
+### Google Maps
+
+
+
+## Shane-Rhys Chua (Individual)
+
+## Jamie Toh (Individual)
+
 ## Reference Links for Images
 1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM
 2. Gong Bao Chicken - https://www.seriouseats.com/recipes/2017/08/gong-bao-ji-ding-sichuan-kung-pow-chicken-recipe.html
