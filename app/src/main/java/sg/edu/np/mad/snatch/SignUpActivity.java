@@ -138,11 +138,6 @@ public class SignUpActivity extends AppCompatActivity {
                         if((id.toUpperCase().matches("S[0-9]{8}") && id.length() == 9) ){
                             username = un;
                             password = pw;
-                            SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("studentID", id.toUpperCase());
-                            editor.putString("studentUsername", un);
-                            editor.putString("studentPW", pw);
                             String newUser = "yes";
                             Students students = new Students(id.toUpperCase(),pw,un,newUser,0);
                             reff.child(id).setValue(students);
