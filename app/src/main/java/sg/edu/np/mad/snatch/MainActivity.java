@@ -161,10 +161,13 @@ public class MainActivity extends AppCompatActivity {
 
                 else{
                     boolean matchFound = false;
+                    boolean correctPW = false;
                     for(int i = 0; i<studentsList.size(); i++)
                     {
+                        Log.d("snatchwork", "User is " +studentsList.get(i).getStudentName());
                         //in list of registered users in firebase, obtain studentID
                         if ((studentsList.get(i).getStudentID()).equalsIgnoreCase(studentID.toString())){
+                            matchFound = true;
                             try{
                                 //obtain password of studentID in list and check if it matches the keyed in password
                                 if (studentsList.get(i).getStudentPW().equalsIgnoreCase(pw.toString()) == true){
@@ -175,7 +178,9 @@ public class MainActivity extends AppCompatActivity {
                                     usingID = studentsList.get(i).getStudentID();
                                     usingPW = studentsList.get(i).getStudentPW();
                                     usingName = studentsList.get(i).getStudentName();
-                                    matchFound = true;
+
+                                    correctPW = true;
+                                    inputLayout.setError(null);
                                     Intent in;
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
                                         in = new Intent(MainActivity.this, IntroActivity.class);
@@ -203,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                                         editor.putString("studentUsername", studentsList.get(i).getStudentName());
                                         editor.apply();
                                     }
+                                    break;
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
                                 /*inputLayout.setError("Incorrect Password");*/
@@ -210,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
+                    }
+                    if (!correctPW) {
+                        inputLayout.setError("Invalid Password");
                     }
                     if (!matchFound) {
                         Log.d(TAG, "Login Unsuccessful");
