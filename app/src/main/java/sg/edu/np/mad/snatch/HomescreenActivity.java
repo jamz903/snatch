@@ -83,10 +83,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
                     })
                     .show();
         }
-        else{
-            Log.d(TAG, "RUNNING");
-            addExistingMembers();
-        }
 
         //find and assign views
         dropdownList = findViewById(R.id.dropdownList);
@@ -98,6 +94,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         final String checkbox = preferences.getString("remember","");
         final String username = preferences.getString("studentUsername","");
         final String studentID = preferences.getString("studentID","");
+        final String studentPoints = preferences.getString("studentPoints","");
 
         //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
@@ -113,14 +110,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
                 points = 0;
             }
             else{
-                Log.d("snatchworks", "SIZE IS " + studentsList.size());
-                for(int i = 0; i<studentsList.size(); i++){
-                    if (studentsList.get(i).getStudentID().equalsIgnoreCase(studentID)){
-                        points = studentsList.get(i).getStudentPoints();
-                        Log.d("snatchworks", "Points HERE is " + points);
-                    }
-                }
-                Log.d("snatchworks", "else Student ID Is " + studentID);
+                points = Integer.parseInt(studentPoints);
             }
             pointsText = "Points: " + points;
         }
@@ -298,86 +288,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         helpDialog.show();
     }
 
-    //add members of database to studentsList
-    protected void addExistingMembers(){
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                studentsList.clear();
-
-
-                Log.d(TAG,"connection Success");
-                Log.d(TAG,"Value is" + map);
-                Log.d(TAG,"is a " + map.getClass().getName());
-
-                //add to list
-                Iterator StuList = map.entrySet().iterator();
-                String a = null ;
-                String b = null;
-                String c = null;
-                String d = null;
-                int e = 0;
-
-                //iterate through database for all child items
-                while(StuList.hasNext()){
-                    Map.Entry mapElement = (Map.Entry)StuList.next();
-                    Log.d(TAG,"map key is" + mapElement.getValue());
-
-
-                    HashMap hash = (HashMap) mapElement.getValue();
-                    Iterator IDLIST = hash.entrySet().iterator();
-                    while (IDLIST.hasNext()) {
-
-                        Map.Entry hashElement = (Map.Entry)IDLIST.next();
-
-                        Log.d(TAG,"map key s" + hashElement);
-                        String details = (((String)hashElement.getValue().toString()));
-
-                        //check if item is an ID or PW before adding to list
-                        if (hashElement.getKey().equals("studentID")){
-                            a = (String) details;
-                        }
-                        else if (hashElement.getKey().equals("studentPW")){
-                            b = (String) details;
-                        }
-                        else if(hashElement.getKey().equals("studentName")){
-                            c = (String) details;
-                        }
-                        else if(hashElement.getKey().equals("newUser")){
-                            d = (String) details;
-                        }
-                        else if(hashElement.getKey().equals("studentPoints")){
-                            e = Integer.parseInt(details);
-                        }
-                        else{
-                            Log.d(TAG,"Assignment failure");
-                        }
-
-
-
-                        //make student obkect to add to list
-                        Students student = new Students(a,b,c,d,e);
-                        //add student to student list
-                        studentsList.add(student);
-                        Log.d(TAG, " " + studentsList.get(0).getStudentID());
-
-
-                    }
-
-
-                }
-
-            }
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG,"FAILL" , databaseError.toException());
-            }
-        });
-    }
 
     public static boolean getConnectionType(Context context) {
         boolean result = true; // If there is no internet connection, bool returns true
