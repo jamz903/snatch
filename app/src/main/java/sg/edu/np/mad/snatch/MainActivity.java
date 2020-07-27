@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
-                                inputLayout.setError("Incorrect Password");
+                                /*inputLayout.setError("Incorrect Password");*/
                             }
 
                         }
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //add to list
                 Iterator StuList = map.entrySet().iterator();
-                String a = null;
+                String a = null ;
                 String b = null;
                 String c = null;
                 String d = null;

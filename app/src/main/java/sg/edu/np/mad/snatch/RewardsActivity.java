@@ -42,15 +42,6 @@ public class RewardsActivity  extends AppCompatActivity {
         //add all rewards to list from firebase
         addExistingDeals();
 
-        RecyclerView rv = findViewById(R.id.recyclerViewRewards);
-
-        adapter = new RewardsAdapter(this , (ArrayList<Rewards>) rewardsList);
-        rv.setAdapter(adapter);
-        LinearLayoutManager layout = new LinearLayoutManager(this);
-        rv.setLayoutManager(layout);
-        rv.setItemAnimator(new DefaultItemAnimator());
-
-        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
 
 
     }
@@ -94,6 +85,14 @@ public class RewardsActivity  extends AppCompatActivity {
                 rewardsList.add(reward);
                 Log.d("Reward", rewardsList.get(0).getRewardsID());
 
+                RecyclerView rv = findViewById(R.id.recyclerViewRewards);
+                adapter = new RewardsAdapter(RewardsActivity.this , (ArrayList<Rewards>) rewardsList);
+                rv.setAdapter(adapter);
+                LinearLayoutManager layout = new LinearLayoutManager(RewardsActivity.this);
+                rv.setLayoutManager(layout);
+                rv.setItemAnimator(new DefaultItemAnimator());
+
+                rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
 
 
 
