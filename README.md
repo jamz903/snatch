@@ -153,6 +153,11 @@ After the user has successfully placed an order, the user would be able to see t
 [Slides used for Presentation](https://docs.google.com/presentation/d/1EyHYaZNn5Ivg7DkswJTTFgeQ20STXJnDcjCZc1PpXpU/edit?usp=sharing)
 
 # Stage 2
+## Description of snatch (Updated)
+snatch is a food ordering app for Ngee Ann Polytechnic (NP) students and staff. It allows users to visit the different food courts available in NP as well as the different food stalls in the respective food courts. Users are able to add and remove food from their cart and are also able to place an order using snatch. In addition, users are also able to upvote different food items. The food in a stall's menu are sorted based on the number of upvotes it has, hence allowing users to know which are the more popular food in NP.
+Users will also be able to view the vacancies of each Food Court to know how crowded or empty a Food Court is, so that they can decide which Food Court they would like to dine at. They wll also be able to see what are the top 3 dishes of each Food Court which can help them decide what to eat at the Food Court they wish to go to.
+
+## Individual Roles and Contributions
 ## Justin Ng (Individual)
 ## NP Food Court Vacancy
 ![Image of "Vacancy" option in the kebab menu](/githubImages/food_court_vacancy_kebab.png)\
@@ -168,7 +173,8 @@ Users will be able to see where are all the different food courts are located at
 The custom info window displays a Pie Chart showing the number of users, as well as the number of vacant places. It also displays the name of the Food Court. Users can click on the info window to see more information regarding the vacancy.
 
 ### Pop-up Window
-
+![Image of pop-up window](/githubImages/pop_up.png)\
+The pop-up window displays more information like the exact number of empty seats. It also shows the legend, green - number of empty seats and red - number of users. By being able to see such information, users can decide which is the least crowded Food Court so that they can quickly eat their meals before going to their next class.
 
 ## Shane-Rhys Chua (Individual)
 
