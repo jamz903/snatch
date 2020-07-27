@@ -65,12 +65,13 @@ public class RewardsActivity  extends AppCompatActivity {
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                rewardsList.clear();
 
 
                 String a = null;
                 String b = null;
                 String c = null;
+                String d = null;
                 hashList = (List<HashMap>) dataSnapshot.getValue();
 
                 Log.d("Rewards", " "+ hashList.get(1).get("ID"));
@@ -79,10 +80,12 @@ public class RewardsActivity  extends AppCompatActivity {
                     a = hashList.get(i).get("ID").toString();
                     b = hashList.get(i).get("Redeemed").toString();
                     c = hashList.get(i).get("Price").toString();
+                    d = hashList.get(i).get("Desc").toString();
+                    Rewards reward = new Rewards(a,c,b,d);
+                    rewardsList.add(reward);
                 }
 
-                Rewards reward = new Rewards(a,c,b);
-                rewardsList.add(reward);
+
                 Log.d("Reward", rewardsList.get(0).getRewardsID());
 
                 RecyclerView rv = findViewById(R.id.recyclerViewRewards);

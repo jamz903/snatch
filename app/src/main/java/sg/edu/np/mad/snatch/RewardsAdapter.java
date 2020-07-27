@@ -1,7 +1,9 @@
 package sg.edu.np.mad.snatch;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -42,9 +44,9 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RewardsViewHolder holder, int position) {
         if(position< RewardsArrayList.size()){
-            Rewards rewards = RewardsArrayList.get(position);
+            final Rewards rewards = RewardsArrayList.get(position);
             final String info1 = rewards.getRewardsID();
-            String rewardNumber = "Order #" + info1; //use this to change to names later on(rhsy)
+            String rewardNumber = rewards.getDesc(); //use this to change to names later on(rhsy)
             holder.RewardstxtV.setText(rewardNumber);
 
             final String info2 = rewards.getPrice();
@@ -76,7 +78,20 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsViewHolder> {
                         //delete from database
                         FirebaseDatabase.getInstance().getReference().child("Rewards").child(info1).removeValue();
 
-                        context.startActivity(new Intent(context,HomescreenActivity.class));
+                        AlertDialog.Builder codealert = new AlertDialog.Builder(context);
+                        codealert.setTitle("Heres your code! Remember to screenshot it for future use!");
+                        codealert.setMessage(rewards.getRedeemed());
+                        codealert.setCancelable(false);
+                        codealert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                context.startActivity(new Intent(context,HomescreenActivity.class));
+
+                            }
+                        });
+
+                        AlertDialog showDialog = codealert.create();
+                        showDialog.show();
 
 
                     }

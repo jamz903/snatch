@@ -54,7 +54,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     boolean doubleClickToExit = false;
     TextView welcomeMessage;
     private int[] mImages = new int[]{R.drawable.steak, R.drawable.fastfood, R.drawable.desert};
-    TextView pointsTextView;
+
     //Help pop-up dialog
     Dialog helpDialog;
     ImageView close;
@@ -99,9 +99,9 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
         //show current points
-        pointsTextView = (TextView) findViewById(R.id.PointsTextView);
+
         String message;
-        String pointsText;
+
         int points = 0;
         if (checkbox.equals("true")){
             message = "Welcome, " + username + "!";
@@ -112,15 +112,15 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             else{
                 points = Integer.parseInt(studentPoints);
             }
-            pointsText = "Points: " + points;
+
         }
         else{
             message = "Welcome, " + SignUpActivity.username + "!";
             Log.d("Points", "Points = " + MainActivity.userpoints);
-            pointsText = "Points: " + MainActivity.userpoints;
+
         }
         welcomeMessage.setText(message);
-        pointsTextView.setText(pointsText);
+
 
 
 

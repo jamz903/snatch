@@ -94,7 +94,23 @@ public class ProfileActivity extends AppCompatActivity{
     @Override
     protected void onStart() {
         super.onStart();
-        profilePoints.setText("Points: " + MainActivity.userpoints);
+        reff = FirebaseDatabase.getInstance().getReference().child("Students");
+        int value = 0;
+
+        reff.child(MainActivity.usingID).child("studentPoints").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int value = Integer.parseInt( dataSnapshot.getValue().toString());
+                profilePoints.setText("Points: " + value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
     @Override
     protected void onResume() {
