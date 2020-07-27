@@ -176,6 +176,13 @@ The custom info window displays a Pie Chart showing the number of users, as well
 ![Image of pop-up window](/githubImages/pop_up.png)\
 The pop-up window displays more information like the exact number of empty seats. It also shows the legend, green - number of empty seats and red - number of users. By being able to see such information, users can decide which is the least crowded Food Court so that they can quickly eat their meals before going to their next class.
 
+### Top 3 Dishes of each Food Court
+![Image of top 3 dishes](/githubImages/popular_dishes.png)\
+The RecyclerView at the bottom of the Google Maps shows all the Food Courts in NP as well as their respective seating capacity. Users can click on any one of the Food Court and it will expand to show the top 3 dishes in that Food Court. This is measured by the number of upvotes the Food Dishes have. Clicking on the "Visit Store" option would bring the user directly to the dish's Food Stall menu page.
+
+## Justin's Individual Reference Links
+
+
 ## Shane-Rhys Chua (Individual)
 
 ## Jamie Toh (Individual)
