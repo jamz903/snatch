@@ -205,20 +205,20 @@ public class MainActivity extends AppCompatActivity {
                                         if (student.getStudentName().equals(username)){
                                             editor.putString("studentID", student.getStudentID());
                                             editor.putString("studentPW", student.getStudentName());
+
                                             break;
                                         }
                                     }
-                                    editor.apply();
+
                                     //if "remember me" is checked, store user's information
                                     if (checked.equals("true")) {
                                         editor.putString("remember", "true");
-                                        editor.apply();
                                     }
                                     else{
                                         editor.putString("remember", "false");
                                         editor.putString("studentUsername", studentsList.get(i).getStudentName());
-                                        editor.apply();
                                     }
+                                    editor.apply();
                                     break;
                                 }
                             } catch (NullPointerException e) { //password does not match value in firebase
