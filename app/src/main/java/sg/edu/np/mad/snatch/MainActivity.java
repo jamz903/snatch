@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
 
+
                 //redirects to stall owner/admin view
                 if (studentID.equalsIgnoreCase("stall123") && pw.equals("123123")){
                     Intent in = new Intent(MainActivity.this, StallOwnerActivity.class);
@@ -201,9 +202,6 @@ public class MainActivity extends AppCompatActivity {
                                         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = preferences.edit();
                                         editor.putString("remember", "true");
-                                        editor.putString("studentID", studentsList.get(i).getStudentID());
-                                        editor.putString("studentUsername", studentsList.get(i).getStudentName());
-                                        editor.putString("studentPW", studentsList.get(i).getStudentPW());
                                         editor.apply();
                                     }
                                     else{

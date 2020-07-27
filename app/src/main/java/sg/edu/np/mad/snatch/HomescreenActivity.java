@@ -117,7 +117,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             else{
                 points = 0;
             }
-            pointsText = "Points = " + points;
+            pointsText = "Points: " + points;
         }
         else{
             message = "Welcome, " + SignUpActivity.username + "!";
