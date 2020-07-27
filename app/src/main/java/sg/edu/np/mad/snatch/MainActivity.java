@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 closeKeyboard();
                 String studentID = emailEditText.getText().toString().toUpperCase(); //.toUpperCase() makes Student ID not case sensitive
                 String pw = pwEditText.getText().toString();
+
+                //redirects to stall owner/admin view
                 if (studentID.equalsIgnoreCase("stall123") && pw.equals("123123")){
                     Intent in = new Intent(MainActivity.this, StallOwnerActivity.class);
                     startActivity(in);
@@ -182,16 +184,19 @@ public class MainActivity extends AppCompatActivity {
                                     correctPW = true;
                                     inputLayout.setError(null);
                                     Intent in;
+                                    //checks if user is new, if new then proceed to intro slides
                                     if (studentsList.get(i).getNewUser().equalsIgnoreCase("yes")){
                                         in = new Intent(MainActivity.this, IntroActivity.class);
                                         FirebaseStudentID = studentsList.get(i).getStudentID();
                                     }
+                                    //if not new, proceed as normal to homepage
                                     else{
                                         in = new Intent(MainActivity.this, HomescreenActivity.class);
                                     }
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
                                     SignUpActivity.username = studentsList.get(i).getStudentName();
+                                    //if "remember me" is checked, store user's information
                                     if (checked.equals("true")) {
                                         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = preferences.edit();

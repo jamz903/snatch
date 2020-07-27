@@ -32,17 +32,23 @@ public class FormActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);// set drawable icon
+        //to set the drawable icon to be the "back" equivalent, goes back to previous activity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //sets progress dialog
         progDialog = ProgressDialog.show(FormActivity.this, "Loading","Please wait...", true);
         progDialog.setCancelable(false);
 
         webView = (WebView) findViewById(R.id.webView);
 
+        //enables javascript so that the page can load
         webView.getSettings().setJavaScriptEnabled(true);
+        //loads the webview completely zoomed out
         webView.getSettings().setLoadWithOverviewMode(true);
+        //makes the webview have a normal viewport (e.g. like a normal desktop browser), instead of one that adjusts to the size of webview
         webView.getSettings().setUseWideViewPort(true);
 
+        //checks if the url has loaded, if not loaded display the progress dialog, if not cancel the progress dialog.
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -67,7 +73,7 @@ public class FormActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
+        //allows user to open the webview in chrome instead for easier access
         if(item.getItemId() == R.id.chrome_option){
             Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
             startActivity(in);
@@ -81,10 +87,11 @@ public class FormActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        //if the user has clicked another page in the browser, if it can go back to its previous page, allow it to
         if (webView.canGoBack()){
             webView.goBack();
         }
+        //if not, go back to previous activity
         else{
             super.onBackPressed();
         }

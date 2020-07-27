@@ -3,12 +3,19 @@ package sg.edu.np.mad.snatch;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -24,8 +31,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class HomescreenActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -41,10 +59,30 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     ImageView close;
     Button getHelpButton;
 
+    DatabaseReference reff;
+    final List<Students> studentsList = new ArrayList();
+    private static final String TAG = "snatch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
+        if (getConnectionType(HomescreenActivity.this)){
+            AlertDialog.Builder builder = new AlertDialog.Builder(HomescreenActivity.this);
+            builder.setTitle("No Internet Connection")
+                    .setCancelable(false)
+                    .setMessage("You currently have no internet connection. Information displayed may be inaccurate.")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }
+        else{
+            addExistingMembers();
+        }
 
         //find and assign views
         dropdownList = findViewById(R.id.dropdownList);
@@ -55,22 +93,36 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         final String checkbox = preferences.getString("remember","");
         final String username = preferences.getString("studentUsername","");
+        final String studentID = preferences.getString("studentID","");
 
         //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
+        //show current points
+        pointsTextView = (TextView) findViewById(R.id.PointsTextView);
         String message;
+        String pointsText;
+        int points = 0;
         if (checkbox.equals("true")){
             message = "Welcome, " + username + "!";
+            if (getConnectionType(HomescreenActivity.this)){
+                for(int i = 0; i<studentsList.size(); i++){
+                    if (studentsList.get(i).getStudentID().equalsIgnoreCase(studentID)){
+                        points = studentsList.get(i).getStudentPoints();
+                    }
+                }
+            }
+            else{
+                points = 0;
+            }
+            pointsText = "Points = " + points;
         }
         else{
             message = "Welcome, " + SignUpActivity.username + "!";
+            Log.d("Points", "Points = " + MainActivity.userpoints);
+            pointsText = "Points: " + MainActivity.userpoints;
         }
         welcomeMessage.setText(message);
-
-        //show current points
-        pointsTextView = (TextView) findViewById(R.id.PointsTextView);
-        Log.d("Points", "Points = " + MainActivity.userpoints);
-        pointsTextView.setText("Points: " + MainActivity.userpoints);
+        pointsTextView.setText(pointsText);
 
 
 
@@ -149,13 +201,11 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on in phase 2
-        }*/
         if(item.getItemId() == R.id.profile_option){
             Intent in = new Intent(this, ProfileActivity.class);
             startActivity(in);
         }
+
         //Food courts' vacancy button on kebab icon on top right corner of the app
         //brings user to see the number of people in each food court
         if (item.getItemId() == R.id.vacancy_option) {
@@ -179,6 +229,7 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
             finish();
         }
 
+        //shows cardview popup for users to get help
         else if(item.getItemId() == R.id.help_option){
             helpDialog = new Dialog(this);
             ShowPopUp();
@@ -229,15 +280,130 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: create a google form to link
-                //sends user to google form to give feedback
+                //sends user to activity with webview to open google form
                 Intent in = new Intent(HomescreenActivity.this, FormActivity.class);
-                //Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });
         //sets the background to 'blur' so that the pop up dialog is clearer
         helpDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         helpDialog.show();
+    }
+
+    //add members of database to studentsList
+    protected void addExistingMembers(){
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                studentsList.clear();
+
+
+                Log.d(TAG,"connection Success");
+                Log.d(TAG,"Value is" + map);
+                Log.d(TAG,"is a " + map.getClass().getName());
+
+                //add to list
+                Iterator StuList = map.entrySet().iterator();
+                String a = null ;
+                String b = null;
+                String c = null;
+                String d = null;
+                int e = 0;
+
+                //iterate through database for all child items
+                while(StuList.hasNext()){
+                    Map.Entry mapElement = (Map.Entry)StuList.next();
+                    Log.d(TAG,"map key is" + mapElement.getValue());
+
+
+                    HashMap hash = (HashMap) mapElement.getValue();
+                    Iterator IDLIST = hash.entrySet().iterator();
+                    while (IDLIST.hasNext()) {
+
+                        Map.Entry hashElement = (Map.Entry)IDLIST.next();
+
+                        Log.d(TAG,"map key s" + hashElement);
+                        String details = (((String)hashElement.getValue().toString()));
+
+                        //check if item is an ID or PW before adding to list
+                        if (hashElement.getKey().equals("studentID")){
+                            a = (String) details;
+                        }
+                        else if (hashElement.getKey().equals("studentPW")){
+                            b = (String) details;
+                        }
+                        else if(hashElement.getKey().equals("studentName")){
+                            c = (String) details;
+                        }
+                        else if(hashElement.getKey().equals("newUser")){
+                            d = (String) details;
+                        }
+                        else if(hashElement.getKey().equals("studentPoints")){
+                            e = Integer.parseInt(details);
+                        }
+                        else{
+                            Log.d(TAG,"Assignment failure");
+                        }
+
+
+
+                        //make student obkect to add to list
+                        Students student = new Students(a,b,c,d,e);
+                        //add student to student list
+                        studentsList.add(student);
+                        Log.d(TAG, " " + studentsList.get(0).getStudentID());
+
+
+                    }
+
+
+                }
+
+            }
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG,"FAILL" , databaseError.toException());
+            }
+        });
+    }
+
+    public static boolean getConnectionType(Context context) {
+        boolean result = true; // If there is no internet connection, bool returns true
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (cm != null) {
+                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
+                // if there is internet connection, regardless of what type (wifi, cellular, vpn) return false
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = false;
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) {
+                        result = false;
+                    }
+                }
+            }
+            else { //for older devices
+                if (cm != null) {
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = false;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_VPN) {
+                            result = false;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
