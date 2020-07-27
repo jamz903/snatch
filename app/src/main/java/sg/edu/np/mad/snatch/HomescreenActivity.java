@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -67,6 +68,8 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homescreen);
+        //Reference for firebase to get studentList
+        reff = FirebaseDatabase.getInstance().getReference().child("Students");
         if (getConnectionType(HomescreenActivity.this)){
             AlertDialog.Builder builder = new AlertDialog.Builder(HomescreenActivity.this);
             builder.setTitle("No Internet Connection")

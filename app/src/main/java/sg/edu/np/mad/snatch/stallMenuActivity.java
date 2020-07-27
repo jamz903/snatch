@@ -66,6 +66,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         Log.d("Snatch", "error test : " + StoresAdapter.firebaseStoreName);
 
 
+        // Checks if the previous activity was from FoodCourtVacancyActivity
         if(getIntent().hasExtra("prevActivity")) {
             String foodCourtString = foodCourtChoice.replaceAll("\\s+", "");
             String foodStallString = foodStallChoice.replaceAll("\\s+", "");
