@@ -155,6 +155,8 @@ After the user has successfully placed an order, the user would be able to see t
 # Stage 2
 ## Justin Ng (Individual)
 ## NP Food Court Vacancy
+![Image of NP Food Court Vacancy Activity](/githubImages/food_court_vacancy.png)\
+
 ### Google Maps
 
 
