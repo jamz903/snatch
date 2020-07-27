@@ -155,10 +155,19 @@ After the user has successfully placed an order, the user would be able to see t
 # Stage 2
 ## Justin Ng (Individual)
 ## NP Food Court Vacancy
+![Image of "Vacancy" option in the kebab menu](/githubImages/food_court_vacancy_kebab.png)\
+Upon selecting the "Vacancy" option in the kebab menu at the homescreen as seen in the image above, this is the view that the User will first see.
+
 ![Image of NP Food Court Vacancy Activity](/githubImages/food_court_vacancy.png)\
-
 ### Google Maps
+![Image of NP Food Court Vacancy Activity](/githubImages/food_court_vacancy.png)\
+Users will be able to see where are all the different food courts are located at. Each marker on the map indicates the location of a food court. Upon selecting a marker, a custom info window will be displayed.
 
+### Custom Info Window
+![Image of Custom Info Window of marker](/githubImages/custom_info_window.png)\
+The custom info window displays a Pie Chart showing the number of users, as well as the number of vacant places. It also displays the name of the Food Court. Users can click on the info window to see more information regarding the vacancy.
+
+### Pop-up Window
 
 
 ## Shane-Rhys Chua (Individual)
