@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FoodCourtVacancyActivity" />
+        <activity android:name=".FoodCourtVacancyActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".IntroActivity"
             android:screenOrientation="portrait" />
@@ -52,8 +53,8 @@
         <activity android:name=".ProfileActivity" />
         <activity
             android:name=".Pop"
-            android:theme="@style/AppTheme.CustomTheme" />
-
+            android:theme="@style/AppTheme.CustomTheme"
+            android:screenOrientation="portrait"/> <!--Setting of custom theme for Pop-up window-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyANOcfEnKUALhZCX4IQMYw1J_zsM3h3Yns" />

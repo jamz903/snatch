@@ -79,6 +79,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_court_vacancy);
 
+        // Checks if user has an Internet connection, else display alert dialog
         if(getConnectionType(FoodCourtVacancyActivity.this)){
             AlertDialog.Builder builder = new AlertDialog.Builder(FoodCourtVacancyActivity.this);
             builder.setTitle("No Internet Connection")
@@ -98,10 +99,10 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         mMapView.onCreate(savedInstanceState);
         mMapView.getMapAsync(this);
 
+        // Initialising the different food courts and retrieving all the dishes from all the different Food Stalls
         FoodCourt foodClub = new FoodCourt(400, "FoodClub");
         foodClub.setPopularDishes(foodClub.getAllDishes(foodClub.name));
 
-        //Below is test values for the recycler view, just leave it here for now
         FoodCourt makanPlace = new FoodCourt(500,"Makan Place");
         makanPlace.setPopularDishes(makanPlace.getAllDishes(makanPlace.name));
 
@@ -111,6 +112,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         FoodCourt munch = new FoodCourt(200, "Munch");
         munch.setPopularDishes(munch.getAllDishes(munch.name));
 
+        // Adding all the Food Courts into a list to pass into the Recycler View
         ArrayList<FoodCourt> foodCourtList = new ArrayList<>();
         foodCourtList.add(foodClub);
         foodCourtList.add(makanPlace);
@@ -120,9 +122,8 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         RecyclerView rv = findViewById(R.id.vacancyRecyclerView);
         vacancyRVAdapter adapter = new vacancyRVAdapter(this,foodCourtList,this);
         for (FoodCourt fc : foodCourtList) {
-            Log.d("snatchwork", "NEW FOOD COURT IS " + fc.name);
+            // Getting the upvote score from Firebase for each Food Dish
             fc.popularDishes = fc.getAllDishes(fc.name);
-
             getUpvote(fc.popularDishes, adapter);
         }
         rv.setAdapter(adapter);
@@ -131,7 +132,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         rv.setLayoutManager(layout);
         rv.setItemAnimator(new DefaultItemAnimator());
 
-        //adds a divider in-between items
+        // Adds a divider in-between items
         rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 
@@ -140,19 +141,25 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         initLocations(googleMap);
     }
 
+    // Initialise the locations of the different Food Courts on Google Maps
     public void initLocations(final GoogleMap googleMap) {
         LatLng makanPlaceLocation = new LatLng(1.332251, 103.774441);
         LatLng foodClubLocation = new LatLng(1.334217,  103.775498);
         LatLng poolsideLocation = new LatLng(1.335179, 103.77629);
         LatLng munchLocation = new LatLng(1.331992, 103.776518);
 
+        // Setting the camera zoom in Google Maps
+        // To allow users to see all the Food Courts on Google Maps when the activity starts
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(makanPlaceLocation, 15);
+
+        // Adding the markers on Google Maps for all the Food Courts
         googleMap.addMarker(new MarkerOptions().position(makanPlaceLocation).title("Makan Place"));
         googleMap.addMarker(new MarkerOptions().position(foodClubLocation).title("Food Club"));
         googleMap.addMarker(new MarkerOptions().position(poolsideLocation).title("Poolside"));
         googleMap.addMarker(new MarkerOptions().position(munchLocation).title("Munch"));
         googleMap.animateCamera(cameraUpdate);
 
+        // Animates Google Maps to zoom to the Marker when it is clicked on/selected
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
@@ -163,15 +170,22 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(zoomLocation, 15);
                 //Animates Google Maps to zoom to the selected marker
                 googleMap.animateCamera(cameraUpdate);
+
+                // To display the right Info Window of the Food Court selected (e.g. if Makan Place
+                // marker is selected, display the Info Window for Makan Place)
                 googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(FoodCourtVacancyActivity.this, marker.getTitle()));
+
+                // Display the Info Window
                 marker.showInfoWindow();
                 return true;
             }
         });
 
+        // Triggered when user clicks on the Info Window
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                // Launches pop-up for Food Court capacity Info
                 Intent in = new Intent(FoodCourtVacancyActivity.this, Pop.class);
                 in.putExtra("FoodCourt", marker.getTitle());
                 startActivity(in);
@@ -238,9 +252,6 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on in phase 2
-        }*/
         if(item.getItemId() == R.id.profile_option){
             Intent in = new Intent(this, ProfileActivity.class);
             startActivity(in);
@@ -296,9 +307,12 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         helpDialog.show();
     }
 
+    // Visit the Food Stall Menu when user clicks on "Visit Store" option in the Recycler View
     @Override
     public void visitFoodStall(String foodCourt, String foodStall) {
         Intent in = new Intent(FoodCourtVacancyActivity.this, stallMenuActivity.class);
+        // Pass the values of FoodCourt, and Stall so that stallMenuActivity knows which Stall from which Food Court is selected
+        // so as to display the correct menu in the Recycler View
         in.putExtra("FoodCourt", foodCourt);
         in.putExtra("Stall", foodStall);
         in.putExtra("prevActivity", "FoodCourtVacancyActivity");
@@ -310,6 +324,7 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
         startActivity(in);
     }
 
+    // Get the upvote of each Food Dish from Firebase
     public void getUpvote(final ArrayList<FoodItem> listOfDishes, final vacancyRVAdapter aAdapter){
         for (final FoodItem food : listOfDishes) {
             final String dishName = food.getFoodName().replaceAll("\\s+","");
@@ -319,8 +334,6 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Long upvotes = (Long) dataSnapshot.child(dishName).getValue();
-                    Log.d("snatchwork", "KEY IS " + dataSnapshot.child(dishName).getKey() + " FROM " + food.foodCourt);
-                    Log.d("snatchwork", "upvote here is " + String.valueOf(upvotes));
                     food.setUpVotes(Integer.parseInt(String.valueOf(upvotes)));
                     food.upVotes = Integer.parseInt(String.valueOf(upvotes));
                     //sorts items based on UpvoteNo (sorted based on CompareTo in FoodItem class)
@@ -333,10 +346,10 @@ public class FoodCourtVacancyActivity extends AppCompatActivity implements OnMap
 
                 }
             });
-/*            Log.d("snatchwork", food.getFoodName() + " has " + food.getUpVotes());*/
         }
     }
 
+    // To check if the user has an Internet connection
     public static boolean getConnectionType(Context context) {
         boolean result = true; // If there is no internet connection, bool returns true
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -40,13 +40,10 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
     public void onBindViewHolder(@NonNull vacancyViewHolder holder, final int position) {
 
         final FoodCourt foodCourt = foodCourtList.get(position);
-/*        foodCourt.getAllDishes(foodCourt.getAllStalls(foodCourt.name));*/
         holder.bind(foodCourt);
+
         ArrayList<FoodItem> top3Dishes = foodCourt.popularDishes;
         Collections.sort(top3Dishes);
-        for(FoodItem dish : top3Dishes) {
-            Log.d("snatchwork", dish.foodName + " HAS " + dish.upVotes + " UPVOTES!!!");
-        }
 
         if (foodCourt.getName().equals("FoodClub")) {
             holder.listitem_foodCourtNameTextView.setText("Food Club");
@@ -61,7 +58,10 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
             holder.listitem_foodCourtNameTextView.setText("Munch");
         }
 
+        // Display the Food Court seating capacity
         holder.capacityTextView.setText("Seating Capacity: " + String.valueOf(foodCourt.capacity));
+
+        // Retrieving the top 3 dishes and displaying in the Food Court list item
         final FoodItem dish1 = top3Dishes.get(0);
         String visitText = "Visit Store";
         holder.foodNameTextView1.setText(dish1.foodName);
@@ -78,6 +78,7 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
         holder.visitTextView3.setText(visitText);
         holder.dishImageView3.setImageResource(dish3.imageID);
 
+        // To expand/un-expand the row in Recycler View when it is clicked
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +88,7 @@ public class vacancyRVAdapter extends RecyclerView.Adapter<vacancyViewHolder> {
             }
         });
 
+        // Brings user to the food stall's menu when user selects "Visit Food Store" option
         holder.visitTextView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

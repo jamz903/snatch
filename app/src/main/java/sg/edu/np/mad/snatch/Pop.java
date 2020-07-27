@@ -54,11 +54,15 @@ public class Pop extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
+        // Settting the layout width and height of the pop-up window
         getWindow().setLayout((int)(width *.9), (int)(height*.6));
 
         TextView closeButtonTextView;
         PieChart pieChart = findViewById(R.id.chart2);
+        // Setting up of pie chart in pop-up window
         setupPieChart(pieChart);
+
+        // Go back to previous activity when the "X" button is clicked on
         closeButtonTextView = (TextView)findViewById(R.id.closeButtonTextView);
         closeButtonTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +72,7 @@ public class Pop extends Activity {
         });
     }
 
+    // Getting the number of people in the Food Court selected
     public int GetNumPpl(String foodCourt) {
         StrictMode.ThreadPolicy policy = new
         StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -118,6 +123,7 @@ public class Pop extends Activity {
         return numOfPpl;
     }
 
+    // Setting up of the Pie Chart
     private void setupPieChart(PieChart chart) {
         int numOfUsers = 0;
 

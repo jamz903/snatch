@@ -41,6 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
+    // Custom Info Window for a marker when the marker is selected
     private final View mWindow;
     private Context mContext;
     private String foodCourt;
@@ -56,6 +57,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         TextView noOfUsersTextView = (TextView)view.findViewById(R.id.noOfPplTextView);
         TextView showMoreTextView = (TextView)view.findViewById(R.id.showMoreTextView);
         PieChart pieChart = (PieChart)view.findViewById(R.id.chart1);
+        // Set up the pie chart to show number of users in Food Court and capacity of Food Court
         setupPieChart(pieChart);
         TextView apiFoodCourtNameTextView = (TextView)view.findViewById(R.id.apiFoodCourtNameTextView);
         apiFoodCourtNameTextView.setText(foodCourt);
@@ -78,23 +80,32 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private void setupPieChart(PieChart chart) {
         int numOfUsers = 0;
 
+        // Retrieves the number of people in the selcted Food Court
         numOfUsers = GetNumPpl(foodCourt);
         List<PieEntry> pieEntries = new ArrayList<>();
+        // Inserting of data for the Pie Chart
         PieEntry pieEntry = new PieEntry(numOfUsers, "No. of Users");
         PieEntry pieEntry1 = new PieEntry(getFoodCourtCapacity(foodCourt)-numOfUsers, "No. of Empty seats");
+
+        // Adding of the data into the Pie Chart
         pieEntries.add(pieEntry);
         pieEntries.add(pieEntry1);
 
         PieDataSet dataSet = new PieDataSet(pieEntries, null);
+
+        // Setting the colours of the different portions
+        // Green - Empty Seats, Red - Number of users currently
         dataSet.setColors(Color.rgb(212, 44, 44), Color.rgb(12, 201, 47));
         PieData data = new PieData(dataSet);
 
-        chart.setEntryLabelColor(ColorTemplate.rgb("#000000"));
+        // Setting the text labels to size 0
         chart.setCenterTextSize(0);
         chart.setEntryLabelTextSize(0);
         chart.setDescription(null);
         chart.setData(data);
         dataSet.setDrawValues(false);
+
+        // Removing the legend
         chart.getLegend().setEnabled(false);
         chart.invalidate();
     }
@@ -107,6 +118,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         URL url;
         int numOfPpl = 0;
         try {
+            // Retrieving the API URL for the selected Food Court
             if (foodCourt.equals("Munch")) {
                 url = new URL("https://www1.np.edu.sg/npnet/wifiatcanteen/CMXService.asmx/getChartData?Location=System%20Campus%3EBlk%2073%3ELevel%201%3EMunch");
             }
@@ -124,16 +136,23 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             Document doc = db.parse(new InputSource(url.openStream()));
             doc.getDocumentElement().normalize();
 
+            // Retrieving the data from the Web API
+            // API data format:
+            // <string xmlns="http://tempuri.org/">[{"value":0,"color":"#00ff00","label":"Comfy"}]</string>
+
+            // Get the String element/<string> tag
             NodeList nodeList = doc.getElementsByTagName("string");
+            // Since it is an array, get the first item, index 0
             Element bodyElement = (Element) nodeList.item(0);
+            // Get all child nodes
             NodeList bodyList = bodyElement.getChildNodes();
             Node nodeContent = (Node) bodyList.item(0);
+            // Since it is XML, convert to JSON
             String xmlString = nodeContent.getNodeValue();
-            Log.d("Content", xmlString);
             JSONArray objArray = new JSONArray(xmlString);
             JSONObject obj = objArray.getJSONObject(0);
+            // Getting the "value" attribute's value, which is the number of users connected
             String numOfPpl1 = obj.getString("value");
-            Log.d("Content", numOfPpl1);
             numOfPpl = Integer.parseInt(numOfPpl1);
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -149,6 +168,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         return numOfPpl;
     }
 
+    // Getting the capacity of the Food Court
     public int getFoodCourtCapacity(String foodCourt) {
         int capacity = 0;
         if (foodCourt.equals("Makan Place")) {

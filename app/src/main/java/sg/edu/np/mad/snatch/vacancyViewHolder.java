@@ -44,6 +44,7 @@ public class vacancyViewHolder extends RecyclerView.ViewHolder {
         visitTextView3 = itemView.findViewById(R.id.visitTextView3);
     }
 
+    // Expand/Un-expand the row in Recycler View
     public void bind(FoodCourt foodCourt) {
         // Get the state
         boolean expanded = foodCourt.isExpanded();
