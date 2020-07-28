@@ -93,9 +93,6 @@ public class ProfileActivity extends AppCompatActivity{
         }
         profileName.setText(message);
         profilePW.setText(password);
-
-
-
     }
     @Override
     protected void onStart() {
@@ -136,9 +133,21 @@ public class ProfileActivity extends AppCompatActivity{
                 if (profileName.getText().toString() != message|| profilePW.getText().toString() != password){
                     //means that the user has updated sth here
                     //update database
+
+                    //shared pref
+                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                    final String checkbox = preferences.getString("remember","");
+                    final String studentID = preferences.getString("studentID","");
                     reff = FirebaseDatabase.getInstance().getReference().child("Students");
-                    reff.child(MainActivity.usingID).child("studentName").setValue(profileName.getText().toString());
-                    reff.child(MainActivity.usingID).child("studentPW").setValue(profilePW.getText().toString());
+                    if (checkbox.equals("true")){
+                        reff.child(studentID).child("studentName").setValue(profileName.getText().toString());
+                        reff.child(studentID).child("studentPW").setValue(profilePW.getText().toString());
+                    }
+                    else{
+                        reff.child(MainActivity.usingID).child("studentName").setValue(profileName.getText().toString());
+                        reff.child(MainActivity.usingID).child("studentPW").setValue(profilePW.getText().toString());
+                    }
+
                 };
             }
         });
