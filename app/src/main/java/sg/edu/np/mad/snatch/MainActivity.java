@@ -198,29 +198,30 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(in);
                                     String username = studentsList.get(i).getStudentName();
                                     SignUpActivity.username = username;
-
+                                    Log.d("snatchworks", "Username: " + username);
                                     SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putString("studentUsername", username);
                                     Log.d("snatchworks","b4 loop");
                                     if (checked.equals("true")) {
                                         Log.d("snatchworks","checked");
                                         editor.putString("remember", "true");
-                                        for (Students student: studentsList){
-                                            if (student.getStudentName().equals(username)){
-                                                editor.putString("studentID", student.getStudentID());
-                                                editor.putString("studentPW", student.getStudentName());
-                                                editor.apply();
-                                                break;
+                                        editor.putString("studentID", studentID);
+                                        for(Students student:studentsList){
+                                            if(student.getStudentID().equals(studentID)){
+                                                editor.putString("studentUsername", student.getStudentName());
                                             }
                                         }
+                                        editor.putString("studentPW", pw);
+                                        editor.apply();
+                                        Log.d("snatchworks","store remember variable: " + preferences.getString("remember",""));
+                                        Log.d("snatchworks","size of studentList: " + studentsList.size());
                                     }
                                     else{
                                         Log.d("snatchworks","not checked");
                                         editor.putString("remember", "false");
                                         editor.putString("studentUsername", studentsList.get(i).getStudentName());
+                                        editor.apply();
                                     }
-                                    editor.apply();
 
                                     Log.d("snatchworks","after loop");
                                     //if "remember me" is checked, store user's information

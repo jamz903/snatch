@@ -64,6 +64,7 @@ public class SplashActivity extends AppCompatActivity {
         final SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         final String checkbox = preferences.getString("remember","");
         final String studentID = preferences.getString("studentID","");
+        Log.d("snatchworks","StudentID: "+studentID);
 
         //Reference for firebase to get studentList
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
@@ -83,18 +84,34 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 finally{
                     Intent in;
+                    Log.d("snatchworks","Checked:" + checkbox);
                     if (checkbox.equals("true")){
+                        Log.d("snatchworks", "it works");
                         in = new Intent(SplashActivity.this,HomescreenActivity.class);
                         int points = 0;
+                        String password = null;
+                        Log.d("snatchworks","Size: " + studentsList.size());
+                        /*for(Students student: studentsList){
+                            if (student.getStudentID().equals(studentID)){
+                                points = student.getStudentPoints();
+                                password = student.getStudentPW();
+                                Log.d("snatchworks", "Points HERE is " + points);
+                            }
+                        }*/
                         for(int i = 0; i<studentsList.size(); i++){
                             if (studentsList.get(i).getStudentID().equalsIgnoreCase(studentID)){
                                 points = studentsList.get(i).getStudentPoints();
+                                password = studentsList.get(i).getStudentPW();
                                 Log.d("snatchworks", "Points HERE is " + points);
                             }
                         }
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("studentPoints", String.valueOf(points));
+                        editor.putString("studentPW", password);
                         editor.apply();
+                        Log.d("snatchworks","applied");
+                        Log.d("snatchworks",preferences.getString("studentPoints",""));
+                        Log.d("snatchworks",preferences.getString("studentPW",""));
                     }
                     else{
                         in = new Intent(SplashActivity.this,MainActivity.class);

@@ -93,8 +93,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         final String checkbox = preferences.getString("remember","");
         final String username = preferences.getString("studentUsername","");
-        final String studentID = preferences.getString("studentID","");
-        final String studentPoints = preferences.getString("studentPoints","");
 
         //sets custom message for different users, depending on their username
         welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
@@ -106,18 +104,21 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         if (checkbox.equals("true")){
             message = "Welcome, " + username + "!";
             if (getConnectionType(HomescreenActivity.this)){
-                Log.d("snatchworks", "Student ID Is " + studentID);
-                points = 0;
+                android.app.AlertDialog.Builder builder = new AlertDialog.Builder(HomescreenActivity.this);
+                builder.setTitle("No Internet Connection")
+                        .setCancelable(false)
+                        .setMessage("You currently have no internet connection. Internet is required to proceed.")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
-            else{
-                points = Integer.parseInt(studentPoints);
-            }
-
         }
         else{
             message = "Welcome, " + SignUpActivity.username + "!";
-            Log.d("Points", "Points = " + MainActivity.userpoints);
-
         }
         welcomeMessage.setText(message);
 
