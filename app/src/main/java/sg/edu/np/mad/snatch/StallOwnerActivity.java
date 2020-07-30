@@ -59,9 +59,6 @@ public class StallOwnerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on in phase 2
-        }*/
         if(item.getItemId() == R.id.profile_option){
             Intent in = new Intent(this, ProfileActivity.class);
             startActivity(in);
@@ -76,6 +73,7 @@ public class StallOwnerActivity extends AppCompatActivity {
             finish();
         }
 
+        //shows cardview popup for users to get help
         else if(item.getItemId() == R.id.help_option){
             helpDialog = new Dialog(this);
             ShowPopUp();
@@ -126,10 +124,8 @@ public class StallOwnerActivity extends AppCompatActivity {
         getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sends user to activity with webview to open google form
                 Intent in = new Intent(StallOwnerActivity.this, FormActivity.class);
-                //todo: create a google form to link
-                //sends user to google form to give feedback
-                //Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });

@@ -453,9 +453,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on in phase 2
-        }*/
         if(item.getItemId() == R.id.profile_option){
             Intent in = new Intent(this, ProfileActivity.class);
             startActivity(in);
@@ -483,6 +480,7 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
             finish();
         }
 
+        //shows cardview popup for users to get help
         else if(item.getItemId() == R.id.help_option){
             helpDialog = new Dialog(this);
             ShowPopUp();
@@ -504,7 +502,6 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         }
     }
 
-    //show popup dialog
     public void ShowPopUp(){
         helpDialog.setContentView(R.layout.help_layout);
         close = (ImageView) helpDialog.findViewById(R.id.close);
@@ -520,14 +517,11 @@ public class stallMenuActivity extends AppCompatActivity implements menuItemAdap
         getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: create a google form to link
-                //sends user to google form to give feedback
+                //sends user to activity with webview to open google form
                 Intent in = new Intent(stallMenuActivity.this, FormActivity.class);
-                //Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });
-
         //sets the background to 'blur' so that the pop up dialog is clearer
         helpDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         helpDialog.show();

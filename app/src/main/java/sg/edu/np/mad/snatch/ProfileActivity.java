@@ -103,6 +103,8 @@ public class ProfileActivity extends AppCompatActivity{
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         final String checkbox = preferences.getString("remember","");
         final String studentPoints = preferences.getString("studentPoints","");
+        //usingID is a variable taken from MainActivity(login page)
+        //"remember me" function skips login page, and thus must check to see which variables to use
         if (checkbox.equals("true")){
             profilePoints.setText("Points: " + studentPoints);
         }
@@ -139,6 +141,8 @@ public class ProfileActivity extends AppCompatActivity{
                     final String checkbox = preferences.getString("remember","");
                     final String studentID = preferences.getString("studentID","");
                     reff = FirebaseDatabase.getInstance().getReference().child("Students");
+                    //usingID is a variable taken from MainActivity(login page)
+                    //"remember me" function skips login page, and thus must check to see which variables to use
                     if (checkbox.equals("true")){
                         reff.child(studentID).child("studentName").setValue(profileName.getText().toString());
                         reff.child(studentID).child("studentPW").setValue(profilePW.getText().toString());

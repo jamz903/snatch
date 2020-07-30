@@ -61,7 +61,6 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
     Button getHelpButton;
 
     DatabaseReference reff;
-    final List<Students> studentsList = new ArrayList();
     private static final String TAG = "snatchworks";
 
     @Override
@@ -70,6 +69,9 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_homescreen);
         //Reference for firebase to get studentList
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
+
+        //if there is no internet inform user that information will be inaccurate
+        //no internet means cannot obtain values from firebase
         if (getConnectionType(HomescreenActivity.this)){
             AlertDialog.Builder builder = new AlertDialog.Builder(HomescreenActivity.this);
             builder.setTitle("No Internet Connection")
@@ -103,6 +105,8 @@ public class HomescreenActivity extends AppCompatActivity implements AdapterView
         int points = 0;
         if (checkbox.equals("true")){
             message = "Welcome, " + username + "!";
+            //if there is no internet inform user that information will be inaccurate
+            //no internet means cannot obtain values from firebase
             if (getConnectionType(HomescreenActivity.this)){
                 android.app.AlertDialog.Builder builder = new AlertDialog.Builder(HomescreenActivity.this);
                 builder.setTitle("No Internet Connection")

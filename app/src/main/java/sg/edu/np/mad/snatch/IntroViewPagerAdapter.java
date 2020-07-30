@@ -22,6 +22,8 @@ public class IntroViewPagerAdapter extends PagerAdapter {
         this.mItemList = mItemList;
     }
 
+    //create the page for the given position
+    //adds the view to the "container"
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {

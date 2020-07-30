@@ -196,16 +196,21 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     startActivity(in);
+                                    //save username to display in homepage
                                     String username = studentsList.get(i).getStudentName();
                                     SignUpActivity.username = username;
                                     Log.d("snatchworks", "Username: " + username);
+                                    //shared preferences
                                     SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences.edit();
                                     Log.d("snatchworks","b4 loop");
+                                    //if user checks "remember me"
                                     if (checked.equals("true")) {
                                         Log.d("snatchworks","checked");
+                                        //store values
                                         editor.putString("remember", "true");
                                         editor.putString("studentID", studentID);
+                                        //loop has duplicates and some with jumbled values, used for loop to solve this
                                         for(Students student:studentsList){
                                             if(student.getStudentID().equals(studentID)){
                                                 editor.putString("studentUsername", student.getStudentName());
@@ -216,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
                                         Log.d("snatchworks","store remember variable: " + preferences.getString("remember",""));
                                         Log.d("snatchworks","size of studentList: " + studentsList.size());
                                     }
+                                    //remember me not checked, proceed as per normal
                                     else{
                                         Log.d("snatchworks","not checked");
                                         editor.putString("remember", "false");
@@ -279,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //onclick listener for checkbox
         //allows user to stay logged in
         rememberCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

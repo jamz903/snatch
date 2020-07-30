@@ -39,6 +39,7 @@ public class OwnerOrdersActivity extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference().child("Orders");
         getOrderNumber();
+        //add orders to list
         addUncompletedOrders();
         for (Orders o : ordersList){
             Log.d(TAG,"Order " + o.getOrderNumber());

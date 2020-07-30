@@ -85,19 +85,13 @@ public class SplashActivity extends AppCompatActivity {
                 finally{
                     Intent in;
                     Log.d("snatchworks","Checked:" + checkbox);
+                    //if "remember me" function ticked, redirect to homepage and skip login page
                     if (checkbox.equals("true")){
                         Log.d("snatchworks", "it works");
                         in = new Intent(SplashActivity.this,HomescreenActivity.class);
                         int points = 0;
                         String password = null;
                         Log.d("snatchworks","Size: " + studentsList.size());
-                        /*for(Students student: studentsList){
-                            if (student.getStudentID().equals(studentID)){
-                                points = student.getStudentPoints();
-                                password = student.getStudentPW();
-                                Log.d("snatchworks", "Points HERE is " + points);
-                            }
-                        }*/
                         for(int i = 0; i<studentsList.size(); i++){
                             if (studentsList.get(i).getStudentID().equalsIgnoreCase(studentID)){
                                 points = studentsList.get(i).getStudentPoints();
@@ -105,6 +99,7 @@ public class SplashActivity extends AppCompatActivity {
                                 Log.d("snatchworks", "Points HERE is " + points);
                             }
                         }
+                        //store values
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("studentPoints", String.valueOf(points));
                         editor.putString("studentPW", password);
@@ -113,12 +108,12 @@ public class SplashActivity extends AppCompatActivity {
                         Log.d("snatchworks",preferences.getString("studentPoints",""));
                         Log.d("snatchworks",preferences.getString("studentPW",""));
                     }
+                    //if 'remember me' not ticked, proceed as per normal
                     else{
                         in = new Intent(SplashActivity.this,MainActivity.class);
                     }
                     ActivityOptions options = ActivityOptions.makeCustomAnimation(SplashActivity.this,android.R.anim.fade_in, android.R.anim.fade_out);
                     startActivity(in,options.toBundle());
-                    //overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                     finish();
                 }
             }

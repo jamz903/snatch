@@ -111,6 +111,7 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //only update variable to "no" once user has clicked get started, if not intro screen will continue to appear even if app is cleared
                 updateUserStatus(MainActivity.FirebaseStudentID);
                 Intent in = new Intent(IntroActivity.this, HomescreenActivity.class);
                 startActivity(in);
@@ -165,6 +166,7 @@ public class IntroActivity extends AppCompatActivity {
         },2000);
     }
 
+    //changes new user variable to "no" so that introscreen does not appear again
     public void updateUserStatus(String studentID){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("newUser");
         reference.setValue("no");

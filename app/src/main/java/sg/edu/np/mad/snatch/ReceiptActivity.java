@@ -73,6 +73,8 @@ public class ReceiptActivity extends AppCompatActivity implements View.OnClickLi
         final String studentID = preferences.getString("studentID","");
 
         DatabaseReference updatePoints;
+        //usingID is a variable taken from MainActivity(login page)
+        //"remember me" function skips login page, and thus must check to see which variables to use
         if (checkbox.equals("false")){
             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID).child("studentPoints");
         }

@@ -110,10 +110,6 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        /*if(item.getItemId() == R.id.credits_option){
-            to be implemented later on in phase 2
-        }*/
-
         //Food courts' vacancy button on kebab icon on top right corner of the app
         //brings user to see the number of people in each food court
         //bring user to pofile page
@@ -145,6 +141,7 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
             finish();
         }
 
+        //shows cardview popup for users to get help
         else if(item.getItemId() == R.id.help_option){
             helpDialog = new Dialog(this);
             ShowPopUp();
@@ -268,10 +265,8 @@ public class OrderActivity extends AppCompatActivity implements orderItemAdapter
         getHelpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //todo: create a google form to link
-                //sends user to google form to give feedback
+                //sends user to activity with webview to open google form
                 Intent in = new Intent(OrderActivity.this, FormActivity.class);
-                //Intent in = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forms.gle/gsgmyWWp17vvxF7e8"));
                 startActivity(in);
             }
         });
