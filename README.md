@@ -196,20 +196,26 @@ The splash screen improves the user experience for users and also has animation 
 This 'Remember Me' function uses SharedPreferences to store variables locally in AppData. When ticked, it allows users to stay logged in and access the functions (Ordering Food, Editing Profile) even after cache is cleared or after a session has expired. The user can change this by manually logging out.
 
 ## Introduction Screens
+
+### First Slide
 <img src="/githubImages/intro_screen1.jpg" height="755px" width="374px" ><br>
 When a new user registers an account and logs in for the first time, these introduction screens will be loaded. It is interactive and the user can swipe through the slides, or press the 'Skip' button. These slides only appear upon first login, and will not appear again once the user clicks 'Get Started', as seen in the next image. The introduction screens are in fullscreen mode, with the action bar disabled.<br>
 
+### Last Slide
 <img src="/githubImages/intro_screen2.jpg" height="755px" width="374px" ><br>
 When the user gets to the last slide/screen, the 'Next' button and indicators on the left hand corner will fade out, and the 'Get Started' button will appear instead. The user can still swipe through the screens if they so wish.
 
-## Get Help Function (Part 1: CardView Dialog)
+## Get Help Function 
+
+### CardView Dialog
 <img src="/githubImages/help_dialog.jpg" height="755px" width="374px" ><br>
 After logging in, on the right hand corner in the action bar, there is a help icon. When clicked, this pop-up will appear, which is a custom made CardView Dialog. The background is blurred so that the pop-up dialog is clearer.
 
-## Get Help Function (Part 2: WebView)
+### Loading Dialog
 <img src="/githubImages/help_loading_dialog.jpg" height="755px" width="374px" ><br>
 When the 'Get Help' button is clicked, it brings the user to an in-app webView, but informs the user that it is loading the page so that the user does not get confused at the blank activity while the google form is loading.<br>
 
+### WebView
 <img src="/githubImages/help_webview.jpg" height="755px" width="374px" ><br>
 When the page is loaded, the google form will appear. The user can choose to exit the activity by clicking 'X' on the left-hand corner, or open the pop-up in google chrome/ chosen web browser of the device for a easier experience by clicking the kebab icon located at the top left corner. Once the google form is submitted, if the user wishes to return back to the google form, clicking the back button from the phone's navigation bar will bring the webView back to the original page. If there is no previous page, pressing the back button will return the user to the previous activity, which is the pop-up cardView dialog.
 
