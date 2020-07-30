@@ -154,8 +154,9 @@ After the user has successfully placed an order, the user would be able to see t
 
 # Stage 2
 ## Description of snatch (Updated)
-snatch is a food ordering app for Ngee Ann Polytechnic (NP) students and staff. It allows users to visit the different food courts available in NP as well as the different food stalls in the respective food courts. Users are able to add and remove food from their cart and are also able to place an order using snatch. In addition, users are also able to upvote different food items. The food in a stall's menu are sorted based on the number of upvotes it has, hence allowing users to know which are the more popular food in NP.
+Snatch is a food ordering app for Ngee Ann Polytechnic (NP) students and staff. It allows users to visit the different food courts available in NP as well as the different food stalls in the respective food courts. Users are able to add and remove food from their cart and are also able to place an order using snatch. In addition, users are also able to upvote different food items. The food in a stall's menu are sorted based on the number of upvotes it has, hence allowing users to know which are the more popular food in NP.
 Users will also be able to view the vacancies of each Food Court to know how crowded or empty a Food Court is, so that they can decide which Food Court they would like to dine at. They wll also be able to see what are the top 3 dishes of each Food Court which can help them decide what to eat at the Food Court they wish to go to.
+New Users will be guided through the app and functionality offered through introduction slides on first login, and will have access to the app and it's functions even after the session has expired or been cleared by selecting the 'Remember Me' checkbox during login. If any help is required, users can click on the help icon which will redirect them to a google form where they can fill in feedback. Administrators or Stall Owners can also use this app by logging in with their credentials, which will bring them to a different interface to access and read all orders made by customers, receipts and more.
 
 ## Individual Roles and Contributions
 ## Justin Ng (Individual)
@@ -186,6 +187,20 @@ The RecyclerView at the bottom of the Google Maps shows all the Food Courts in N
 ## Shane-Rhys Chua (Individual)
 
 ## Jamie Toh (Individual)
+## Splash Screen
+
+## Remember Me Function
+
+## Introduction Screens
+
+## Get Help Function (Part 1: CardView Dialog)
+
+## Get Help Function (Part 2: WebView)
+
+## Admin/Stall Owner Interface
+
+## View Incoming Orders (Admin/Stall Owner)
+
 
 ## Reference Links for Images
 1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM
