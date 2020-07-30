@@ -188,19 +188,38 @@ The RecyclerView at the bottom of the Google Maps shows all the Food Courts in N
 
 ## Jamie Toh (Individual)
 ## Splash Screen
+<img src="/githubImages/splash_screen.jpg" height="755px" width="374px" ><br>
+The splash screen improves the user experience for users and also has animation while loading. This splash screen gives an aesthetic view to users while providing time to load data from firebase, and to check which screen to redirect the user, depending on if the user is logged in or not. The splash screen is in fullscreen mode, with the action bar disabled.
 
 ## Remember Me Function
+<img src="/githubImages/remember_me.jpg" height="755px" width="374px" ><br>
+This 'Remember Me' function uses SharedPreferences to store variables locally in AppData. When ticked, it allows users to stay logged in and access the functions (Ordering Food, Editing Profile) even after cache is cleared or after a session has expired. The user can change this by manually logging out.
 
 ## Introduction Screens
+<img src="/githubImages/intro_screen1.jpg" height="755px" width="374px" ><br>
+When a new user registers an account and logs in for the first time, these introduction screens will be loaded. It is interactive and the user can swipe through the slides, or press the 'Skip' button. These slides only appear upon first login, and will not appear again once the user clicks 'Get Started', as seen in the next image. The introduction screens are in fullscreen mode, with the action bar disabled.<br>
+
+<img src="/githubImages/intro_screen2.jpg" height="755px" width="374px" ><br>
+When the user gets to the last slide/screen, the 'Next' button and indicators on the left hand corner will fade out, and the 'Get Started' button will appear instead. The user can still swipe through the screens if they so wish.
 
 ## Get Help Function (Part 1: CardView Dialog)
+<img src="/githubImages/help_dialog.jpg" height="755px" width="374px" ><br>
+After logging in, on the right hand corner in the action bar, there is a help icon. When clicked, this pop-up will appear, which is a custom made CardView Dialog. The background is blurred so that the pop-up dialog is clearer.
 
 ## Get Help Function (Part 2: WebView)
+<img src="/githubImages/help_loading_dialog.jpg" height="755px" width="374px" ><br>
+When the 'Get Help' button is clicked, it brings the user to an in-app webView, but informs the user that it is loading the page so that the user does not get confused at the blank activity while the google form is loading.<br>
+
+<img src="/githubImages/help_webview.jpg" height="755px" width="374px" ><br>
+When the page is loaded, the google form will appear. The user can choose to exit the activity by clicking 'X' on the left-hand corner, or open the pop-up in google chrome/ chosen web browser of the device for a easier experience by clicking the kebab icon located at the top left corner. Once the google form is submitted, if the user wishes to return back to the google form, clicking the back button from the phone's navigation bar will bring the webView back to the original page. If there is no previous page, pressing the back button will return the user to the previous activity, which is the pop-up cardView dialog.
 
 ## Admin/Stall Owner Interface
+<img src="/githubImages/admin_view.jpg" height="755px" width="374px" ><br>
+Admins or Stall Owners can also use the app, by logging in using their own credentials. This will bring them to a different user interface as compared to normal users, as seen above. They can track orders, view receipts and track transactions made.
 
 ## View Incoming Orders (Admin/Stall Owner)
-
+<img src="/githubImages/view_orders.jpg" height="755px" width="374px" ><br>
+When a user places an order, the order details (e.g. Order Number, Time of Order, FoodCourt, Items Ordered) are stored in the database, Firebase. This is then displayed as a recyclerView in this page, showing the order number and date time that it was ordered at.
 
 ## Reference Links for Images
 1. Hor Fun - https://www.google.com/search?q=hor+fun&tbm=isch&ved=2ahUKEwj1wOyAgMnpAhXW2XMBHdcPDKEQ2-cCegQIABAA&oq=hor+fun&gs_lcp=CgNpbWcQAzICCAAyBAgAEEMyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoCCCk6BQgAEIMBUInbAVi-5gFgpOgBaAJwAHgAgAFPiAG-A5IBATmYAQCgAQGqAQtnd3Mtd2l6LWltZw&sclient=img&ei=rZLIXrW2C9azz7sP15-wiAo&bih=888&biw=1920&rlz=1C1CHBF_enSG839SG839&hl=en#imgrc=ArBs_BnPcoMEAM
