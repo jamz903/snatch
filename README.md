@@ -182,7 +182,9 @@ The pop-up window displays more information like the exact number of empty seats
 The RecyclerView at the bottom of the Google Maps shows all the Food Courts in NP as well as their respective seating capacity. Users can click on any one of the Food Court and it will expand to show the top 3 dishes in that Food Court. This is measured by the number of upvotes the Food Dishes have. Clicking on the "Visit Store" option would bring the user directly to the dish's Food Stall menu page.
 
 ## Justin's Individual Reference Links
-
+External Libraries used:
+1. [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
+2. [Round Korner Layouts](https://github.com/JcMinarro/RoundKornerLayouts)
 
 ## Shane-Rhys Chua (Individual)
 
