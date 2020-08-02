@@ -43,18 +43,22 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RewardsViewHolder holder, int position) {
+
         if(position< RewardsArrayList.size()){
+            //Conneting information to different parts of voucher selection
             final Rewards rewards = RewardsArrayList.get(position);
-            final String info1 = rewards.getRewardsID();
-            String rewardNumber = rewards.getDesc(); //use this to change to names later on(rhsy)
+            final String info1 = rewards.getRewardsID(); //id of voucher
+            String rewardNumber = rewards.getDesc(); //description of voucher
             holder.RewardstxtV.setText(rewardNumber);
 
             final String info2 = rewards.getPrice();
             holder.PricetxtV.setText(info2);
 
+            //check on redemmtion
             holder.CfmRedeem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //check if user has enough points to redeeem reward
                     if(MainActivity.userpoints < Integer.parseInt(info2)){
                         Log.d("rewards", "User does not have enough points");
                     }
@@ -63,6 +67,7 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsViewHolder> {
                         final String checkbox = preferences.getString("remember","");
                         final String studentID = preferences.getString("studentID","");
 
+                        //for users who have chosen "remember me funcitom"
                         DatabaseReference updatePoints;
                         if (checkbox.equals("false")){
                             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(MainActivity.usingID).child("studentPoints");
@@ -71,12 +76,14 @@ public class RewardsAdapter extends RecyclerView.Adapter<RewardsViewHolder> {
                             updatePoints = FirebaseDatabase.getInstance().getReference().child("Students").child(studentID).child("studentPoints");
                         }
 
-
+                        //update points in database
                         updatePoints.setValue(MainActivity.userpoints - (Integer.parseInt(info2)));
                         Log.d("rewards", "deduction sueccessfulk");
 
                         //delete from database
                         FirebaseDatabase.getInstance().getReference().child("Rewards").child(info1).removeValue();
+
+                        //alert diagloge to show code to user
 
                         AlertDialog.Builder codealert = new AlertDialog.Builder(context);
                         codealert.setTitle("Heres your code! Remember to screenshot it for future use!");

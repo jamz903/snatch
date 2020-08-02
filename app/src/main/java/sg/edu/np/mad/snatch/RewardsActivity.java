@@ -1,5 +1,7 @@
 package sg.edu.np.mad.snatch;
 
+//rewards imports
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,17 +28,24 @@ import java.util.List;
 import java.util.Map;
 
 public class RewardsActivity  extends AppCompatActivity {
+
+    //set up vairables for activity
     DatabaseReference reff;
     RewardsAdapter adapter;
     private RecyclerView recyclerView;
     List<Rewards> rewardsList = new ArrayList<>();
     List<HashMap> hashList = new ArrayList<>();
 
+
+//oncreate
     @Override
     protected void onCreate(Bundle savedInstaceState){
         super.onCreate(savedInstaceState);
 
+
         setContentView(R.layout.activity_rewards);
+
+        //connect to firebase in rewards child branch
         reff = FirebaseDatabase.getInstance().getReference().child("Rewards");
 
         //add all rewards to list from firebase
@@ -46,13 +55,14 @@ public class RewardsActivity  extends AppCompatActivity {
 
     }
 
-
+//onstart
     @Override
     protected void onStart(){
         super.onStart();
         Log.d("Reward", "Started");
     }
 
+//onresume
     @Override
     protected void onResume(){
         super.onResume();
@@ -60,14 +70,16 @@ public class RewardsActivity  extends AppCompatActivity {
 
 
 
-    //add all current available arewards to list
+    //add all current available a rewards to list
     protected void addExistingDeals(){
+        //value listener for rewards reference child
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //clear list for re-entering user
                 rewardsList.clear();
 
-
+                //vairables used for assigning different parts of the firebase class
                 String a = null;
                 String b = null;
                 String c = null;
@@ -76,6 +88,7 @@ public class RewardsActivity  extends AppCompatActivity {
 
                 Log.d("Rewards", " "+ hashList.get(1).get("ID"));
 
+                //look through hashlist for different parts using keys
                 for(int i = 1; i<hashList.size(); i++ ){
                     a = hashList.get(i).get("ID").toString();
                     b = hashList.get(i).get("Redeemed").toString();
@@ -88,7 +101,9 @@ public class RewardsActivity  extends AppCompatActivity {
 
                 Log.d("Reward", rewardsList.get(0).getRewardsID());
 
+                //assign recycler view  view
                 RecyclerView rv = findViewById(R.id.recyclerViewRewards);
+                //conenct adapter to rewards list
                 adapter = new RewardsAdapter(RewardsActivity.this , (ArrayList<Rewards>) rewardsList);
                 rv.setAdapter(adapter);
                 LinearLayoutManager layout = new LinearLayoutManager(RewardsActivity.this);

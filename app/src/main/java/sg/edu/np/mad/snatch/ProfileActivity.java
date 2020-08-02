@@ -43,23 +43,22 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity{
 
+    //Assigning Variables
     EditText profileName;
     EditText profilePW;
     TextView profilePoints;
     Button updateButton;
     Button redeemButton;
-
-
     String password;
     String message;
     int points;
-
     DatabaseReference reff;
 
     //Help pop-up dialog
     Dialog helpDialog;
     ImageView close;
     Button getHelpButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -82,7 +81,6 @@ public class ProfileActivity extends AppCompatActivity{
         final String pw = preferences.getString("studentPW", "");
 
         //set hints of current user name and pw
-
         if (checkbox.equals("true")){
             message = username;
             password = pw;
@@ -98,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         int value = 0;
+        //connect to firebase child branch
         reff = FirebaseDatabase.getInstance().getReference().child("Students");
         //Shared Preferences
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -109,10 +108,13 @@ public class ProfileActivity extends AppCompatActivity{
             profilePoints.setText("Points: " + studentPoints);
         }
         else{
+
+            //Make points showing on profile updateable to database so its shown on the profile
             reff.child(MainActivity.usingID).child("studentPoints").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     int value = Integer.parseInt( dataSnapshot.getValue().toString());
+                    //set new points amount
                     profilePoints.setText("Points: " + value);
                 }
 
@@ -174,6 +176,7 @@ public class ProfileActivity extends AppCompatActivity{
         return super.onCreateOptionsMenu(menu);
     }
 
+    //burger menu icon to show different options to profile, vacancy or logout options.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -214,6 +217,8 @@ public class ProfileActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+
+    //function to display a pop up that moves to form activity
     public void ShowPopUp(){
         helpDialog.setContentView(R.layout.help_layout);
         close = (ImageView) helpDialog.findViewById(R.id.close);
